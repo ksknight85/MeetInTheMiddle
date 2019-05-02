@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import API from "../../utils/API";
+
+import LoginModal from "../../components/LoginModal"
+
 import "./style.css";
 import Header from "../../components/Header";
 import MyMapComponent from '../../components/Map/MyMapComponent';
 import { GoogleMap } from 'react-google-maps';
+
 
 
 class Home extends Component {
@@ -33,11 +37,17 @@ class Home extends Component {
 
   render() {
     return (
+      <div className="homeBox">
+
+
+        <LoginModal />
+
       <div>
      <Header/>
         <MyMapComponent >
           <GoogleMap {...MyMapComponent} />
         </MyMapComponent>
+
       </div>
     );
   }
