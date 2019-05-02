@@ -1,0 +1,10 @@
+.navbar-brand {
+    padding: 5px;
+}
+
+.navbar-expand-lg {
+    padding: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-family:'Montserrat', sans-serif;
+}

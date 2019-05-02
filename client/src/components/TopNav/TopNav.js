@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./TopNav.scss";
+import "./style.css";
 import API from "../../utils/API";
 import { Route, Link } from 'react-router-dom'
 import {
@@ -58,7 +58,7 @@ export default class Navigation extends Component {
             <div>
     
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="#"><img src="./images/MeetInTheMiddleSmall.png" alt="logo" height="40px" /></a>
+                <a className="navbar-brand" href="#"><img src="./assets/images/MeetInTheMiddleSmall.png" alt="logo" height="40px" /></a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
