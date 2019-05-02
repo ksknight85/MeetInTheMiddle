@@ -1,0 +1,50 @@
+#carouselExampleSlidesOnly {
+    position: relative;
+
+}
+
+#titleDiv {
+    position: absolute;
+    right: 10%;
+    margin-top: 10%;
+    background: white;
+    width: 400px;
+    height: 390px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#titleImage {
+    width: 100%;
+    height:66%;
+    padding-left: 20px;
+}
+
+#byline {
+    font-family: 'Montserrat', sans-serif;
+    align-content: center;
+    text-align: center;
+    font-size: 17px;
+}
+
+@media only screen and (max-width: 500px) {
+    #carouselExampleSlidesOnly {
+        align-content: center
+    
+    }
+    #titleDiv {
+        right: 5%;
+        left: 5%;
+        width: 90%;
+        height: 80%
+    }
+
+    #titleImage {
+        width: 90%;
+        height:100%;
+        padding-left: 20px;
+    }
+
+    #byline {
+        display: none
+    }
+  }
