@@ -26,5 +26,14 @@ export default {
     return axios.get("/api/users/logout")
   },
 
+  coordinates: function(place) {
+    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${place}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+  }, 
+
+  places: function(lat, long, radius, type) {
+    return axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=${radius}&type=${type}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+  }, 
+
+
 
 };
