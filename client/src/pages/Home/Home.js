@@ -4,6 +4,9 @@ import { Button } from "reactstrap";
 import API from "../../utils/API";
 import "./style.css";
 import Header from "../../components/Header";
+import MyMapComponent from '../../components/Map/MyMapComponent';
+import { GoogleMap } from 'react-google-maps';
+
 
 class Home extends Component {
 
@@ -32,6 +35,9 @@ class Home extends Component {
     return (
       <div>
      <Header/>
+        <MyMapComponent >
+          <GoogleMap {...MyMapComponent} />
+        </MyMapComponent>
       </div>
     );
   }
