@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import API from "../../utils/API";
 import "./Home.scss";
+import MyMapComponent from '../../components/Map/MyMapComponent';
+import { GoogleMap } from 'react-google-maps';
 
 class Home extends Component {
 
@@ -31,10 +33,13 @@ class Home extends Component {
     return (
       <div className="homeBox">
         {this.state.loggedIn ? (
-          <Button onClick={e=> {this.getJoke()}} color="warning" block>Get New Joke</Button>
+          <Button onClick={e => { this.getJoke() }} color="warning" block>Get New Joke</Button>
         ) : (<></>)}
 
         <h1>hello</h1>
+        <MyMapComponent >
+          <GoogleMap {...MyMapComponent} />
+        </MyMapComponent>
       </div>
     );
   }
