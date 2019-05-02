@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import API from "../../utils/API";
-import "./Home.scss";
+import "./style.css";
+import Header from "../../components/Header";
 
 class Home extends Component {
 
@@ -29,12 +30,8 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="homeBox">
-        {this.state.loggedIn ? (
-          <Button onClick={e=> {this.getJoke()}} color="warning" block>Get New Joke</Button>
-        ) : (<></>)}
-
-        <h1>hello</h1>
+      <div>
+     <Header/>
       </div>
     );
   }
