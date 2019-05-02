@@ -42,7 +42,7 @@ class MyFancyComponent extends React.PureComponent {
 
   render() {
     return (
-      <MyMapComponent
+      <MyMapComponent id="map"
         isMarkerShown={this.state.isMarkerShown}
         onMarkerClick={this.handleMarkerClick}
       />
@@ -50,7 +50,7 @@ class MyFancyComponent extends React.PureComponent {
   }
 }
 
-export default MyMapComponent;
+export default MyFancyComponent;
 
 
 

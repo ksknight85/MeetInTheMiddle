@@ -1,0 +1,10 @@
+p {
+    display: inline-flex;
+    padding: 1%;
+    padding-top: 2%;
+}
+
+footer {
+    text-align: center;
+    background-color: #f8bc45
+}

@@ -19,10 +19,28 @@ function Header() {
         <img className="d-block w-100" src="./assets/images/friends26.jpg" alt="Third slide"/>
       </div>
       <div className="carousel-item">
+        <img className="d-block w-100" src="./assets/images/friends22.jpg" alt="Third slide"/>
+      </div>
+      <div className="carousel-item">
         <img className="d-block w-100" src="./assets/images/friends14.jpg" alt="Third slide"/>
       </div>
       <div className="carousel-item">
         <img className="d-block w-100" src="./assets/images/friends11.jpg" alt="Third slide"/>
+      </div>
+      <div className="carousel-item">
+        <img className="d-block w-100" src="./assets/images/friends10.jpg" alt="Third slide"/>
+      </div>
+      <div className="carousel-item">
+        <img className="d-block w-100" src="./assets/images/friends31.jpg" alt="Third slide"/>
+      </div>
+      <div className="carousel-item">
+        <img className="d-block w-100" src="./assets/images/friends36.jpg" alt="Third slide"/>
+      </div>
+      <div className="carousel-item">
+        <img className="d-block w-100" src="./assets/images/friends16.jpg" alt="Third slide"/>
+      </div>
+      <div className="carousel-item">
+        <img className="d-block w-100" src="./assets/images/friends8.jpg" alt="Third slide"/>
       </div>
     </div>
   </div>
