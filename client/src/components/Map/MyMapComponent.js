@@ -12,7 +12,7 @@ import API from "../../utils/API"
 const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
 console.log(props.markers)
   return (
-    <GoogleMap defaultZoom={8} defaultCenter={{ lat: 29.5, lng: -95 }}>
+    <GoogleMap defaultZoom={8} defaultCenter={ props.currentLocation ? props.currentLocation : {lat: 29.7, lng: -104.9} }>
       {props.markers.map(marker => {
         const onClick = props.onClick.bind(this, marker)
         return (
@@ -159,6 +159,7 @@ export default class MyFancyComponent extends Component {
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
         key={this.state.selectedMarker}
+        currentLocation={`lat: ${this.state.chosenLat}, lng: ${this.state.chosenLng}`}
       />
     )
   }
