@@ -61,7 +61,8 @@ class Signup extends Component {
     render() {
         return (
             <div>
-                <LoginModal><div id="app" /></LoginModal>
+                <LoginModal
+                signin="true"><div id="app" /></LoginModal>
 
             </div>
         );
