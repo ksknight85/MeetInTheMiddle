@@ -27,7 +27,7 @@ console.log(props.markers)
                   {marker}
                 </div>
               </InfoWindow>}
-            }
+            
           </Marker>
         )
       })}
