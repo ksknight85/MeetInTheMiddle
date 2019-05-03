@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText, Alert } from 'reactstrap';
-import { Link } from "react-router-dom";
 import LoginModal from "../../components/LoginModal/index.js"
-
+// import { Button, Form, FormGroup, Label, Input, FormText, Alert } from 'reactstrap';
+// import { Link } from "react-router-dom";
 
 class Signup extends Component {
     state = {
@@ -62,7 +61,8 @@ class Signup extends Component {
         return (
             <div>
                 <LoginModal
-                signin="true"><div id="app" /></LoginModal>
+                action= "Signup"
+                ><div id="app" /></LoginModal>
 
             </div>
         );

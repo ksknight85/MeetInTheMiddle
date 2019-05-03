@@ -7,7 +7,9 @@ import LoginModal from "../../components/LoginModal/index.js"
 function Login(props) {
     return (
         <>
-        <LoginModal><div id="app" /></LoginModal>
+        <LoginModal
+        action="login"
+        ><div id="app" /></LoginModal>
         </>
     );
 }
