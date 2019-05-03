@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
+import { Button, Row, Col } from "reactstrap";
 import API from "../../utils/API";
-
-import LoginModal from "../../components/LoginModal"
-
 import "./style.css";
 import Header from "../../components/Header";
 import MyMapComponent from '../../components/Map/MyMapComponent';
@@ -44,13 +41,20 @@ class Home extends Component {
     return (
       <div className="homeBox">
         <span onClick={this.postAddress}>fkdsjfdklfds</span>
-        {/* <LoginModal /> */}
-      
-     <Header/>
-        <MyMapComponent >
-          <GoogleMap {...MyMapComponent} />
-        </MyMapComponent>
 
+        <div>
+          <Row><Header /></Row>
+          <Row>
+            <Col>
+              <p>Type in 2-5 addresses to find a central meeting point:</p>
+              <MyMapComponent >
+                <GoogleMap {...MyMapComponent} />
+
+              </MyMapComponent>
+            </Col>
+            <Col>2 of 2</Col>
+          </Row>
+        </div>
       </div>
     );
   }

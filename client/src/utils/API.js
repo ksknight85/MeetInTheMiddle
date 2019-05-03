@@ -31,5 +31,14 @@ export default {
     return axios.post("/api/address/" +id, address);
   }
 
+  coordinates: function(address) {
+    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+  }, 
+
+  places: function(lat, lng, radius, type) {
+    return axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${type}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+  }, 
+
+
 
 };
