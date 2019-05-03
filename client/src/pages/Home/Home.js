@@ -18,6 +18,11 @@ class Home extends Component {
   componentDidMount() {
     this.loggedIn();
   }
+  postAddress = () => {
+    API.postAddress("5ccc802bf3ad93291ca770aa", {address: "123 blah st"})
+      .then(res => console.log("here"))
+      .catch(err => console.log("no"))
+  }
 
 
   loggedIn = () => {
@@ -35,6 +40,8 @@ class Home extends Component {
   render() {
     return (
       <div className="homeBox">
+        <span onClick={this.postAddress}>fkdsjfdklfds</span>
+
         <div>
           <Row><Header /></Row>
           <Row>
@@ -47,7 +54,6 @@ class Home extends Component {
             </Col>
             <Col>2 of 2</Col>
           </Row>
-
         </div>
       </div>
     );

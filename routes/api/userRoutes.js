@@ -82,4 +82,16 @@ router.get("/admin", authMiddleware.isAdmin, function(req, res, next) {
   });
 });
 
+// /api/users/address
+// router.post("/address", function(req,res,next) {
+//   let newAddress = new db.Address ({
+//     address: "1234 fake st"
+//   })
+//   newAddress.save(function(err) {
+//     if (err) throw err;
+//     console.log("address saved!");
+//     // redirects to the login route as a post route *307*
+//     res.send(newAddress)
+//   });
+// })
 module.exports = router;
