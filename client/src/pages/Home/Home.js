@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, Row, Col, Container } from "reactstrap";
 import API from "../../utils/API";
+<<<<<<< HEAD
 import LoginModal from "../../components/LoginModal"
+=======
+>>>>>>> 581b00f40d3e318835cf110dc44d8e52f8d3d4c3
 import "./style.css";
 import Header from "../../components/Header";
 import MyMapComponent from '../../components/Map/MyMapComponent';
@@ -35,6 +38,7 @@ class Home extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div>
         <Row>
           <LoginModal className="homeBox" />
@@ -53,6 +57,23 @@ class Home extends Component {
           </Col>
         </Row>
         </Container>
+=======
+      <div className="homeBox">
+        <div>
+          <Row><Header /></Row>
+          <Row>
+            <Col>
+              <p>Type in 2-5 addresses to find a central meeting point:</p>
+              <MyMapComponent >
+                <GoogleMap {...MyMapComponent} />
+
+              </MyMapComponent>
+            </Col>
+            <Col>2 of 2</Col>
+          </Row>
+
+        </div>
+>>>>>>> 581b00f40d3e318835cf110dc44d8e52f8d3d4c3
       </div>
     );
   }
