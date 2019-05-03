@@ -26,5 +26,10 @@ export default {
     return axios.get("/api/users/logout")
   },
 
+  postAddress: function(id, address) {
+    console.log(id);
+    return axios.post("/api/address/" +id, address);
+  }
+
 
 };
