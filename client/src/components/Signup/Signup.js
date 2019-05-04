@@ -29,20 +29,7 @@ class Signup extends Component {
         }
     }
 
-    validatePassword() {
-        let strongPassword = new RegExp(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/);
-        let valid = strongPassword.test(this.props.password);
-        if (!this.state.validPassword && valid) {
-            this.setState({
-                validPassword: true
-            });
-        }
-        if (this.state.validPassword && !valid) {
-            this.setState({
-                validPassword: false,
-            });
-        }
-    }
+
 
     confirmPassword() {
         if (this.props.password === this.props.confirmPassword && !this.state.confirmPassword && this.props.password) {

@@ -6,6 +6,10 @@ class LoginModal extends React.Component {
 
   state = {
     signin: "",
+    name: "",
+    username: "",
+    email: "",
+    password: "",
   }
 
   componentDidMount(props) {
@@ -15,6 +19,20 @@ class LoginModal extends React.Component {
       })
     }
   }
+
+  handleInputChange = event => {
+    const { name, value } = event.target
+
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+
+  }
+  
 
   render() {
     const { signin = true } = this.state;
@@ -26,12 +44,31 @@ class LoginModal extends React.Component {
             <form action="#">
               <h1>Create Account</h1>
               <span>or use your email for registration</span>
-              <input type="text" placeholder="Name" />
-              <input type="text" name="username" id="username" placeholder="username" value={this.props.username} onChange={this.props.handleInputChange} valid={this.state.validUsername} />
-              <input type="email" placeholder="Email" />
-              <input type="password" name="password" id="password" placeholder="password" value={this.props.password} onChange={this.props.handleInputChange} valid={this.state.validPassword} />
-              <input type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm password" value={this.props.confirmPassword} onChange={this.props.handleInputChange} valid={this.state.confirmPassword} />
-              <button>Sign Up</button>
+              <input
+                type="text"
+                placeholder="Name"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleInputChange} />
+
+              <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="username"
+              />
+
+              <input
+                type="email"
+                placeholder="Email" />
+
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="password"
+              />
+              <button onClick={this.handleFormSubmit}>Sign Up</button>
             </form>
           </div>
           <div className="form-container sign-in-container">
