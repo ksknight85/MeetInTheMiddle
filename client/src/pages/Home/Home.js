@@ -21,6 +21,18 @@ class Home extends Component {
     this.loggedIn();
   }
 
+  // revist this it does not hit either the .then or .catch but it does post the address
+  postAddress = () => {
+    API.postAddress("5ccc802bf3ad93291ca770aa", {address: "123 blah st"})
+      .then(res => console.log("post: please"))
+      .catch(err => console.log("post: no"))
+  }
+  deleteAddress = () => {
+    API.deleteAddress("5ccca3597b8ad51988f6e788")
+      .then(res => console.log("delete: please"))
+      .catch(err => console.log("delete: no"))
+  }
+
 
   loggedIn = () => {
     API.isLoggedIn().then(user => {
@@ -56,6 +68,9 @@ class Home extends Component {
   render() {
     return (
       <div className="homeBox">
+        <span onClick={this.postAddress}>save</span> {"--------------------"}
+        <span onClick={this.deleteAddress}>delete</span>
+
         <div>
           <Row><Header /></Row>
           <Row>
@@ -77,7 +92,6 @@ class Home extends Component {
             </Col>
             <Col>Filters</Col>
           </Row>
-
         </div>
       </div>
     );

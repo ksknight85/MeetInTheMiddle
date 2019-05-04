@@ -26,6 +26,15 @@ export default {
     return axios.get("/api/users/logout")
   },
 
+  postAddress: function(id, address) {
+    console.log(id);
+    return axios.post("/api/address/" +id, address);
+  },
+  deleteAddress: function(id) {
+    console.log(id)
+    return axios.delete("/api/address/" +id)
+  },
+
   coordinates: function(address) {
     return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=405+South+Pearl+Street,+Denver,+CO&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
   }, 
