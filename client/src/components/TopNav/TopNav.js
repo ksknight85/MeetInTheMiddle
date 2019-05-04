@@ -57,8 +57,9 @@ export default class Navigation extends Component {
         return (
             <div>
     
-            <nav className="navbar navbar-expand-lg navbar-light bg-white" id="NavBar">
-                <a className="navbar-brand" href="#"><img src="./assets/images/MeetInTheMiddleSmall.png" alt="logo" height="40px" /></a>
+
+            <nav className="navbar navbar-expand-lg navbar-light bg-white">
+                <Link className="navbar-brand" to="#"><img src="./assets/images/MeetInTheMiddleSmall.png" alt="logo" height="40px" /></Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -68,22 +69,22 @@ export default class Navigation extends Component {
     
                             <Link to="/">
                                 <li className="nav-item active">
-                                    <a className="nav-link" href="#">Home<span className="sr-only">(current)</span></a>
+                                    <NavLink className="nav-link" to="#">Home<span className="sr-only">(current)</span></NavLink>
                                 </li>
                             </Link>
                             <Link to="/search">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Search</a>
+                                    <NavLink className="nav-link" to="#">Search</NavLink>
                                 </li>
                             </Link>
                             <Link to="/profile">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Profile</a>
+                                    <NavLink className="nav-link" to="#">Profile</NavLink>
                                 </li>
                             </Link>
                             <Link to="#">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Logout</a>
+                                    <NavLink className="nav-link" to="#">Logout</NavLink>
                                 </li>
                             </Link>
                         </ul>
@@ -91,22 +92,22 @@ export default class Navigation extends Component {
                             <ul className="navbar-nav">
                                 <Link to="/">
                                     <li className="nav-item active">
-                                        <a className="nav-link" href="#">Home<span className="sr-only">(current)</span></a>
+                                        <NavLink className="nav-link" to="#">Home<span className="sr-only">(current)</span></NavLink>
                                     </li>
                                 </Link>
                                 <Link to="/search">
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#">Search</a>
+                                        <NavLink className="nav-link" to="#">Search</NavLink>
                                     </li>
                                 </Link>
                                 <Link to="/login">
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#">Login</a>
+                                        <NavLink className="nav-link" to="#">Login</NavLink>
                                     </li>
                                 </Link>
                                 <Link to="/signup">
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#">Sign Up</a>
+                                        <NavLink className="nav-link" to="#">Sign Up</NavLink>
                                     </li>
                                 </Link>
                             </ul>

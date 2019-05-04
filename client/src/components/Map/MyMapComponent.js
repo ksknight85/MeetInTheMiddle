@@ -13,8 +13,12 @@ import ReactGooglePlacesSuggest from "react-google-places-suggest"
 import "./style.css"
 
 const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
+  // console.log(props.markers)
   return (
-    <GoogleMap defaultCenter={props.currentLocation ? props.currentLocation : { lat: 39.7, lng: -104.9 }}>
+    <GoogleMap defaultZoom={8} defaultCenter={props.currentLocation ? props.currentLocation : { lat: 0, lng: 0 }}>
+      {/* {console.log(typeof(props.currentLocation))} */}
+      {/* {console.log(`default loc ${defaultCenter}`)} */}
+
       {props.markers.map(marker => {
         const onClick = props.onClick.bind(this, marker)
         return (
@@ -92,13 +96,15 @@ export default class MyFancyComponent extends Component {
     API.coordinates(address1)
       .then(data => {
         this.setState({ address1Coord: data.data.results[0].geometry.location })
-        console.log(this.state.address1Coord)
+        // console.log(this.state.address1Coord)
       })
       .catch(err => console.log(err))
     API.coordinates(address2)
       .then(data => {
         this.setState({ address2Coord: data.data.results[0].geometry.location })
-        console.log(this.state.address2Coord)
+
+        // console.log(this.state.address2Coord)
+
       })
       .catch(err => console.log(err))
     if (address3) {
@@ -130,12 +136,12 @@ export default class MyFancyComponent extends Component {
   getPlaces = (lat, lng, radius, type) => {
     API.places(lat, lng, radius, type)
       .then(data => {
-        console.log(data.data.results)
+        // console.log(data.data.results)
         const newArr = []
         for (let i = 0; i < 20; i++) {
           newArr.push(data.data.results[i].geometry.location)
         }
-        console.log("new Arrary", newArr)
+        // console.log("new Arrary", newArr)
         this.setState({ places: newArr })
       })
   }
@@ -147,10 +153,15 @@ export default class MyFancyComponent extends Component {
 
   handleClick = (marker, event) => {
     event.preventDefault()
-    console.log({ marker })
+    // console.log({ marker })
     this.setState({ selectedMarker: marker })
   }
   render() {
+    var LatLng = {
+      lat: parseFloat(this.state.chosenLat),
+      lng: parseFloat(this.state.chosenLng)
+    }
+
     return (
       <MapWithAMarker
         selectedMarker={this.state.selectedMarker}
@@ -161,9 +172,68 @@ export default class MyFancyComponent extends Component {
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
         key={this.state.selectedMarker}
-        currentLocation={`lat: ${this.state.chosenLat}, lng: ${this.state.chosenLng}`}
+        currentLocation={LatLng}
       />
     )
   }
 }
 
+// FILTERS for location type & search radius
+export class Filters extends Component {
+  state = {
+    typeSearch: "",
+    placeId:"ChIJwXlO3HKKa4cR3ieDsbtuWLw",
+    types: [],
+    typeResult: [],
+    radius: 10
+  }
+
+  componentDidMount() {
+    API.details(this.state.placeId)
+      .then(res => console.log("details", res.data.result.types))
+      .catch(err => console.log(err))
+  };
+
+  handleInputChange = event => {
+    this.setState({ typeSearch: event.target.value });
+    this.setState({ radius: event.target.value })
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+
+  };
+
+  render() {
+    return (
+      <form className="filter">
+        <div className="form-group">
+          <label htmlFor="details">Location Type:</label>
+          <input
+            name="details"
+            type="text"
+            placeholder="Restaurant, Coffee Shop, ect."
+            value={this.typeSearch}
+            onChange={this.handleInputChange}
+            // list=""
+          
+          />
+          
+          <datalist id="" >
+          </datalist>
+          <input
+            name="radius"
+            type="text"
+            placeholder="Radius"
+            value={this.radius}
+            onChange={this.handleInputChange}
+            // list=""
+          />
+              <datalist id="" >
+          </datalist>
+          <button type="submit">Search</button>
+        </div>
+      </form>
+    )
+  }
+}

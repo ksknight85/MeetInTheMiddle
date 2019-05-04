@@ -5,7 +5,7 @@ import API from "../../utils/API";
 import LoginModal from "../../components/LoginModal"
 import "./style.css";
 import Header from "../../components/Header";
-import MyMapComponent from '../../components/Map/MyMapComponent';
+import MyMapComponent, { Filters } from '../../components/Map/MyMapComponent';
 import { GoogleMap } from 'react-google-maps';
 import GoogleSuggest from "../../components/AddressSearch"
 
@@ -90,7 +90,9 @@ class Home extends Component {
                 <GoogleMap {...MyMapComponent} />
               </MyMapComponent>
             </Col>
-            <Col>Filters</Col>
+            <Col>Filter your results</Col>
+            <Filters></Filters>
+
           </Row>
         </div>
       </div>
