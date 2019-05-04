@@ -23,14 +23,19 @@ class Home extends Component {
 
   // revist this it does not hit either the .then or .catch but it does post the address
   postAddress = () => {
-    API.postAddress("5ccc802bf3ad93291ca770aa", {address: "123 blah st"})
+    API.postAddress("5ccdf7b418094b379059c35c", {address: "123456 blah st"})
       .then(res => console.log("post: please"))
       .catch(err => console.log("post: no"))
   }
   deleteAddress = () => {
-    API.deleteAddress("5ccca3597b8ad51988f6e788")
+    API.deleteAddress("5ccdf7b418094b379059c35c")
       .then(res => console.log("delete: please"))
       .catch(err => console.log("delete: no"))
+  }
+  findAll = () => {
+    API.getAll("5ccdf7b418094b379059c35c")
+    .then(res=> console.log(res))
+    .catch(err=> console.log(err))
   }
 
 
@@ -69,7 +74,8 @@ class Home extends Component {
     return (
       <div className="homeBox">
         <span onClick={this.postAddress}>save</span> {"--------------------"}
-        <span onClick={this.deleteAddress}>delete</span>
+        <span onClick={this.deleteAddress}>delete</span>{"-----------------"}
+        <span onClick={this.findAll}>find</span>
 
         <div>
           <Row><Header /></Row>
