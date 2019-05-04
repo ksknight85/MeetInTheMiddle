@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./style.css";
+import "./navbar.css";
 import API from "../../utils/API";
 import { Route, Link } from 'react-router-dom'
 import {
@@ -57,6 +57,7 @@ export default class Navigation extends Component {
         return (
             <div>
     
+
             <nav className="navbar navbar-expand-lg navbar-light bg-white">
                 <Link className="navbar-brand" to="#"><img src="./assets/images/MeetInTheMiddleSmall.png" alt="logo" height="40px" /></Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

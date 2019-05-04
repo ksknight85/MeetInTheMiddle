@@ -8,6 +8,9 @@ import {
   InfoWindow
 } from "react-google-maps"
 import API from "../../utils/API"
+import ReactGoogleMapLoader from "react-google-maps-loader"
+import ReactGooglePlacesSuggest from "react-google-places-suggest"
+import "./style.css"
 
 const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
   // console.log(props.markers)
@@ -42,7 +45,7 @@ export default class MyFancyComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      places: [{ lat: 39.70922, lng: -104.980389 }, { lat: 39.707760, lng: -104.973170 }],
+      places: [],
       selectedMarker: false,
       address1Coord: false,
       address2Coord: false,
@@ -99,7 +102,9 @@ export default class MyFancyComponent extends Component {
     API.coordinates(address2)
       .then(data => {
         this.setState({ address2Coord: data.data.results[0].geometry.location })
+
         // console.log(this.state.address2Coord)
+
       })
       .catch(err => console.log(err))
     if (address3) {
