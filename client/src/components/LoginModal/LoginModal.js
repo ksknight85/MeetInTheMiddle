@@ -5,41 +5,32 @@ import "./style.css"
 class LoginModal extends React.Component {
 
   state = {
-    signin: "",
+    action: "login",
     name: "",
     username: "",
     email: "",
     password: "",
   }
 
-  componentDidMount(props) {
-    if (this.props.action === "login") {
-      this.setState({
-        signin: true
-      })
-    }
+  constructor(props) {
+    super(props);
   }
 
-  handleInputChange = event => {
-    const { name, value } = event.target
 
+  componentDidMount(props) {
     this.setState({
-      [name]: value
+      action: this.props.action
     })
   }
 
-  handleFormSubmit = event => {
-    event.preventDefault();
 
-  }
-  
+
 
   render() {
-    const { signin = true } = this.state;
     return (
       <div className="zama-form">
         <h2>Sign in/up Form</h2>
-        <div className={`container ${!signin ? 'right-panel-active' : ''}`} id="container">
+        <div className={`container ${this.state.action === "signup" ? 'right-panel-active' : ''}`} id="container">
           <div className="form-container sign-up-container">
             <form action="#">
               <h1>Create Account</h1>
@@ -48,35 +39,52 @@ class LoginModal extends React.Component {
                 type="text"
                 placeholder="Name"
                 name="name"
-                value={this.state.name}
-                onChange={this.handleInputChange} />
+                onChange={this.props.handleInputChange} />
 
               <input
                 type="text"
                 name="username"
                 id="username"
                 placeholder="username"
+                onChange={this.props.handleInputChange}
               />
 
               <input
                 type="email"
-                placeholder="Email" />
+                placeholder="Email"
+                name="email"
+                onChange={this.props.handleInputChange} />
 
               <input
                 type="password"
                 name="password"
                 id="password"
                 placeholder="password"
+                onChange={this.props.handleInputChange}
               />
-              <button onClick={this.handleFormSubmit}>Sign Up</button>
+              <button
+                onClick={this.props.handleSignup}
+                >Sign Up</button>
             </form>
           </div>
           <div className="form-container sign-in-container">
             <form action="#">
               <h1>Sign in</h1>
               <span>or use your account</span>
-              <input type="text" name="username" id="username" placeholder="Username" value={this.props.username} onChange={this.props.handleInputChange} valid={this.state.validUsername} />
-              <input type="password" name="password" placeholder="Password" />
+              <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Username"
+                onChange={this.props.handleInputChange}
+                valid={this.state.validUsername} />
+
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={this.props.handleInputChange}
+                />
               <a href="#">Forgot your password?</a>
               <button>Sign In</button>
             </form>
@@ -86,12 +94,12 @@ class LoginModal extends React.Component {
               <div className="overlay-panel overlay-left">
                 <h1>Welcome Back!</h1>
                 <p>To keep connected with us please login with your personal info</p>
-                <button className="ghost" onClick={e => this.setState({ signin: true })}>Sign In</button>
+                <button className="ghost" onClick={e => this.setState({ action: "login" })}>Sign In</button>
               </div>
               <div className="overlay-panel overlay-right">
                 <h1>Hello, Friend!</h1>
                 <p>Enter your personal details and start journey with us</p>
-                <button className="ghost" onClick={e => this.setState({ signin: false })}>Sign Up</button>
+                <button className="ghost" onClick={e => this.setState({ action: "signup" })}>Sign Up</button>
               </div>
             </div>
           </div>
