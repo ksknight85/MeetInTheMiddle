@@ -55,6 +55,7 @@ class Home extends Component {
           <Row>
             <Col>
               <p>Type in 2-5 addresses to find a central meeting point:</p>
+              
               <MyMapComponent >
                 <GoogleMap {...MyMapComponent} />
 
