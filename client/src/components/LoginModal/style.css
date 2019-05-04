@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400');
 
 .zama-form {
 	background: #f6f5f7;
@@ -37,7 +37,7 @@ span {
 	font-size: 12px;
 }
 
-a {
+#forgot {
 	color: #333;
 	font-size: 14px;
 	text-decoration: none;
@@ -226,7 +226,7 @@ input {
 	width: 40px;
 }
 
-footer {
+/* footer {
     background-color: #222;
     color: #fff;
     font-size: 14px;
@@ -249,5 +249,5 @@ footer i {
 footer a {
     color: #3c97bf;
     text-decoration: none;
-}
+} */
 

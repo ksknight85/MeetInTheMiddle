@@ -8,11 +8,13 @@ import {
   InfoWindow
 } from "react-google-maps"
 import API from "../../utils/API"
+import ReactGoogleMapLoader from "react-google-maps-loader"
+import ReactGooglePlacesSuggest from "react-google-places-suggest"
+import "./style.css"
 
 const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
-console.log(props.markers)
   return (
-    <GoogleMap defaultCenter={ props.currentLocation ? props.currentLocation : {lat: 39.7, lng: -104.9} }>>
+    <GoogleMap defaultCenter={props.currentLocation ? props.currentLocation : { lat: 39.7, lng: -104.9 }}>
       {props.markers.map(marker => {
         const onClick = props.onClick.bind(this, marker)
         return (
@@ -27,7 +29,7 @@ console.log(props.markers)
                   {marker}
                 </div>
               </InfoWindow>}
-            
+
           </Marker>
         )
       })}
@@ -99,29 +101,29 @@ export default class MyFancyComponent extends Component {
         console.log(this.state.address2Coord)
       })
       .catch(err => console.log(err))
-    if (address3){
-    API.coordinates(address3)
-      .then(data => {
-        this.setState({ address3Coord: data.data.results[0].geometry.location })
-        console.log(this.state.address3Coord)
-      })
-      .catch(err => console.log(err))
+    if (address3) {
+      API.coordinates(address3)
+        .then(data => {
+          this.setState({ address3Coord: data.data.results[0].geometry.location })
+          console.log(this.state.address3Coord)
+        })
+        .catch(err => console.log(err))
     }
     if (address4) {
-    API.coordinates(address4)
-      .then(data => {
-        this.setState({ address4Coord: data.data.results[0].geometry.location })
-        console.log(this.state.address4Coord)
-      })
-      .catch(err => console.log(err))
+      API.coordinates(address4)
+        .then(data => {
+          this.setState({ address4Coord: data.data.results[0].geometry.location })
+          console.log(this.state.address4Coord)
+        })
+        .catch(err => console.log(err))
     }
     if (address5) {
-    API.coordinates(address5)
-      .then(data => {
-        this.setState({ address5Coord: data.data.results[0].geometry.location })
-        console.log(this.state.address5Coord)
-      })
-      .catch(err => console.log(err))
+      API.coordinates(address5)
+        .then(data => {
+          this.setState({ address5Coord: data.data.results[0].geometry.location })
+          console.log(this.state.address5Coord)
+        })
+        .catch(err => console.log(err))
     }
   }
 
@@ -130,7 +132,7 @@ export default class MyFancyComponent extends Component {
       .then(data => {
         console.log(data.data.results)
         const newArr = []
-        for (let i=0; i<20; i++){
+        for (let i = 0; i < 20; i++) {
           newArr.push(data.data.results[i].geometry.location)
         }
         console.log("new Arrary", newArr)
@@ -159,7 +161,9 @@ export default class MyFancyComponent extends Component {
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
         key={this.state.selectedMarker}
+        currentLocation={`lat: ${this.state.chosenLat}, lng: ${this.state.chosenLng}`}
       />
     )
   }
 }
+

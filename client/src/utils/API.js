@@ -27,11 +27,7 @@ export default {
   },
 
   coordinates: function(address) {
-<<<<<<< HEAD
     return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=405+South+Pearl+Street,+Denver,+CO&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
-=======
-    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
->>>>>>> 581b00f40d3e318835cf110dc44d8e52f8d3d4c3
   }, 
 
   places: function(lat, lng, radius, type) {
