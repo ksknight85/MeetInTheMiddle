@@ -4,7 +4,7 @@ import { Button, Row, Col } from "reactstrap";
 import API from "../../utils/API";
 import "./style.css";
 import Header from "../../components/Header";
-import MyMapComponent from '../../components/Map/MyMapComponent';
+import MyMapComponent, { Filters } from '../../components/Map/MyMapComponent';
 import { GoogleMap } from 'react-google-maps';
 
 
@@ -60,7 +60,8 @@ class Home extends Component {
 
               </MyMapComponent>
             </Col>
-            <Col>2 of 2</Col>
+            <Col>Filter your results</Col>
+            <Filters></Filters>
           </Row>
         </div>
       </div>
