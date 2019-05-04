@@ -90,8 +90,11 @@ class Home extends Component {
                 <GoogleMap {...MyMapComponent} />
               </MyMapComponent>
             </Col>
-            <Col>Filter your results</Col>
+            <Col>
+            <p>Filter your results</p>
             <Filters></Filters>
+            </Col>
+
           </Row>
         </div>
       </div>
