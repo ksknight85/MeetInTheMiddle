@@ -1,12 +1,6 @@
 const db = require("../models");
 
 module.exports = {
-    findOne: function(req,res) {
-        db.Address
-            .findByID(req.params.id)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err))
-    },
     create: function(req,res) {
         db.Address
             .create(req.body)
@@ -21,5 +15,12 @@ module.exports = {
           .then(dbModel => dbModel.remove())
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err));
-      }
+    },
+    findAll: function(req,res) {
+        db.User
+            .findById(req.params.id)
+            .populate("address")
+            .then(user => res.json(user.address))
+            
+    },
 }
