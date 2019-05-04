@@ -92,7 +92,6 @@ class Home extends Component {
             </Col>
             <Col>Filter your results</Col>
             <Filters></Filters>
-
           </Row>
         </div>
       </div>
