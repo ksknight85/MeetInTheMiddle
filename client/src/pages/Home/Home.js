@@ -1,20 +1,17 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Button, Row, Col, Container } from "reactstrap";
+import { Row } from "reactstrap";
 import API from "../../utils/API";
-import LoginModal from "../../components/LoginModal"
 import "./style.css";
 import Header from "../../components/Header";
-import MyMapComponent, { Filters } from '../../components/Map/MyMapComponent';
+import MyMapComponent from '../../components/Map/MyMapComponent';
 import { GoogleMap } from 'react-google-maps';
-import GoogleSuggest from "../../components/AddressSearch"
+
 
 
 class Home extends Component {
 
   state = {
     loggedIn: false,
-    num: 2
   };
 
   componentDidMount() {
@@ -23,14 +20,26 @@ class Home extends Component {
 
   // revist this it does not hit either the .then or .catch but it does post the address
   postAddress = () => {
-    API.postAddress("5ccc802bf3ad93291ca770aa", {address: "123 blah st"})
+
+    API.postAddress("5cce0e875424ec39408f60dd", {address: "12345 fake st"})
+
       .then(res => console.log("post: please"))
       .catch(err => console.log("post: no"))
   }
   deleteAddress = () => {
-    API.deleteAddress("5ccca3597b8ad51988f6e788")
+    API.deleteAddress("5ccdf7b418094b379059c35c")
       .then(res => console.log("delete: please"))
       .catch(err => console.log("delete: no"))
+  }
+  findAll = () => {
+    API.getAll("5ccdf7b418094b379059c35c")
+    .then(res=> console.log(res))
+    .catch(err=> console.log(err))
+  }
+  findPlace = () => {
+    API.places("cafe", "39.740880", "-104.981930", "5000")
+      .then(res=> console.log(res))
+      .catch(err => console.log(`error: \n ${err}`))
   }
 
 
@@ -46,52 +55,24 @@ class Home extends Component {
     });
   }
 
-  numAddresses = (event) => {
-    event.preventDefault()
-    const {name, value} = event.target
-    this.setState({[name]: value})
 
-  }
 
-  generateMore = (num) => {
-      if(num === 3) {
-        return <GoogleSuggest/>
-      } else if (num === 4) {
-        return <><GoogleSuggest/> <GoogleSuggest/></>
-      } else if (num === 5) {
-        return <><GoogleSuggest/> <GoogleSuggest/> <GoogleSuggest/></>
-      } else if (num === 2) {
-        return
-      }
-  }
 
   render() {
     return (
       <div className="homeBox">
         <span onClick={this.postAddress}>save</span> {"--------------------"}
-        <span onClick={this.deleteAddress}>delete</span>
+        <span onClick={this.deleteAddress}>delete</span>{"-----------------"}
+
+        <span onClick={this.findAll}>find</span>{"------------------"}
+        <span onClick={this.findPlace}>places?</span> 
 
         <div>
           <Row><Header /></Row>
           <Row>
-            <Col>
-              <p>Type in 2-5 addresses to find a central meeting point:</p>
-              <select value={this.state.num} onChange={this.numAddresses} name="num">
-              <option>Add More?</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-                <option value={5}>5</option>
-              </select>
-              <GoogleSuggest />
-              <GoogleSuggest />
-              {this.generateMore(parseInt(this.state.num))}
-              <MyMapComponent >
-                <GoogleMap {...MyMapComponent} />
-              </MyMapComponent>
-            </Col>
-            <Col>Filter your results</Col>
-            <Filters></Filters>
+            <MyMapComponent >
+              <GoogleMap {...MyMapComponent} />
+            </MyMapComponent>
           </Row>
         </div>
       </div>

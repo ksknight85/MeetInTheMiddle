@@ -3,7 +3,7 @@ import "./style.css"
 
 function Header() {
   return (
-    <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel" data-interval="5000">
+    <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel" data-interval="2000">
     <div id="carousel-inner">
     <div id = "titleDiv" style={{zIndex: "100"}} className="shadow p-3 mb-5 bg-white rounded">
     <img id = "titleImage" src="./assets/images/MeetInTheMiddle6.png" alt="logo"/>
@@ -19,7 +19,7 @@ function Header() {
         <img className="d-block w-100" src="./assets/images/friends26.jpg" alt="Third slide"/>
       </div>
       <div className="carousel-item">
-        <img className="d-block w-100" src="./assets/images/friends22.jpg" alt="Third slide"/>
+        <img className="d-block w-100" src="./assets/images/friends17.jpg" alt="Third slide"/>
       </div>
       <div className="carousel-item">
         <img className="d-block w-100" src="./assets/images/friends14.jpg" alt="Third slide"/>

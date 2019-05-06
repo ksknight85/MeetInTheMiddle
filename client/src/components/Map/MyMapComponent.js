@@ -1,47 +1,15 @@
 import React, { Component } from "react"
-import { compose } from "recompose"
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-  InfoWindow
-} from "react-google-maps"
 import API from "../../utils/API"
-import ReactGoogleMapLoader from "react-google-maps-loader"
-import ReactGooglePlacesSuggest from "react-google-places-suggest"
 import "./style.css"
+import "./SearchForm"
+import MapWithAMarker from "./MapWithAMarker"
+import { Col } from "reactstrap";
+import Filters from "./Filters";
+import GoogleSuggest from "../../components/AddressSearch"
+import DetailCards from "../../components/DetailCards/DetailCards.js"
 
-const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
-  // console.log(props.markers)
-  return (
-    <GoogleMap defaultZoom={8} defaultCenter={props.currentLocation ? props.currentLocation : { lat: 0, lng: 0 }}>
-      {/* {console.log(typeof(props.currentLocation))} */}
-      {/* {console.log(`default loc ${defaultCenter}`)} */}
-
-      {props.markers.map(marker => {
-        const onClick = props.onClick.bind(this, marker)
-        return (
-          <Marker
-            key={marker.id}
-            onClick={onClick}
-            position={{ lat: marker.lat, lng: marker.lng }}
-          >
-            {props.selectedMarker === marker &&
-              <InfoWindow>
-                <div>
-                  {marker}
-                </div>
-              </InfoWindow>}
-
-          </Marker>
-        )
-      })}
-    </GoogleMap>
-  )
-})
-
-export default class MyFancyComponent extends Component {
+let placesIDs = []
+class MyFancyComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -59,8 +27,9 @@ export default class MyFancyComponent extends Component {
       address5: false,
       chosenLat: "39.70922",
       chosenLng: "-104.980389",
-      radius: "5000",
-      type: "restaurant"
+      radius: "1600",
+      type: "restaurant",
+      num: 2,
     }
   }
 
@@ -134,7 +103,7 @@ export default class MyFancyComponent extends Component {
   }
 
   getPlaces = (lat, lng, radius, type) => {
-    API.places(lat, lng, radius, type)
+    API.places(this.state.type, this.state.chosenLat, this.state.chosenLng, this.state.radius)
       .then(data => {
         // console.log(data.data.results)
         const newArr = []
@@ -143,7 +112,9 @@ export default class MyFancyComponent extends Component {
         }
         // console.log("new Arrary", newArr)
         this.setState({ places: newArr })
+        console.log(this.state.places)
       })
+      // console.log(this.state.places)
   }
 
   componentDidMount() {
@@ -156,6 +127,53 @@ export default class MyFancyComponent extends Component {
     // console.log({ marker })
     this.setState({ selectedMarker: marker })
   }
+  numAddresses = (event) => {
+    event.preventDefault()
+    const { name, value } = event.target
+    this.setState({ [name]: value })
+
+  }
+
+  generateMore = (num) => {
+    if (num === 3) {
+      return <GoogleSuggest />
+    } else if (num === 4) {
+      return <><GoogleSuggest /> <GoogleSuggest /></>
+    } else if (num === 5) {
+      return <><GoogleSuggest /> <GoogleSuggest /> <GoogleSuggest /></>
+    } else if (num === 2) {
+      return
+    }
+  }
+
+  formSubmit = () => {
+    let places = this.state.places
+    return new Promise(function (resolve, reject) {
+      let detailsArr = []
+   for (var i=0; i<places.length; i++ ){
+      console.log(places[i])
+      API.details(places[i]).then(function (item) {
+        let onePlace = {
+          address: item.data.result.formatted_address,
+          icon: item.data.result.icon,
+          name: item.data.result.name,
+          number: item.data.result.formatted_phone_number,
+          photo: item.data.result.photos[0].html_attributions[0]
+  
+        }
+        detailsArr.push(onePlace)
+      });
+    }
+    resolve(detailsArr);
+    })
+  }
+  
+    handleFormSubmit = async (event) => {
+      event.preventDefault()
+      let result = await this.formSubmit();
+      console.log(result)
+  }
+
   render() {
     var LatLng = {
       lat: parseFloat(this.state.chosenLat),
@@ -163,77 +181,42 @@ export default class MyFancyComponent extends Component {
     }
 
     return (
-      <MapWithAMarker
-        selectedMarker={this.state.selectedMarker}
-        markers={this.state.places}
-        onClick={this.handleClick}
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-        key={this.state.selectedMarker}
-        currentLocation={LatLng}
-      />
+      <>
+        <Col>
+          <p>Type in 2-5 addresses to find a central meeting point:</p>
+          <select value={this.state.num} onChange={this.numAddresses} name="num">
+            <option>Add More?</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+          </select>
+          <GoogleSuggest />
+          <GoogleSuggest />
+          {this.generateMore(parseInt(this.state.num))}
+          <MapWithAMarker
+            selectedMarker={this.state.selectedMarker}
+            markers={this.state.places}
+            onClick={this.handleClick}
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            key={this.state.selectedMarker}
+            currentLocation={LatLng}
+          />
+        </Col>
+        <Col>
+          <p>Filter your results</p>
+          <Filters
+            type={this.state.type}
+            radius={this.state.radius}
+            />
+          <DetailCards handleformSubmit={this.handleFormSubmit}/>
+        </Col>
+      </>
     )
   }
 }
 
-// FILTERS for location type & search radius
-export class Filters extends Component {
-  state = {
-    typeSearch: "",
-    placeId:"ChIJwXlO3HKKa4cR3ieDsbtuWLw",
-    types: [],
-    typeResult: [],
-    radius: 10
-  }
-
-  componentDidMount() {
-    API.details(this.state.placeId)
-      .then(res => console.log("details", res.data.result.types))
-      .catch(err => console.log(err))
-  };
-
-  handleInputChange = event => {
-    this.setState({ typeSearch: event.target.value });
-    this.setState({ radius: event.target.value })
-  };
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-
-  };
-
-  render() {
-    return (
-      <form className="filter">
-        <div className="form-group">
-          <label htmlFor="details">Location Type:</label>
-          <input
-            name="details"
-            type="text"
-            placeholder="Restaurant, Coffee Shop, ect."
-            value={this.typeSearch}
-            onChange={this.handleInputChange}
-            // list=""
-          
-          />
-          
-          <datalist id="" >
-          </datalist>
-          <input
-            name="radius"
-            type="text"
-            placeholder="Radius"
-            value={this.radius}
-            onChange={this.handleInputChange}
-            // list=""
-          />
-              <datalist id="" >
-          </datalist>
-          <button type="submit">Search</button>
-        </div>
-      </form>
-    )
-  }
-}
+export default MyFancyComponent;
