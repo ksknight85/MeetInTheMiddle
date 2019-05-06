@@ -1,20 +1,10 @@
 import React, { Component } from "react"
-import { compose } from "recompose"
-import {
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
-    Marker,
-    InfoWindow
-} from "react-google-maps"
-import API from "../../utils/API"
 import ReactGoogleMapLoader from "react-google-maps-loader"
 import ReactGooglePlacesSuggest from "react-google-places-suggest"
 import "./style.css"
-
 const MY_API_KEY = "AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE" // fake
  
-export default class GoogleSuggest extends React.Component {
+export default class GoogleSuggest extends Component {
     state = {
         search: "",
         value: "",
