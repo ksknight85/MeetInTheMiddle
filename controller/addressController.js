@@ -5,7 +5,7 @@ module.exports = {
         db.Address
             .create(req.body)
             .then(function(dbAddress) {
-                return db.User.findOneAndUpdate({}, { $push: { address: dbAddress._id} }, {new:true});
+                return db.User.findOneAndUpdate({_id: req.params.id}, { $push: { address: dbAddress._id} }, {new:true});
             })
             .catch(err => res.status(422).json(err))
     },
@@ -18,7 +18,7 @@ module.exports = {
     },
     findAll: function(req,res) {
         db.User
-            .findById(req.params.id)
+            .findById({_id: req.params.id})
             .populate("address")
             .then(user => res.json(user.address))
             
