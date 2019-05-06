@@ -42,10 +42,13 @@ export default {
     return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=405+South+Pearl+Street,+Denver,+CO&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
   }, 
 
-  places: function(lat, lng, radius, type) {
-    return axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${type}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+  // places: function(lat, lng, radius, type) {
+  //   return axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${type}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+  // }, 
+  places: function(type, lat, lng, radius) {
+    console.log(lat, lng, radius, type)
+    return axios.get(`/api/place/${type}/${lat}/${lng}/${radius}`)
   }, 
-
 
   // details: function(placeID){
   //   return axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeID}&fields=name,rating,formatted_phone_number&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)

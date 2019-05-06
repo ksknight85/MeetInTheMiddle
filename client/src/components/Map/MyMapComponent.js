@@ -114,7 +114,6 @@ class MyFancyComponent extends Component {
         this.setState({ places: newArr })
         console.log(this.state.places)
       })
-    // console.log(this.state.places)
   }
 
   componentDidMount() {
