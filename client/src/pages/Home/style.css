@@ -1,0 +1,9 @@
+#mainBody {
+    margin-top: 20px;
+}
+
+#filterTitle, #addressInstructions {
+    font-family: 'Sansita', sans-serif;
+    font-size: 20px;
+    text-align: center
+}

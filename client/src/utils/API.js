@@ -26,14 +26,32 @@ export default {
     return axios.get("/api/users/logout")
   },
 
+  postAddress: function(id, address) {
+    console.log(id);
+    return axios.post("/api/address/" +id, address);
+  },
+  deleteAddress: function(id) {
+    console.log(id)
+    return axios.delete("/api/address/" +id)
+  },
+
   coordinates: function(address) {
-    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=405+South+Pearl+Street,+Denver,+CO&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
   }, 
 
   places: function(lat, lng, radius, type) {
     return axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${type}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
   }, 
 
+
+  // details: function(placeID){
+  //   return axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeID}&fields=name,rating,formatted_phone_number&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+  // }
+  
+// MOVE TO THE BACKEND TO GET RID OF CORS WORKAROUND
+  details: function(placeId){
+    return axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&fields=name,type,rating,photo,formatted_address,icon,formatted_phone_number&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+  }
 
 
 };

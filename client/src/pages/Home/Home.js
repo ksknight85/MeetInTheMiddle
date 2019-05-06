@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Button, Row, Col } from "reactstrap";
+import { Row } from "reactstrap";
 import API from "../../utils/API";
 import "./style.css";
 import Header from "../../components/Header";
@@ -19,6 +18,30 @@ class Home extends Component {
     this.loggedIn();
   }
 
+  // revist this it does not hit either the .then or .catch but it does post the address
+  postAddress = () => {
+
+    API.postAddress("5cce0e875424ec39408f60dd", {address: "12345 fake st"})
+
+      .then(res => console.log("post: please"))
+      .catch(err => console.log("post: no"))
+  }
+  deleteAddress = () => {
+    API.deleteAddress("5ccdf7b418094b379059c35c")
+      .then(res => console.log("delete: please"))
+      .catch(err => console.log("delete: no"))
+  }
+  findAll = () => {
+    API.getAll("5ccdf7b418094b379059c35c")
+    .then(res=> console.log(res))
+    .catch(err=> console.log(err))
+  }
+  findPlace = () => {
+    API.places("cafe", "39.740880", "-104.981930", "5000")
+      .then(res=> console.log(res))
+      .catch(err => console.log(`error: \n ${err}`))
+  }
+
 
   loggedIn = () => {
     API.isLoggedIn().then(user => {
@@ -32,22 +55,25 @@ class Home extends Component {
     });
   }
 
+
+
+
   render() {
     return (
       <div className="homeBox">
+        <span onClick={this.postAddress}>save</span> {"--------------------"}
+        <span onClick={this.deleteAddress}>delete</span>{"-----------------"}
+
+        <span onClick={this.findAll}>find</span>{"------------------"}
+        <span onClick={this.findPlace}>places?</span> 
+
         <div>
           <Row><Header /></Row>
           <Row>
-            <Col>
-              <p>Type in 2-5 addresses to find a central meeting point:</p>
-              <MyMapComponent >
-                <GoogleMap {...MyMapComponent} />
-
-              </MyMapComponent>
-            </Col>
-            <Col>2 of 2</Col>
+            <MyMapComponent >
+              <GoogleMap {...MyMapComponent} />
+            </MyMapComponent>
           </Row>
-
         </div>
       </div>
     );

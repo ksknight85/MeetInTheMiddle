@@ -1,45 +1,19 @@
 import React, { Component } from "react"
-import { compose } from "recompose"
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-  InfoWindow
-} from "react-google-maps"
 import API from "../../utils/API"
+import "./style.css"
+import "./SearchForm"
+import MapWithAMarker from "./MapWithAMarker"
+import { Col } from "reactstrap";
+import Filters from "./Filters";
+import GoogleSuggest from "../../components/AddressSearch"
+import DetailCards from "../../components/DetailCards/DetailCards.js"
 
-const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
-console.log(props.markers)
-  return (
-    <GoogleMap defaultZoom={8} defaultCenter={{ lat: 29.5, lng: -95 }}>
-      {props.markers.map(marker => {
-        const onClick = props.onClick.bind(this, marker)
-        return (
-          <Marker
-            key={marker.id}
-            onClick={onClick}
-            position={{ lat: marker.lat, lng: marker.lng }}
-          >
-            {props.selectedMarker === marker &&
-              <InfoWindow>
-                <div>
-                  {marker}
-                </div>
-              </InfoWindow>}
-            
-          </Marker>
-        )
-      })}
-    </GoogleMap>
-  )
-})
-
-export default class MyFancyComponent extends Component {
+let placesIDs = []
+class MyFancyComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      places: [{lat: 39.70922, lng: -104.980389}, {lat: 39.707760, lng: -104.973170}],
+      places: [],
       selectedMarker: false,
       address1Coord: false,
       address2Coord: false,
@@ -53,8 +27,9 @@ export default class MyFancyComponent extends Component {
       address5: false,
       chosenLat: "39.70922",
       chosenLng: "-104.980389",
-      radius: "5000",
-      type: "restaurant"
+      radius: "1600",
+      type: "restaurant",
+      num: 2,
     }
   }
 
@@ -90,52 +65,56 @@ export default class MyFancyComponent extends Component {
     API.coordinates(address1)
       .then(data => {
         this.setState({ address1Coord: data.data.results[0].geometry.location })
-        console.log(this.state.address1Coord)
+        // console.log(this.state.address1Coord)
       })
       .catch(err => console.log(err))
     API.coordinates(address2)
       .then(data => {
         this.setState({ address2Coord: data.data.results[0].geometry.location })
-        console.log(this.state.address2Coord)
+
+        // console.log(this.state.address2Coord)
+
       })
       .catch(err => console.log(err))
-    if (address3){
-    API.coordinates(address3)
-      .then(data => {
-        this.setState({ address3Coord: data.data.results[0].geometry.location })
-        console.log(this.state.address3Coord)
-      })
-      .catch(err => console.log(err))
+    if (address3) {
+      API.coordinates(address3)
+        .then(data => {
+          this.setState({ address3Coord: data.data.results[0].geometry.location })
+          console.log(this.state.address3Coord)
+        })
+        .catch(err => console.log(err))
     }
     if (address4) {
-    API.coordinates(address4)
-      .then(data => {
-        this.setState({ address4Coord: data.data.results[0].geometry.location })
-        console.log(this.state.address4Coord)
-      })
-      .catch(err => console.log(err))
+      API.coordinates(address4)
+        .then(data => {
+          this.setState({ address4Coord: data.data.results[0].geometry.location })
+          console.log(this.state.address4Coord)
+        })
+        .catch(err => console.log(err))
     }
     if (address5) {
-    API.coordinates(address5)
-      .then(data => {
-        this.setState({ address5Coord: data.data.results[0].geometry.location })
-        console.log(this.state.address5Coord)
-      })
-      .catch(err => console.log(err))
+      API.coordinates(address5)
+        .then(data => {
+          this.setState({ address5Coord: data.data.results[0].geometry.location })
+          console.log(this.state.address5Coord)
+        })
+        .catch(err => console.log(err))
     }
   }
 
   getPlaces = (lat, lng, radius, type) => {
-    API.places(lat, lng, radius, type)
+    API.places(this.state.type, this.state.chosenLat, this.state.chosenLng, this.state.radius)
       .then(data => {
-        console.log(data.data.results)
+        // console.log(data.data.results)
         const newArr = []
-        for (let i=0; i<20; i++){
+        for (let i = 0; i < 20; i++) {
           newArr.push(data.data.results[i].geometry.location)
         }
-        console.log("new Arrary", newArr)
+        // console.log("new Arrary", newArr)
         this.setState({ places: newArr })
+        console.log(this.state.places)
       })
+      // console.log(this.state.places)
   }
 
   componentDidMount() {
@@ -145,21 +124,99 @@ export default class MyFancyComponent extends Component {
 
   handleClick = (marker, event) => {
     event.preventDefault()
-    console.log({ marker })
+    // console.log({ marker })
     this.setState({ selectedMarker: marker })
   }
+  numAddresses = (event) => {
+    event.preventDefault()
+    const { name, value } = event.target
+    this.setState({ [name]: value })
+
+  }
+
+  generateMore = (num) => {
+    if (num === 3) {
+      return <GoogleSuggest />
+    } else if (num === 4) {
+      return <><GoogleSuggest /> <GoogleSuggest /></>
+    } else if (num === 5) {
+      return <><GoogleSuggest /> <GoogleSuggest /> <GoogleSuggest /></>
+    } else if (num === 2) {
+      return
+    }
+  }
+
+  formSubmit = () => {
+    let places = this.state.places
+    return new Promise(function (resolve, reject) {
+      let detailsArr = []
+   for (var i=0; i<places.length; i++ ){
+      console.log(places[i])
+      API.details(places[i]).then(function (item) {
+        let onePlace = {
+          address: item.data.result.formatted_address,
+          icon: item.data.result.icon,
+          name: item.data.result.name,
+          number: item.data.result.formatted_phone_number,
+          photo: item.data.result.photos[0].html_attributions[0]
+  
+        }
+        detailsArr.push(onePlace)
+      });
+    }
+    resolve(detailsArr);
+    })
+  }
+  
+    handleFormSubmit = async (event) => {
+      event.preventDefault()
+      let result = await this.formSubmit();
+      console.log(result)
+  }
+
   render() {
+    var LatLng = {
+      lat: parseFloat(this.state.chosenLat),
+      lng: parseFloat(this.state.chosenLng)
+    }
+
     return (
-      <MapWithAMarker
-        selectedMarker={this.state.selectedMarker}
-        markers={this.state.places}
-        onClick={this.handleClick}
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-        key={this.state.selectedMarker}
-      />
+      <>
+        <Col>
+          <p>Type in 2-5 addresses to find a central meeting point:</p>
+          <select value={this.state.num} onChange={this.numAddresses} name="num">
+            <option>Add More?</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+          </select>
+          <GoogleSuggest />
+          <GoogleSuggest />
+          {this.generateMore(parseInt(this.state.num))}
+          <MapWithAMarker
+            selectedMarker={this.state.selectedMarker}
+            markers={this.state.places}
+            onClick={this.handleClick}
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            key={this.state.selectedMarker}
+            currentLocation={LatLng}
+          />
+        </Col>
+        <Col>
+          <p>Filter your results</p>
+          <Filters
+            type={this.state.type}
+            radius={this.state.radius}
+            />
+          <DetailCards handleformSubmit={this.handleFormSubmit}/>
+        </Col>
+      </>
     )
   }
 }
+
+export default MyFancyComponent;

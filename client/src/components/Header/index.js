@@ -3,9 +3,9 @@ import "./style.css"
 
 function Header() {
   return (
-    <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel" data-interval="5000">
+    <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel" data-interval="2000">
     <div id="carousel-inner">
-    <div id = "titleDiv" style={{zIndex: "100"}} class="shadow p-3 mb-5 bg-white rounded">
+    <div id = "titleDiv" style={{zIndex: "100"}} className="shadow p-3 mb-5 bg-white rounded">
     <img id = "titleImage" src="./assets/images/MeetInTheMiddle6.png" alt="logo"/>
     <p id="byline">Meeting halfway has never been easier! Enter two or more addresses, the type of place you want to meet, and we’ll help you figure out exactly where to go.</p>
     </div>
@@ -19,7 +19,7 @@ function Header() {
         <img className="d-block w-100" src="./assets/images/friends26.jpg" alt="Third slide"/>
       </div>
       <div className="carousel-item">
-        <img className="d-block w-100" src="./assets/images/friends22.jpg" alt="Third slide"/>
+        <img className="d-block w-100" src="./assets/images/friends17.jpg" alt="Third slide"/>
       </div>
       <div className="carousel-item">
         <img className="d-block w-100" src="./assets/images/friends14.jpg" alt="Third slide"/>
