@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 
 function SearchForm(props) {
+  console.log()
   return (
     <>
       <form className="search">

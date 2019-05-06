@@ -12,7 +12,7 @@ function Header() {
       <div className="carousel-item active">
         <img className="d-block w-100" src="./assets/images/friends30.jpg" alt="First slide"/>
       </div>
-      <div class="carousel-item">
+      <div className="carousel-item">
         <img className="d-block w-100" src="./assets/images/friends23.jpg" alt="Second slide"/>
       </div>
       <div className="carousel-item">

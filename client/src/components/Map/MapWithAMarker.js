@@ -1,23 +1,36 @@
+import React from "react"
+import { compose } from "recompose"
+import {  withScriptjs,  withGoogleMap,  GoogleMap,  Marker,  InfoWindow} from "react-google-maps"
+import "./style.css"
+import "./SearchForm"
 
-// import { withScriptjs, withGoogleMap, GoogleMap, Marker,} from "react-google-maps";
+const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
+    // console.log(props.markers)
+    return (
+      <GoogleMap defaultZoom={8} defaultCenter={props.currentLocation ? props.currentLocation : { lat: 0, lng: 0 }}>
+        {/* {console.log(typeof(props.currentLocation))} */}
+        {/* {console.log(`default loc ${defaultCenter}`)} */}
+  
+        {props.markers.map(marker => {
+          const onClick = props.onClick.bind(this, marker)
+          return (
+            <Marker
+              key={marker.id}
+              onClick={onClick}
+              position={{ lat: marker.lat, lng: marker.lng }}
+            >
+              {props.selectedMarker === marker &&
+                <InfoWindow>
+                  <div>
+                    {marker}
+                  </div>
+                </InfoWindow>}
+  
+            </Marker>
+          )
+        })}
+      </GoogleMap>
+    )
+  })
 
-// const MapWithAMarker = withScriptjs(withGoogleMap(props =>
-//   <GoogleMap
-//     defaultZoom={8}
-//     defaultCenter={{ lat: -34.397, lng: 150.644 }}
-//   >
-//     <Marker
-//       position={{ lat: -34.397, lng: 150.644 }}
-//     />
-//   </GoogleMap>
-// ));
-
-// <MapWithAMarker
-//   // googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUVFMs53CKYmm-w1kLsKLCJztZtBvxzcU&libraries=geometry,drawing,places"
-//   googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=places,distance"
-//   loadingElement={<div style={{ height: `100%` }} />}
-//   containerElement={<div style={{ height: `400px` }} />}
-//   mapElement={<div style={{ height: `100%` }} />}
-// />
-
-// export default MapWithAMarker
+  export default MapWithAMarker;
