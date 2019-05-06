@@ -6,7 +6,9 @@ import MapWithAMarker from "./MapWithAMarker"
 import { Col } from "reactstrap";
 import Filters from "./Filters";
 import GoogleSuggest from "../../components/AddressSearch"
+import DetailCards from "../../components/DetailCards/DetailCards.js"
 
+let placesIDs = []
 class MyFancyComponent extends Component {
   constructor(props) {
     super(props)
@@ -112,7 +114,6 @@ class MyFancyComponent extends Component {
         this.setState({ places: newArr })
         console.log(this.state.places)
       })
-      // console.log(this.state.places)
   }
 
   componentDidMount() {
@@ -129,7 +130,6 @@ class MyFancyComponent extends Component {
     event.preventDefault()
     const { name, value } = event.target
     this.setState({ [name]: value })
-
   }
 
   generateMore = (num) => {
@@ -180,12 +180,13 @@ class MyFancyComponent extends Component {
           <Filters
             type={this.state.type}
             radius={this.state.radius}
-            />
+          />
+          <DetailCards handleformSubmit={this.handleFormSubmit} />
         </Col>
       </>
     )
   }
 }
 
-export default MyFancyComponent;
+  export default MyFancyComponent;
 
