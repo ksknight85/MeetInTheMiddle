@@ -101,7 +101,7 @@ class MyFancyComponent extends Component {
   }
 
   getPlaces = (lat, lng, radius, type) => {
-    API.places(lat, lng, radius, type)
+    API.places(this.state.type, this.state.chosenLat, this.state.chosenLng, this.state.radius)
       .then(data => {
         // console.log(data.data.results)
         const newArr = []
@@ -110,7 +110,9 @@ class MyFancyComponent extends Component {
         }
         // console.log("new Arrary", newArr)
         this.setState({ places: newArr })
+        console.log(this.state.places)
       })
+      // console.log(this.state.places)
   }
 
   componentDidMount() {
