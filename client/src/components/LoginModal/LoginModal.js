@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./style.css"
+import { Link } from 'react-router-dom'
 
 
-class LoginModal extends React.Component {
+class LoginModal extends Component {
 
   state = {
     action: "login",
@@ -71,21 +72,10 @@ class LoginModal extends React.Component {
             <form action="#">
               <h1>Sign in</h1>
               <span>or use your account</span>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username"
-                onChange={this.props.handleInputChange}
-                valid={this.state.validUsername} />
+              <input type="text" name="username" id="username" placeholder="Username" value={this.props.username} onChange={this.props.handleInputChange} valid={this.state.validUsername} />
+              <input type="password" name="password" placeholder="Password" />
+              <Link to="#">Forgot your password?</Link>
 
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={this.props.handleInputChange}
-                />
-              <a href="#">Forgot your password?</a>
               <button>Sign In</button>
             </form>
           </div>
@@ -111,13 +101,3 @@ class LoginModal extends React.Component {
 
 export default LoginModal;
 
-// {/* <div className="social-container">
-// <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-// <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-// <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-// </div>
-// <div className="social-container">
-// <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-// <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-// <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-// </div> */}
