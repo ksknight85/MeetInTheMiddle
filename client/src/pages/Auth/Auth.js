@@ -2,16 +2,18 @@ import React, { Component } from "react";
 import Login from "../../components/Login";
 import Signup from "../../components/Signup";
 import API from "../../utils/API";
+import LoginModal from "../../components/LoginModal/index.js"
 
 class Auth extends Component {
 
   state = {
     loggedIn: false,
-    username: "",
-    password: "",
-    confirmPassword: "",
     user: null,
-    message: ""
+    message: "",
+    name: "",
+    username: "",
+    email: "",
+    password: ""
   }
 
   handleInputChange = event => {
@@ -49,6 +51,7 @@ class Auth extends Component {
 
   handleSignup = event => {
     event.preventDefault();
+    console.log("hi")
     if (this.state.username && this.state.password) {
       API.signup({
         username: this.state.username,
@@ -74,30 +77,57 @@ class Auth extends Component {
 
   render() {
     return (
-      <div className="authBox">
+      <>
         {(this.props.action === "login") ? (
-          <Login
+          <LoginModal
+            action="login"
+            name={this.state.username}
             username={this.state.username}
             password={this.state.password}
             handleLogin={this.handleLogin}
             handleInputChange={this.handleInputChange}
             message={this.state.message}
-          />
+            handleSignup={this.handleSignup}
+          ><div id="app" /></LoginModal>
         ) : (
-            <Signup
+            <LoginModal
+              action="signup"
+              name={this.state.username}
               username={this.state.username}
               password={this.state.password}
-              confirmPassword={this.state.confirmPassword}
-              handleSignup={this.handleSignup}
+              handleLogin={this.handleLogin}
               handleInputChange={this.handleInputChange}
               message={this.state.message}
-            />
+              handleSignup={this.handleSignup}
+            ><div id="app" /></LoginModal>
           )}
-      </div>
+      </>
     )
   }
 }
 
-
-
 export default Auth;
+
+// {/* <div className="authBox">
+//           {(this.props.action === "login") ? (
+//             <Login
+//               username={this.state.username}
+//               password={this.state.password}
+//               handleLogin={this.handleLogin}
+//               handleInputChange={this.handleInputChange}
+//               message={this.state.message}
+//             />
+//           ) : (
+//               <Signup
+//                 username={this.state.username}
+//                 password={this.state.password}
+//                 confirmPassword={this.state.confirmPassword}
+//                 handleSignup={this.handleSignup}
+//                 handleInputChange={this.handleInputChange}
+//                 message={this.state.message}
+//               />
+//             )}
+//         </div> */}
+
+
+
