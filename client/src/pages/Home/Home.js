@@ -35,6 +35,11 @@ class Home extends Component {
     .then(res=> console.log(res))
     .catch(err=> console.log(err))
   }
+  findPlace = () => {
+    API.places("cafe", "39.740880", "-104.981930", "5000")
+      .then(res=> console.log(res))
+      .catch(err => console.log(`error: \n ${err}`))
+  }
 
 
   loggedIn = () => {
@@ -57,7 +62,9 @@ class Home extends Component {
       <div className="homeBox">
         <span onClick={this.postAddress}>save</span> {"--------------------"}
         <span onClick={this.deleteAddress}>delete</span>{"-----------------"}
-        <span onClick={this.findAll}>find</span>
+        <span onClick={this.findAll}>find</span>{"------------------"}
+        <span onClick={this.findPlace}>places?</span> 
+
         <div>
           <Row><Header /></Row>
           <Row>
