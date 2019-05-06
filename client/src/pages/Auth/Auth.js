@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Login from "../../components/Login";
-import Signup from "../../components/Signup";
 import API from "../../utils/API";
 import LoginModal from "../../components/LoginModal/index.js"
 

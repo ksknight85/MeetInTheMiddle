@@ -13,10 +13,6 @@ class LoginModal extends Component {
     password: "",
   }
 
-  constructor(props) {
-    super(props);
-  }
-
 
   componentDidMount(props) {
     this.setState({
