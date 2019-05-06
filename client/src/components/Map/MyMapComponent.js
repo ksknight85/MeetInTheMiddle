@@ -11,6 +11,8 @@ import API from "../../utils/API"
 import ReactGoogleMapLoader from "react-google-maps-loader"
 import ReactGooglePlacesSuggest from "react-google-places-suggest"
 import "./style.css"
+import "./filterForm"
+import SearchForm from "./filterForm";
 
 const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
   // console.log(props.markers)
@@ -183,57 +185,32 @@ export class Filters extends Component {
   state = {
     typeSearch: "",
     placeId:"ChIJwXlO3HKKa4cR3ieDsbtuWLw",
-    types: [],
-    typeResult: [],
     radius: 10
   }
-
   componentDidMount() {
     API.details(this.state.placeId)
-      .then(res => console.log("details", res.data.result.types))
+      .then(res => console.log("details", res.data.result))
       .catch(err => console.log(err))
   };
-
-  handleInputChange = event => {
+  handleTypeChange = event => {
     this.setState({ typeSearch: event.target.value });
+  };
+  handleRadiusChange = event => {
     this.setState({ radius: event.target.value })
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-
   };
-
+  
   render() {
     return (
-      <form className="filter">
-        <div className="form-group">
-          <label htmlFor="details">Location Type:</label>
-          <input
-            name="details"
-            type="text"
-            placeholder="Restaurant, Coffee Shop, ect."
-            value={this.typeSearch}
-            onChange={this.handleInputChange}
-            // list=""
-          
+          <SearchForm
+            handleFormSubmit={this.handleFormSubmit}
+            handleTypeChange={this.handleTypeChange}
+            handleRadiusChange={this.handleRadiusChange}
+            types={this.type}
           />
-          
-          <datalist id="" >
-          </datalist>
-          <input
-            name="radius"
-            type="text"
-            placeholder="Radius"
-            value={this.radius}
-            onChange={this.handleInputChange}
-            // list=""
-          />
-              <datalist id="" >
-          </datalist>
-          <button type="submit">Search</button>
-        </div>
-      </form>
     )
   }
 }
