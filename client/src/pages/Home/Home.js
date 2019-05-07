@@ -3,8 +3,6 @@ import { Row } from "reactstrap";
 import API from "../../utils/API";
 import "./style.css";
 import Header from "../../components/Header";
-import MyMapComponent from '../../components/Map/MyMapComponent';
-import { GoogleMap } from 'react-google-maps';
 import ModalExample from "../../components/Modal/Modal.js"
 
 
@@ -74,9 +72,6 @@ class Home extends Component {
         <div>
           <ModalExample show={true} closeOnOuterClick={true}/>
           <Row><Header /></Row>
-            <MyMapComponent >
-              <GoogleMap {...MyMapComponent} />
-            </MyMapComponent>
         </div>
       </div>
     );
