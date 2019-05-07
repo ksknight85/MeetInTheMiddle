@@ -3,16 +3,16 @@ import "./style.css"
 
 
 function Filters(props) {
-  handleTypeChange = event => {
-    this.setState({ typeSearch: event.target.value });
-  };
-  handleRadiusChange = event => {
-    this.setState({ radius: event.target.value })
-  };
+  // handleTypeChange = event => {
+  //   this.setState({ typeSearch: event.target.value });
+  // };
+  // handleRadiusChange = event => {
+  //   this.setState({ radius: event.target.value })
+  // };
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-  };
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  // };
 
   return (
     <>

@@ -26,7 +26,6 @@ export default class GoogleSuggest extends Component {
     render() {
         const {search, value} = this.state
         return (
-            <>
             <ReactGoogleMapLoader
                 params={{
                     key: MY_API_KEY,
@@ -34,6 +33,8 @@ export default class GoogleSuggest extends Component {
                 }}
                 render={googleMaps =>
                     googleMaps && (
+                        <div className="input-bar">
+                        <div className="input-bar-item">
                         <ReactGooglePlacesSuggest
                             googleMaps={googleMaps}
                             autocompletionRequest={{
@@ -46,7 +47,7 @@ export default class GoogleSuggest extends Component {
                             onSelectSuggest={this.handleSelectSuggest}
                             textNoResults="My custom no results text" // null or "" if you want to disable the no results item
                             customRender={prediction => (
-                                <div className="customWrapper">
+                                <div className="customWrapper input-group">
                                     {prediction
                                         ? prediction.description
                                         : "My custom no results text"}
@@ -54,18 +55,23 @@ export default class GoogleSuggest extends Component {
                             )}
                         >
                             <input
+                                className= "form-control width100"
                                 type="text"
                                 value={value}
                                 placeholder="Search a location"
                                 onChange={this.handleInputChange}
                             />
                         </ReactGooglePlacesSuggest>
+                        <span className="input-group-btn">
+                        <button type="button" className="btn btn-warning">Save</button>
+                    <button type="button" className="btn btn-info">Select from Profile</button>
+                    </span>
+                </div>
+                </div>
                     )
                 }
+                
             />
-            <button type="button" className="btn btn-warning">Save</button>
-            <button type="button" className="btn btn-info">Select from Profile</button>
-            </>
         )
     }
 }

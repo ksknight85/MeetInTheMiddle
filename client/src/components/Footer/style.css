@@ -1,10 +1,14 @@
 p {
     display: inline-flex;
-    padding: 1%;
-    padding-top: 2%;
+    padding: 0%;
+    padding-top: 1%;
 }
 
 footer {
     text-align: center;
-    background-color: #f8bc45
+    background-color: #f8bc45;
+}
+
+#Footer {
+    padding: 0px;
 }

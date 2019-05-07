@@ -1,0 +1,60 @@
+.profilePage {
+    background-image: url("../../images/coffeeshoppeople.jpg");
+    /* background-image: url("http://storage.googleapis.com/zagat-article-ss/mourningdove_atlanta_1_lukebeardd_02022018.jpg?h=646&w=646&auto=format"); */
+    background-size: cover;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+#loadingIcon {
+    width: 200px;
+    height: 200px;
+}
+
+body {
+    height: 100%
+}
+
+  
+  .profileBox {
+    flex: 1;
+  }
+
+  #profileContainer {
+      margin-top: 10%;
+      padding: 0;
+      width: 60%
+  }
+
+  #welcome {
+      font-family: 'Sansita', sans-serif;
+      font-size: 2.5em;
+      background: #f8bc45;
+      padding: 10px;
+  }
+
+  #savedAddresses {
+      font-family: 'Montserrat', sans-serif;
+      text-align: center
+  }
+
+  #add {
+      margin-bottom: 10px;
+      margin-left: 10px
+  }
+
+  #update, #delete {
+        border: none;
+        background-color: inherit;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        /* display: inline; */
+        float: right
+        
+  }
+
+  .update:hover, .delete:hover {background: #eee;}
+
+  

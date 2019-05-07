@@ -26,7 +26,6 @@ class LoginModal extends Component {
   render() {
     return (
       <div className="zama-form">
-        <h2>Sign in/up Form</h2>
         <div className={`container ${this.state.action === "signup" ? 'right-panel-active' : ''}`} id="container">
           <div className="form-container sign-up-container">
             <form action="#">
@@ -70,19 +69,19 @@ class LoginModal extends Component {
               <span>or use your account</span>
               <input type="text" name="username" id="username" placeholder="Username" value={this.props.username} onChange={this.props.handleInputChange} valid={this.state.validUsername} />
               <input type="password" name="password" placeholder="Password" />
-              <Link to="#">Forgot your password?</Link>
+              <Link to="#" style={{color: "#57aabe"}}>Forgot your password?</Link>
 
               <button>Sign In</button>
             </form>
           </div>
           <div className="overlay-container">
             <div className="overlay">
-              <div className="overlay-panel overlay-left">
+              <div className="overlay-panel overlay-left helloFriend">
                 <h1>Welcome Back!</h1>
                 <p>To keep connected with us please login with your personal info</p>
                 <button className="ghost" onClick={e => this.setState({ action: "login" })}>Sign In</button>
               </div>
-              <div className="overlay-panel overlay-right">
+              <div className="overlay-panel overlay-right helloFriend">
                 <h1>Hello, Friend!</h1>
                 <p>Enter your personal details and start journey with us</p>
                 <button className="ghost" onClick={e => this.setState({ action: "signup" })}>Sign Up</button>

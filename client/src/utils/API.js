@@ -46,7 +46,7 @@ export default {
   //   return axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${type}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
   // }, 
   places: function(type, lat, lng, radius) {
-    console.log(lat, lng, radius, type)
+    console.log("In places API call: " ,lat, lng, radius, type)
     return axios.get(`/api/place/${type}/${lat}/${lng}/${radius}`)
   }, 
 
