@@ -25,8 +25,8 @@ class MyFancyComponent extends Component {
       address3: false,
       address4: false,
       address5: false,
-      chosenLat: "",
-      chosenLng: "",
+      chosenLat: "39.7392",
+      chosenLng: "-104.9903",
       radius: "1600",
       type: "restaurant",
       num: 2,
@@ -36,6 +36,7 @@ class MyFancyComponent extends Component {
 
   getAvgLat = () => {
     let latAverage;
+    // console.log("hit")
     if (this.state.address1Coord && this.state.address2Coord && !this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
       latAverage = (this.state.address1Coord.lat + this.state.address2Coord.lat) / 2
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
@@ -61,6 +62,10 @@ class MyFancyComponent extends Component {
       lngAverage = ((this.state.address1Coord.lng + this.state.address2Coord.lng + this.state.address3Coord.lng + this.state.address4Coord.lng + this.state.address5Coord.lng) / 5)
     }
     this.setState({ chosenLng: lngAverage.toString() })
+  }
+  getAvg = () => {
+    this.getAvgLng();
+    this.getAvgLat();
   }
 
 
@@ -150,7 +155,7 @@ class MyFancyComponent extends Component {
   }
 
 
-  updateAddress = (boxNum,address) => {
+  updateAddressInState = (boxNum,address) => {
     let num = "address" + boxNum
     this.setState({[num]: address})
   }
@@ -175,12 +180,12 @@ class MyFancyComponent extends Component {
             </select>
             <GoogleSuggest 
             num={"1"}
-            update={this.updateAddress}
+            update={this.updateAddressInState}
             coords={this.getCoordinates}
             />
             <GoogleSuggest 
             num={"2"}
-            update={this.updateAddress}
+            update={this.updateAddressInState}
             coords={this.getCoordinates}
             />
             {this.generateMore(parseInt(this.state.num))}
@@ -188,7 +193,7 @@ class MyFancyComponent extends Component {
               selectedMarker={this.state.selectedMarker}
               markers={this.state.places}
               onClick={this.handleClick}
-              googleMapURL="https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
+              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{ height: `400px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
@@ -206,7 +211,7 @@ class MyFancyComponent extends Component {
             <button type="submit" onClick={this.handleFormSubmit}>Search</button>
           {/* <DetailCards handleformSubmit={this.handleFormSubmit} /> */}
           <button type="submit" onClick={this.getPlaces}>Test</button>
-              <button onClick={this.getAvgLng && this.getAvgLat}>Average and list</button>
+              <button onClick={this.getAvg}>Average and list</button>
           </Col>
       </>
     )
