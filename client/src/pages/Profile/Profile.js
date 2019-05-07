@@ -8,8 +8,10 @@ import GoogleSuggest from "../../components/AddressSearch"
 class Profile extends Component {
     state = {
         loggedIn: false,
-        user: null,
-        loading: true
+        userId: null,
+        loading: true,
+        addresses: [],
+        name: null
     }
 
     componentDidMount() {
@@ -17,17 +19,21 @@ class Profile extends Component {
         this.loading();
 
         API.isLoggedIn().then(user => {
+            console.log(user.data.user)
             if (user.data.loggedIn) {
                 this.setState({
                     loggedIn: true,
-                    user: user.data.user
+                    userId: user.data.user._id,
+                    name: user.data.user.username
                 });
+                this.findAll()
             }
-        }).catch(err => {
+        })
+            .catch(err => {
             console.log(err);
         });
+        // console.log(this.props)
 
-        console.log(this.props)
     }
 
     loading() {
@@ -38,6 +44,19 @@ class Profile extends Component {
         }, 1000)
     }
 
+    findAll = () => {
+        // console.log(`find hit`)
+        API.getAll(this.state.userId)
+        .then(res=> {
+            let addressArray=[];
+            for (let i=0; i< res.data.length; i++) {
+                addressArray.push({address: res.data[i].address, id: res.data[i]._id})
+            }
+            this.setState({addresses: addressArray})        
+        })
+        .catch(err=> console.log(err))
+      }
+
     render() {
         return (
             <div className="profilePage">
@@ -45,25 +64,26 @@ class Profile extends Component {
                 <div className="profileBox">
                     {/* <h1 id="userTitle">Welcome {this.state.user.username}</h1> */}
                     <div className="container" id="profileContainer">
-                        <h2 id="welcome">Welcome</h2>
+                        <h2 id="welcome">Welcome {this.state.name}</h2>
                         <h5 id="savedAddresses">Saved Addresses:</h5>
-                        <button type="submit" class="btn btn-warning" id="add"
-                        onClick = {() => <GoogleSuggest/>}
+                        <button type="submit" className="btn btn-warning" id="add"
+                        // onClick = {() => {
+                            
+                        //         return (document.getElementById("profileContainier").appendChild(<GoogleSuggest />))
+                            
+                        // }}
                         >+ Add Another</button>
-                        <div class="card">
-                            <div class="card-body">
-                                405 S Pearl St, Denver, CO 80209
-                                <button type="submit" id="update" class="btn btn-warning"><u>Update</u></button>
-                                <button type="submit" id="delete" class="btn btn-warning"><u>Delete</u></button>
+                        {this.state.addresses.map(address => {
+                            return (
+                                <div key={address.address} className="card">
+                                <div className="card-body">
+                                    {address.address}
+                                    <button type="submit" id="update" data-addressId={address.id} className="btn btn-warning"><u>Update</u></button>
+                                    <button type="submit" id="delete" data-addressId={address.id} className="btn btn-warning"><u>Delete</u></button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                1269 N Logan St, Denver, CO 80203
-                                <button type="submit" id="update" class="btn btn-warning"><u>Update</u></button>
-                                <button type="submit" id="delete" class="btn btn-warning"><u>Delete</u></button>
-                            </div>
-                        </div>
+                            )
+                        })}
                     </div>
                 </div>
                 {/* ) : (

@@ -29,7 +29,7 @@ export default class GoogleSuggest extends Component {
     }
     postAddress = () => {
 
-        API.postAddress("5cce0e875424ec39408f60dd", {address: this.state.value})
+        API.postAddress(this.state.userId, {address: this.state.value})
     
           .then(res => console.log("post: please"))
           .catch(err => console.log("post: no"))
@@ -37,7 +37,7 @@ export default class GoogleSuggest extends Component {
 
     findAll = () => {
         // console.log(`${this.props.num}'s search bar hit`)
-        API.getAll("5ccdf7b418094b379059c35c")
+        API.getAll(this.state.userId)
         .then(res=> {
             let addressArray = [];
             for (let i =0; i < res.data.length; i++) {
@@ -60,7 +60,21 @@ export default class GoogleSuggest extends Component {
 
     componentDidMount() {
         // console.log("did mount")
-        this.findAll()
+        API.isLoggedIn().then(user => {
+            console.log(user.data.user)
+            if (user.data.loggedIn) {
+                this.setState({
+                    loggedIn: true,
+                    userId: user.data.user._id,
+                    name: user.data.user.username
+
+                });
+                this.findAll()
+            }
+        })
+            .catch(err => {
+            console.log(err);
+        });
     }
  
     render() {
