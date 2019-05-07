@@ -62,7 +62,7 @@ function LoginModal(props) {
               placeholder="Password"
               onChange={props.handleInputChange}
             />
-            <button>Sign In</button>
+            <button onClick={props.handleLogin}>Sign In</button>
           </form>
         </div>
         <div className="overlay-container">

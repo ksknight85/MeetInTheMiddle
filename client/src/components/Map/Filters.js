@@ -3,7 +3,6 @@ import "./style.css"
 
 
 function Filters(props) {
-  console.log(`filter props ${props.handleRadiusTypeChange}`)
   return (
     <>
           <div className="form-group">

@@ -53,9 +53,10 @@ class Home extends Component {
         this.setState({
           loggedIn: true
         });
+        console.log(`User: data ${user.data}`);
       }
     }).catch(err => {
-      console.log(err);
+      console.log("Not logged in");
     });
   }
 
