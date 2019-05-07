@@ -3,8 +3,6 @@ import { Row } from "reactstrap";
 import API from "../../utils/API";
 import "./style.css";
 import Header from "../../components/Header";
-import MyMapComponent from '../../components/Map/MyMapComponent';
-import { GoogleMap } from 'react-google-maps';
 import ModalExample from "../../components/Modal/Modal.js"
 
 
@@ -12,6 +10,7 @@ class Home extends Component {
 
   state = {
     loggedIn: false,
+    userID: ""
   };
 
   componentDidMount() {
@@ -49,13 +48,16 @@ class Home extends Component {
   }
   loggedIn = () => {
     API.isLoggedIn().then(user => {
+      console.log(user)
       if (user.data.loggedIn) {
         this.setState({
-          loggedIn: true
+          loggedIn: true,
+          username: user.data.user._id
         });
+        console.log(`User: data ${user.data}`);
       }
     }).catch(err => {
-      console.log(err);
+      console.log("Not logged in");
     });
   }
 
@@ -73,9 +75,6 @@ class Home extends Component {
         <div>
           <ModalExample show={true} closeOnOuterClick={true}/>
           <Row><Header /></Row>
-            <MyMapComponent >
-              <GoogleMap {...MyMapComponent} />
-            </MyMapComponent>
         </div>
       </div>
     );

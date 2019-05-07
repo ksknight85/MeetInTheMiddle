@@ -1,9 +1,9 @@
 import React from "react"
 import "./style.css"
+import DetailCards from "../DetailCards/DetailCards";
 
 
 function Filters(props) {
-  console.log(`filter props ${props.handleRadiusTypeChange}`)
   return (
     <>
           <div className="form-group">
