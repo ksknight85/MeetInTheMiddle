@@ -3,7 +3,7 @@ import API from "../../utils/API"
 import "./style.css"
 
 import MapWithAMarker from "./MapWithAMarker"
-import { Col } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import Filters from "./Filters";
 import GoogleSuggest from "../../components/AddressSearch"
 import DetailCards from "../../components/DetailCards/DetailCards.js"
@@ -28,7 +28,7 @@ class MyFancyComponent extends Component {
       chosenLat: "39.709123",
       chosenLng: "-104.980573",
       radius: "1600",
-      type: "restaurant",
+      type: "",
       num: 2,
       placeID: placesIDs,
       details: []
@@ -37,6 +37,7 @@ class MyFancyComponent extends Component {
 
   getAvgLat = () => {
     let latAverage;
+    // console.log("hit")
     if (this.state.address1Coord && this.state.address2Coord && !this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
       latAverage = (this.state.address1Coord.lat + this.state.address2Coord.lat) / 2
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
@@ -62,6 +63,10 @@ class MyFancyComponent extends Component {
       lngAverage = ((this.state.address1Coord.lng + this.state.address2Coord.lng + this.state.address3Coord.lng + this.state.address4Coord.lng + this.state.address5Coord.lng) / 5)
     }
     this.setState({ chosenLng: lngAverage.toString() })
+  }
+  getAvg = () => {
+    this.getAvgLng();
+    this.getAvgLat();
   }
 
 
@@ -114,15 +119,16 @@ class MyFancyComponent extends Component {
 
   generateMore = (num) => {
     if (num === 3) {
-      return <GoogleSuggest num={"3"} update={this.updateAddress} coords={this.getCoordinates} />
+      return <GoogleSuggest num={"3"} update={this.updateAddressInState} coords={this.getCoordinates} />
     } else if (num === 4) {
-      return <><GoogleSuggest num={"3"} update={this.updateAddress} coords={this.getCoordinates} /> <GoogleSuggest num={"4"} update={this.updateAddress} coords={this.getCoordinates} /></>
+      return <><GoogleSuggest num={"3"} update={this.updateAddressInState} coords={this.getCoordinates} /> <GoogleSuggest num={"4"} update={this.updateAddressInState} coords={this.getCoordinates} /></>
     } else if (num === 5) {
-      return <><GoogleSuggest num={"3"} update={this.updateAddress} coords={this.getCoordinates} /> <GoogleSuggest num={"4"} update={this.updateAddress} coords={this.getCoordinates} /> <GoogleSuggest num={"5"} update={this.updateAddress} coords={this.getCoordinates} /></>
+      return <><GoogleSuggest num={"3"} update={this.updateAddressInState} coords={this.getCoordinates} /> <GoogleSuggest num={"4"} update={this.updateAddressInState} coords={this.getCoordinates} /> <GoogleSuggest num={"5"} update={this.updateAddressInState} coords={this.getCoordinates} /></>
     } else if (num === 2) {
       return
     }
   }
+
 
     handleFormSubmit = async (event) => {
       event.preventDefault()
@@ -130,7 +136,7 @@ class MyFancyComponent extends Component {
   }
 
 
-  updateAddress = (boxNum, address) => {
+  updateAddressInState = (boxNum,address) => {
     let num = "address" + boxNum
     this.setState({ [num]: address })
   }
@@ -151,49 +157,59 @@ class MyFancyComponent extends Component {
 
     return (
       <>
-        <Col>
-          <p>Type in 2-5 addresses to find a central meeting point:</p>
-          <select value={this.state.num} onChange={this.numAddresses} name="num">
-            <option>Add More?</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-          </select>
-          <GoogleSuggest
-            num={"1"}
-            update={this.updateAddress}
-            coords={this.getCoordinates}
-          />
-          <GoogleSuggest
-            num={"2"}
-            update={this.updateAddress}
-            coords={this.getCoordinates}
-          />
-          {this.generateMore(parseInt(this.state.num))}
-          <MapWithAMarker
-            selectedMarker={this.state.selectedMarker}
-            markers={this.state.places}
-            onClick={this.handleClick}
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `400px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-            key={this.state.selectedMarker}
-            currentLocation={LatLng}
-          />
-        </Col>
-        <Col>
-          <p>Filter your results</p>
-          <Filters
-            type={this.state.type}
-            radius={this.state.radius}
-            handleRadiusTypeChange={this.handleRadiusTypeChange}
-            handleFormSubmit={this.handleFormSubmit}
-            details={this.state.details}
-          />
-          <button onClick={this.getAvgLng && this.getAvgLat}>Average and list</button>
-        </Col>
+        <Row>
+          <Col>
+            <p>Type in 2-5 addresses to find a central meeting point:</p>
+            <select value={this.state.num} onChange={this.numAddresses} name="num">
+              <option>Add More?</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+            </select>
+            <GoogleSuggest
+              num={"1"}
+              update={this.updateAddressInState}
+              coords={this.getCoordinates}
+            />
+            <GoogleSuggest
+              num={"2"}
+              update={this.updateAddressInState}
+              coords={this.getCoordinates}
+            />
+            {this.generateMore(parseInt(this.state.num))}
+          </Col>
+          <Col>
+            <p>Filter your results</p>
+            <Filters
+              type={this.state.type}
+              radius={this.state.radius}
+              handleRadiusTypeChange={this.handleRadiusTypeChange}
+              handleFormSubmit={this.handleFormSubmit}
+                          details={this.state.details}
+
+            />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+            <MapWithAMarker
+              selectedMarker={this.state.selectedMarker}
+              markers={this.state.places}
+              onClick={this.handleClick}
+              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `400px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+              key={this.state.selectedMarker}
+              currentLocation={LatLng}
+            />
+          </Col>
+        </Row>
+        <Row>
+        <button onClick={this.getAvgLng && this.getAvgLat}>Average and list</button>
+        </Row>
       </>
     )
   }

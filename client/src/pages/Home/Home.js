@@ -12,6 +12,7 @@ class Home extends Component {
 
   state = {
     loggedIn: false,
+    userID: ""
   };
 
   componentDidMount() {
@@ -33,7 +34,7 @@ class Home extends Component {
   }
   findAll = () => {
     API.getAll("5ccdf7b418094b379059c35c")
-    .then(res=> console.log(res))
+    .then(res=> console.log(res.data))
     .catch(err=> console.log(err))
   }
   findPlace = () => {
@@ -49,13 +50,16 @@ class Home extends Component {
   }
   loggedIn = () => {
     API.isLoggedIn().then(user => {
+      console.log(user)
       if (user.data.loggedIn) {
         this.setState({
-          loggedIn: true
+          loggedIn: true,
+          username: user.data.user._id
         });
+        console.log(`User: data ${user.data}`);
       }
     }).catch(err => {
-      console.log(err);
+      console.log("Not logged in");
     });
   }
 
@@ -73,11 +77,9 @@ class Home extends Component {
         <div>
           <ModalExample show={true} closeOnOuterClick={true}/>
           <Row><Header /></Row>
-          <Row>
             <MyMapComponent >
               <GoogleMap {...MyMapComponent} />
             </MyMapComponent>
-          </Row>
         </div>
       </div>
     );
