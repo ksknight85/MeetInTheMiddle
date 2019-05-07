@@ -3,7 +3,7 @@ import "./style.css"
 
 
 function Filters(props) {
-console.log(`filter props ${props.handleRadiusTypeChange}`)
+  console.log(`filter props ${props.handleRadiusTypeChange}`)
   return (
     <>
       <form className="search">
@@ -73,12 +73,12 @@ console.log(`filter props ${props.handleRadiusTypeChange}`)
             placeholder="10 mi "
             id="radius"
           >
-            <option value={5}>5 mi</option>
-            <option value={10}>10 mi</option>
-            <option value={15}>15 mi</option>
-            <option value={25}>20 mi</option>
+            <option value={1600}>1 mi</option>
+            <option value={8000}>5 mi</option>
+            <option value={16000}>10 mi</option>
+            <option value={40000}>25 mi</option>
           </select>
-          <button type="submit"  className="btn btn-success" onClick={props.handleFormSubmit}>
+          <button type="submit" className="btn btn-success" onClick={props.handleFormSubmit}>
             Search
           </button>
         </div>
