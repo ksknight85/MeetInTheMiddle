@@ -1,12 +1,13 @@
 import React, { Component } from "react"
 import API from "../../utils/API"
 import "./style.css"
-import "./SearchForm"
 import MapWithAMarker from "./MapWithAMarker"
 import { Col } from "reactstrap";
 import Filters from "./Filters";
 import GoogleSuggest from "../../components/AddressSearch"
+import DetailCards from "../../components/DetailCards/DetailCards.js"
 
+let placesIDs = []
 class MyFancyComponent extends Component {
   constructor(props) {
     super(props)
@@ -82,7 +83,6 @@ class MyFancyComponent extends Component {
         this.setState({ places: newArr })
         console.log(this.state.places)
       })
-      // console.log(this.state.places)
   }
 
   // componentDidMount() {
@@ -99,7 +99,6 @@ class MyFancyComponent extends Component {
     event.preventDefault()
     const { name, value } = event.target
     this.setState({ [name]: value })
-
   }
 
   generateMore = (num) => {
@@ -172,5 +171,5 @@ class MyFancyComponent extends Component {
   }
 }
 
-export default MyFancyComponent;
+  export default MyFancyComponent;
 

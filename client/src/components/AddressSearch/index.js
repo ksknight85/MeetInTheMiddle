@@ -70,8 +70,8 @@ export default class GoogleSuggest extends Component {
                     )
                 }
             />
-            <button type="button" class="btn btn-warning">Save</button>
-            <button type="button" class="btn btn-info">Select from Profile</button>
+            <button type="button" className="btn btn-warning">Save</button>
+            <button type="button" className="btn btn-info">Select from Profile</button>
             </>
         )
     }

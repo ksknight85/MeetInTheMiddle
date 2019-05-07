@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Login from "../../components/Login";
-import Signup from "../../components/Signup";
 import API from "../../utils/API";
 import LoginModal from "../../components/LoginModal/index.js"
 
@@ -13,7 +11,10 @@ class Auth extends Component {
     name: "",
     username: "",
     email: "",
-    password: ""
+    password: "",
+    loginPassword: "",
+    loginUsername: "",
+
   }
 
   handleInputChange = event => {
@@ -26,10 +27,10 @@ class Auth extends Component {
 
   handleLogin = event => {
     event.preventDefault();
-    if (this.state.username && this.state.password) {
+    if (this.state.loginUsername && this.state.loginPassword) {
       API.login({
-        username: this.state.username,
-        password: this.state.password
+        username: this.state.loginUsername,
+        password: this.state.loginPassword
       }).then(user => {
         console.log(user);
         if (user.data.loggedIn) {
@@ -82,8 +83,8 @@ class Auth extends Component {
           <LoginModal
             action="login"
             name={this.state.username}
-            username={this.state.username}
-            password={this.state.password}
+            username={this.state.loginUsername}
+            loginPassword={this.state.loginPassword}
             handleLogin={this.handleLogin}
             handleInputChange={this.handleInputChange}
             message={this.state.message}

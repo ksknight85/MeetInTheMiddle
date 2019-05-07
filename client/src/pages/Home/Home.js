@@ -67,11 +67,9 @@ class Home extends Component {
       <div className="homeBox">
         <span onClick={this.postAddress}>save</span> {"--------------------"}
         <span onClick={this.deleteAddress}>delete</span>{"-----------------"}
-
         <span onClick={this.findAll}>find places</span>{"------------------"}
         <span onClick={this.findPlace}>places</span>{"----------------"}
         <span onClick={this.findDetails}>details</span> 
-
         <div>
           <Row><Header /></Row>
           <Row>
