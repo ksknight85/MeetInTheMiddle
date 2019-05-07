@@ -33,7 +33,7 @@ class Home extends Component {
   }
   findAll = () => {
     API.getAll("5ccdf7b418094b379059c35c")
-    .then(res=> console.log(res))
+    .then(res=> console.log(res.data))
     .catch(err=> console.log(err))
   }
   findPlace = () => {
