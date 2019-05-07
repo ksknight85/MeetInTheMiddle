@@ -117,11 +117,11 @@ class MyFancyComponent extends Component {
 
   generateMore = (num) => {
     if (num === 3) {
-      return <GoogleSuggest num={"3"} update={this.updateAddress} coords={this.getCoordinates} />
+      return <GoogleSuggest num={"3"} update={this.updateAddressInState} coords={this.getCoordinates} />
     } else if (num === 4) {
-      return <><GoogleSuggest num={"3"} update={this.updateAddress} coords={this.getCoordinates} /> <GoogleSuggest num={"4"} update={this.updateAddress} coords={this.getCoordinates} /></>
+      return <><GoogleSuggest num={"3"} update={this.updateAddressInState} coords={this.getCoordinates} /> <GoogleSuggest num={"4"} update={this.updateAddressInState} coords={this.getCoordinates} /></>
     } else if (num === 5) {
-      return <><GoogleSuggest num={"3"} update={this.updateAddress} coords={this.getCoordinates} /> <GoogleSuggest num={"4"} update={this.updateAddress} coords={this.getCoordinates} /> <GoogleSuggest num={"5"} update={this.updateAddress} coords={this.getCoordinates} /></>
+      return <><GoogleSuggest num={"3"} update={this.updateAddressInState} coords={this.getCoordinates} /> <GoogleSuggest num={"4"} update={this.updateAddressInState} coords={this.getCoordinates} /> <GoogleSuggest num={"5"} update={this.updateAddressInState} coords={this.getCoordinates} /></>
     } else if (num === 2) {
       return
     }
@@ -191,12 +191,12 @@ class MyFancyComponent extends Component {
             </select>
             <GoogleSuggest
               num={"1"}
-              update={this.updateAddress}
+              update={this.updateAddressInState}
               coords={this.getCoordinates}
             />
             <GoogleSuggest
               num={"2"}
-              update={this.updateAddress}
+              update={this.updateAddressInState}
               coords={this.getCoordinates}
             />
             {this.generateMore(parseInt(this.state.num))}

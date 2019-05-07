@@ -21,7 +21,7 @@ export default class GoogleSuggest extends Component {
     }
  
     handleSelectSuggest = (geocodedPrediction, originalPrediction) => {
-        console.log(geocodedPrediction, originalPrediction) // eslint-disable-line
+        // console.log(`suggested predictions:  \n${geocodedPrediction}\n\n ${originalPrediction}`) // eslint-disable-line
         this.props.update(this.props.num, geocodedPrediction.formatted_address);
         this.setState({search: "", value: geocodedPrediction.formatted_address})
         this.props.coords(this.props.num, this.state.value);
@@ -36,7 +36,7 @@ export default class GoogleSuggest extends Component {
     }
 
     findAll = () => {
-        console.log(`${this.props.num}'s search bar hit`)
+        // console.log(`${this.props.num}'s search bar hit`)
         API.getAll("5ccdf7b418094b379059c35c")
         .then(res=> {
             let addressArray = [];
@@ -59,7 +59,7 @@ export default class GoogleSuggest extends Component {
     }
 
     componentDidMount() {
-        console.log("did mount")
+        // console.log("did mount")
         this.findAll()
     }
  
