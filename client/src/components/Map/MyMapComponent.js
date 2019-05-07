@@ -23,8 +23,8 @@ class MyFancyComponent extends Component {
       address3: false,
       address4: false,
       address5: false,
-      chosenLat: "39.70922",
-      chosenLng: "-104.980389",
+      chosenLat: "",
+      chosenLng: "",
       radius: "1600",
       type: "restaurant",
       num: 2,
@@ -32,7 +32,7 @@ class MyFancyComponent extends Component {
   }
 
   getAvgLat = () => {
-    let latAverage = 1
+    let latAverage;
     if (this.state.address1Coord && this.state.address2Coord && !this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
       latAverage = (this.state.address1Coord.lat + this.state.address2Coord.lat) / 2
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
@@ -46,7 +46,8 @@ class MyFancyComponent extends Component {
   }
 
   getAvgLng = () => {
-    let lngAverage = 1
+    let lngAverage;
+    console.log("hit")
     if (this.state.address1Coord && this.state.address2Coord && !this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
       lngAverage = (this.state.address1Coord.lng + this.state.address2Coord.lng) / 2
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
@@ -56,51 +57,20 @@ class MyFancyComponent extends Component {
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && this.state.address4Coord && this.state.address5Coord) {
       lngAverage = ((this.state.address1Coord.lng + this.state.address2Coord.lng + this.state.address3Coord.lng + this.state.address4Coord.lng + this.state.address5Coord.lng) / 5)
     }
-    this.setState({ chosenLat: lngAverage.toString() })
+    this.setState({ chosenLng: lngAverage.toString() })
   }
 
-  getCoordinates = (address1, address2, address3, address4, address5) => {
-    API.coordinates(address1)
-      .then(data => {
-        this.setState({ address1Coord: data.data.results[0].geometry.location })
-        // console.log(this.state.address1Coord)
-      })
-      .catch(err => console.log(err))
-    API.coordinates(address2)
-      .then(data => {
-        this.setState({ address2Coord: data.data.results[0].geometry.location })
 
-        // console.log(this.state.address2Coord)
-
-      })
-      .catch(err => console.log(err))
-    if (address3) {
-      API.coordinates(address3)
+  getCoordinates = (boxNum, address) => {
+    let num = "address" + boxNum + "Coord"
+      API.coordinates(address)
         .then(data => {
-          this.setState({ address3Coord: data.data.results[0].geometry.location })
-          console.log(this.state.address3Coord)
+          this.setState({[num]: data.data.results[0].geometry.location})
         })
-        .catch(err => console.log(err))
-    }
-    if (address4) {
-      API.coordinates(address4)
-        .then(data => {
-          this.setState({ address4Coord: data.data.results[0].geometry.location })
-          console.log(this.state.address4Coord)
-        })
-        .catch(err => console.log(err))
-    }
-    if (address5) {
-      API.coordinates(address5)
-        .then(data => {
-          this.setState({ address5Coord: data.data.results[0].geometry.location })
-          console.log(this.state.address5Coord)
-        })
-        .catch(err => console.log(err))
-    }
+        .catch(err=> console.log(err))
   }
 
-  getPlaces = (lat, lng, radius, type) => {
+  getPlaces = () => {
     API.places(this.state.type, this.state.chosenLat, this.state.chosenLng, this.state.radius)
       .then(data => {
         // console.log(data.data.results)
@@ -115,10 +85,10 @@ class MyFancyComponent extends Component {
       // console.log(this.state.places)
   }
 
-  componentDidMount() {
-    this.getCoordinates()
-    this.getPlaces(this.state.chosenLat, this.state.chosenLng, this.state.radius, this.state.type)
-  }
+  // componentDidMount() {
+  //   this.getCoordinates()
+  //   this.getPlaces(this.state.chosenLat, this.state.chosenLng, this.state.radius, this.state.type)
+  // }
 
   handleClick = (marker, event) => {
     event.preventDefault()
@@ -134,15 +104,21 @@ class MyFancyComponent extends Component {
 
   generateMore = (num) => {
     if (num === 3) {
-      return <GoogleSuggest />
+      return <GoogleSuggest num={"3"} update={this.updateAddress} coords={this.getCoordinates} />
     } else if (num === 4) {
-      return <><GoogleSuggest /> <GoogleSuggest /></>
+      return <><GoogleSuggest num={"3"} update={this.updateAddress} coords={this.getCoordinates} /> <GoogleSuggest num={"4"} update={this.updateAddress}  coords={this.getCoordinates} /></>
     } else if (num === 5) {
-      return <><GoogleSuggest /> <GoogleSuggest /> <GoogleSuggest /></>
+      return <><GoogleSuggest num={"3"} update={this.updateAddress} coords={this.getCoordinates} /> <GoogleSuggest num={"4"} update={this.updateAddress} coords={this.getCoordinates} /> <GoogleSuggest num={"5"} update={this.updateAddress} coords={this.getCoordinates} /></>
     } else if (num === 2) {
       return
     }
   }
+
+  updateAddress = (boxNum,address) => {
+    let num = "address" + boxNum
+    this.setState({[num]: address})
+  }
+  
   render() {
     var LatLng = {
       lat: parseFloat(this.state.chosenLat),
@@ -151,37 +127,46 @@ class MyFancyComponent extends Component {
 
     return (
       <>
-        <Col>
-          <p>Type in 2-5 addresses to find a central meeting point:</p>
-          <select value={this.state.num} onChange={this.numAddresses} name="num">
-            <option>Add More?</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-          </select>
-          <GoogleSuggest />
-          <GoogleSuggest />
-          {this.generateMore(parseInt(this.state.num))}
-          <MapWithAMarker
-            selectedMarker={this.state.selectedMarker}
-            markers={this.state.places}
-            onClick={this.handleClick}
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `400px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-            key={this.state.selectedMarker}
-            currentLocation={LatLng}
-          />
-        </Col>
-        <Col>
-          <p>Filter your results</p>
-          <Filters
-            type={this.state.type}
-            radius={this.state.radius}
+          <Col>
+            <p>Type in 2-5 addresses to find a central meeting point:</p>
+            <select value={this.state.num} onChange={this.numAddresses} name="num">
+              <option>Add More?</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+            </select>
+            <GoogleSuggest 
+            num={"1"}
+            update={this.updateAddress}
+            coords={this.getCoordinates}
             />
-        </Col>
+            <GoogleSuggest 
+            num={"2"}
+            update={this.updateAddress}
+            coords={this.getCoordinates}
+            />
+            {this.generateMore(parseInt(this.state.num))}
+            <MapWithAMarker
+              selectedMarker={this.state.selectedMarker}
+              markers={this.state.places}
+              onClick={this.handleClick}
+              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `400px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+              key={this.state.selectedMarker}
+              currentLocation={LatLng}
+            />
+          </Col>
+          <Col>
+            <p>Filter your results</p>
+            <Filters
+              type={this.state.type}
+              radius={this.state.radius}
+              />
+              <button onClick={this.getAvgLng && this.getAvgLat}>Average and list</button>
+          </Col>
       </>
     )
   }

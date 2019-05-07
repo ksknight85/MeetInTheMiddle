@@ -42,7 +42,11 @@ class Home extends Component {
       .catch(err => console.log(`error: \n ${err}`))
   }
 
-
+  findDetails = () => {
+    API.details("ChIJwXlO3HKKa4cR3ieDsbtuWLw")
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+  }
   loggedIn = () => {
     API.isLoggedIn().then(user => {
       if (user.data.loggedIn) {
@@ -64,8 +68,9 @@ class Home extends Component {
         <span onClick={this.postAddress}>save</span> {"--------------------"}
         <span onClick={this.deleteAddress}>delete</span>{"-----------------"}
 
-        <span onClick={this.findAll}>find</span>{"------------------"}
-        <span onClick={this.findPlace}>places?</span> 
+        <span onClick={this.findAll}>find places</span>{"------------------"}
+        <span onClick={this.findPlace}>places</span>{"----------------"}
+        <span onClick={this.findDetails}>details</span> 
 
         <div>
           <Row><Header /></Row>

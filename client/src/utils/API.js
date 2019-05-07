@@ -39,7 +39,8 @@ export default {
   },
 
   coordinates: function(address) {
-    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=405+South+Pearl+Street,+Denver,+CO&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+     let formatted = address.split(" ").join("+")
+    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${formatted}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
   }, 
 
   // places: function(lat, lng, radius, type) {
@@ -56,7 +57,7 @@ export default {
   
 // MOVE TO THE BACKEND TO GET RID OF CORS WORKAROUND
   details: function(placeId){
-    return axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&fields=name,type,rating,formatted_phone_number&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+    return axios.get(`/api/place/${placeId}`)
   }
 
 
