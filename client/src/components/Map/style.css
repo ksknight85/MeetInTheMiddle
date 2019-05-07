@@ -1,3 +1,15 @@
 #address1, #address2 {
     margin-bottom: 10px;
 }
+
+.form-group-type {
+    margin: 5px 0 10px 5px;
+}
+
+.form-group-radius {
+    display: -webkit-inline-box;
+    margin: 0 0 5px 5px;
+}
+
+
+

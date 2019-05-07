@@ -3,7 +3,7 @@ import API from "../../utils/API"
 import "./style.css"
 
 import MapWithAMarker from "./MapWithAMarker"
-import { Col } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import Filters from "./Filters";
 import GoogleSuggest from "../../components/AddressSearch"
 import DetailCards from "../../components/DetailCards/DetailCards.js"
@@ -28,7 +28,7 @@ class MyFancyComponent extends Component {
       chosenLat: "39.709123",
       chosenLng: "-104.980573",
       radius: "1600",
-      type: "restaurant",
+      type: "",
       num: 2,
       placeID: placesIDs,
     }
@@ -102,9 +102,9 @@ class MyFancyComponent extends Component {
 
 
   handleClick = (event, marker) => {
-    if (event && event.preventDefault){
-      event.preventDefault() 
-    } 
+    if (event && event.preventDefault) {
+      event.preventDefault()
+    }
     console.log("handle click:", { marker })
     this.setState({ selectedMarker: marker })
     console.log("Selected Marker", this.state.selectedMarker)
@@ -149,12 +149,12 @@ class MyFancyComponent extends Component {
       resolve(detailsArr);
     })
   }
-  
-    handleFormSubmit = async (event) => {
-      event.preventDefault()
-      this.getPlaces()
-      let result = await this.formSubmit();
-      console.log("DETAILS API:", result)
+
+  handleFormSubmit = async (event) => {
+    event.preventDefault()
+    this.getPlaces()
+    let result = await this.formSubmit();
+    console.log("DETAILS API:", result)
   }
 
 
@@ -179,26 +179,41 @@ class MyFancyComponent extends Component {
 
     return (
       <>
-        <Col>
-          <p>Type in 2-5 addresses to find a central meeting point:</p>
-          <select value={this.state.num} onChange={this.numAddresses} name="num">
-            <option>Add More?</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-          </select>
-          <GoogleSuggest
-            num={"1"}
-            update={this.updateAddressInState}
-            coords={this.getCoordinates}
-          />
-          <GoogleSuggest
-            num={"2"}
-            update={this.updateAddressInState}
-            coords={this.getCoordinates}
+        <Row>
+          <Col>
+            <p>Type in 2-5 addresses to find a central meeting point:</p>
+            <select value={this.state.num} onChange={this.numAddresses} name="num">
+              <option>Add More?</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+            </select>
+            <GoogleSuggest
+              num={"1"}
+              update={this.updateAddress}
+              coords={this.getCoordinates}
+            />
+            <GoogleSuggest
+              num={"2"}
+              update={this.updateAddress}
+              coords={this.getCoordinates}
             />
             {this.generateMore(parseInt(this.state.num))}
+          </Col>
+          <Col>
+            <p>Filter your results</p>
+            <Filters
+              type={this.state.type}
+              radius={this.state.radius}
+              handleRadiusTypeChange={this.handleRadiusTypeChange}
+              handleFormSubmit={this.handleFormSubmit}
+            />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
             <MapWithAMarker
               selectedMarker={this.state.selectedMarker}
               markers={this.state.places}
@@ -211,19 +226,10 @@ class MyFancyComponent extends Component {
               currentLocation={LatLng}
             />
           </Col>
-          <Col>
-            <p>Filter your results</p>
-            <Filters
-              type={this.state.type}
-              radius={this.state.radius}
-              handleRadiusTypeChange={this.handleRadiusTypeChange}
-              handleFormSubmit={this.handleFormSubmit}
-              />
-            <button type="submit" onClick={this.handleFormSubmit}>Search</button>
-          {/* <DetailCards handleformSubmit={this.handleFormSubmit} /> */}
-          <button type="submit" onClick={this.getPlaces}>Test</button>
-              <button onClick={this.getAvg}>Average and list</button>
-          </Col>
+        </Row>
+        <Row>
+        <button onClick={this.getAvgLng && this.getAvgLat}>Average and list</button>
+        </Row>
       </>
     )
   }
