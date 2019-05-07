@@ -12,6 +12,7 @@ class Home extends Component {
 
   state = {
     loggedIn: false,
+    userID: ""
   };
 
   componentDidMount() {
@@ -49,9 +50,11 @@ class Home extends Component {
   }
   loggedIn = () => {
     API.isLoggedIn().then(user => {
+      console.log(user)
       if (user.data.loggedIn) {
         this.setState({
-          loggedIn: true
+          loggedIn: true,
+          username: user.data.user._id
         });
         console.log(`User: data ${user.data}`);
       }
