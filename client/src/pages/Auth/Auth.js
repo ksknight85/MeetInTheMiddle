@@ -14,7 +14,7 @@ class Auth extends Component {
     password: "",
     loginPassword: "",
     loginUsername: "",
-
+    action: this.props.action
   }
 
   handleInputChange = event => {
@@ -76,28 +76,43 @@ class Auth extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.action !== prevProps.action) {
+      this.setState({
+        action: this.props.action
+      })
+    }
+  }
+  handleActionChange = event => {
+    this.setState({
+      action: event.target.value
+    })
+  }
+
   render() {
     return (
       <>
-        {(this.props.action === "login") ? (
+        {(this.state.action === "login") ? (
           <LoginModal
-            action="login"
+            action={this.state.action}
             name={this.state.username}
             username={this.state.loginUsername}
             loginPassword={this.state.loginPassword}
             handleLogin={this.handleLogin}
             handleInputChange={this.handleInputChange}
+            handleActionChange={this.handleActionChange}
             message={this.state.message}
             handleSignup={this.handleSignup}
           ><div id="app" /></LoginModal>
         ) : (
             <LoginModal
-              action="signup"
+              action={this.state.action}
               name={this.state.username}
               username={this.state.username}
               password={this.state.password}
               handleLogin={this.handleLogin}
               handleInputChange={this.handleInputChange}
+              handleActionChange={this.handleActionChange}
               message={this.state.message}
               handleSignup={this.handleSignup}
             ><div id="app" /></LoginModal>
