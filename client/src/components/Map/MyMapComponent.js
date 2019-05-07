@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import API from "../../utils/API"
 import "./style.css"
-import "./SearchForm"
 import MapWithAMarker from "./MapWithAMarker"
 import { Col } from "reactstrap";
 import Filters from "./Filters";

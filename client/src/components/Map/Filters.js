@@ -1,18 +1,18 @@
-import React, { Component } from "react"
+import React from "react"
 import "./style.css"
 
 
 function Filters(props) {
-  handleTypeChange = event => {
-    this.setState({ typeSearch: event.target.value });
-  };
-  handleRadiusChange = event => {
-    this.setState({ radius: event.target.value })
-  };
+  // handleTypeChange = event => {
+  //   this.setState({ typeSearch: event.target.value });
+  // };
+  // handleRadiusChange = event => {
+  //   this.setState({ radius: event.target.value })
+  // };
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-  };
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  // };
 
   return (
     <>
@@ -21,8 +21,8 @@ function Filters(props) {
 
           <label htmlFor="types">Search Location Type:</label>
           <select
-            value={props.typeSearch}
-            onChange={props.handleTypeChange}
+            // value={props.typeSearch}
+            // onChange={props.handleTypeChange}
             name="types"
             type="text"
             className="form-control"
@@ -75,8 +75,8 @@ function Filters(props) {
 
           <label htmlFor="radius">Adjust Radius:</label>
           <select
-            value={props.radius}
-            onChange={props.handleRadiusChange}
+            // value={props.radius}
+            // onChange={props.handleRadiusChange}
             name="radius"
             type="text"
             className="form-control"
@@ -89,7 +89,7 @@ function Filters(props) {
             <option value={25}>20 mi</option>
           </select>
 
-          <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
+          <button type="submit"  className="btn btn-success">
             Search
           </button>
         </div>

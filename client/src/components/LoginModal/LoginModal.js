@@ -7,10 +7,6 @@ class LoginModal extends Component {
 
   state = {
     action: "login",
-    name: "",
-    username: "",
-    email: "",
-    password: "",
   }
 
 
@@ -61,15 +57,28 @@ class LoginModal extends Component {
               />
               <button
                 onClick={this.props.handleSignup}
-                >Sign Up</button>
+              >Sign Up</button>
             </form>
           </div>
           <div className="form-container sign-in-container">
             <form action="#">
               <h1>Sign in</h1>
               <span>or use your account</span>
-              <input type="text" name="username" id="username" placeholder="Username" value={this.props.username} onChange={this.props.handleInputChange} valid={this.state.validUsername} />
-              <input type="password" name="password" placeholder="Password" />
+              <input
+                type="text"
+                name="loginUsername"
+                id="loginUsername"
+                placeholder="Username"
+                value={this.props.username}
+                onChange={this.props.handleInputChange}
+                valid={this.state.validUsername} />
+              <input
+                type="password"
+                name="loginPassword"
+                id="loginPassword"
+                placeholder="Password"
+                onChange={this.props.handleInputChange}
+                />
               <Link to="#">Forgot your password?</Link>
 
               <button>Sign In</button>
