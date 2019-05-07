@@ -73,11 +73,9 @@ class Home extends Component {
         <div>
           <ModalExample show={true} closeOnOuterClick={true}/>
           <Row><Header /></Row>
-          <Row>
             <MyMapComponent >
               <GoogleMap {...MyMapComponent} />
             </MyMapComponent>
-          </Row>
         </div>
       </div>
     );
