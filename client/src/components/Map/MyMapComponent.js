@@ -31,6 +31,7 @@ class MyFancyComponent extends Component {
       type: "",
       num: 2,
       placeID: placesIDs,
+      details: []
     }
   }
 
@@ -88,9 +89,10 @@ class MyFancyComponent extends Component {
           newArr.push({ place: data.data.results[i].geometry.location, id: data.data.results[i].place_id })
           placesIDs.push(data.data.results[i].place_id)
         }
-        console.log(newArr)
         this.setState({ places: newArr })
-        console.log(this.state.placeID)
+        this.setState({ placeID: placesIDs })
+        this.setState({details: data.data.results})
+        console.log("DATA: ", this.state.details)
       })
   }
 
@@ -128,33 +130,9 @@ class MyFancyComponent extends Component {
   }
 
 
-  formSubmit = () => {
-    let places = this.state.placeID
-    return new Promise(function (resolve, reject) {
-      let detailsArr = []
-      for (var i = 0; i < places.length; i++) {
-        console.log(places[i])
-        API.details(places[i]).then(function (item) {
-          let onePlace = {
-            address: item.data.result.formatted_address,
-            icon: item.data.result.icon,
-            name: item.data.result.name,
-            number: item.data.result.formatted_phone_number,
-            photo: item.data.result.photos[0].html_attributions[0]
-
-          }
-          detailsArr.push(onePlace)
-        });
-      }
-      resolve(detailsArr);
-    })
-  }
-
-  handleFormSubmit = async (event) => {
-    event.preventDefault()
-    this.getPlaces()
-    let result = await this.formSubmit();
-    console.log("DETAILS API:", result)
+    handleFormSubmit = async (event) => {
+      event.preventDefault()
+      this.getPlaces()
   }
 
 
@@ -208,6 +186,8 @@ class MyFancyComponent extends Component {
               radius={this.state.radius}
               handleRadiusTypeChange={this.handleRadiusTypeChange}
               handleFormSubmit={this.handleFormSubmit}
+                          details={this.state.details}
+
             />
           </Col>
         </Row>
