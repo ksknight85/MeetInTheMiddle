@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import API from "../../utils/API"
 import "./style.css"
+
 import MapWithAMarker from "./MapWithAMarker"
 import { Col } from "reactstrap";
 import Filters from "./Filters";
@@ -29,6 +30,7 @@ class MyFancyComponent extends Component {
       radius: "1600",
       type: "restaurant",
       num: 2,
+      placeID: placesIDs,
     }
   }
 
@@ -71,29 +73,34 @@ class MyFancyComponent extends Component {
         .catch(err=> console.log(err))
   }
 
+
   getPlaces = () => {
     API.places(this.state.type, this.state.chosenLat, this.state.chosenLng, this.state.radius)
       .then(data => {
-        // console.log(data.data.results)
+        console.log("in places .then: ", data.data.results)
         const newArr = []
         for (let i = 0; i < 20; i++) {
-          newArr.push(data.data.results[i].geometry.location)
+          newArr.push({place: data.data.results[i].geometry.location, id: data.data.results[i].place_id})
+          placesIDs.push(data.data.results[i].place_id)
         }
-        // console.log("new Arrary", newArr)
+        console.log(newArr)
         this.setState({ places: newArr })
-        console.log(this.state.places)
+        console.log(this.state.placeID)
       })
   }
+
 
   // componentDidMount() {
   //   this.getCoordinates()
   //   this.getPlaces(this.state.chosenLat, this.state.chosenLng, this.state.radius, this.state.type)
   // }
 
-  handleClick = (marker, event) => {
-    event.preventDefault()
-    // console.log({ marker })
+
+  handleClick = (event, marker) => {
+    // event.preventDefault()
+    console.log("handle click:", { marker })
     this.setState({ selectedMarker: marker })
+    console.log("Selected Marker",this.state.selectedMarker)
   }
   numAddresses = (event) => {
     event.preventDefault()
@@ -113,11 +120,42 @@ class MyFancyComponent extends Component {
     }
   }
 
+
+  formSubmit = () => {
+    let places = this.state.placeID
+    return new Promise(function (resolve, reject) {
+      let detailsArr = []
+   for (var i=0; i<places.length; i++ ){
+      console.log(places[i])
+      API.details(places[i]).then(function (item) {
+        let onePlace = {
+          address: item.data.result.formatted_address,
+          icon: item.data.result.icon,
+          name: item.data.result.name,
+          number: item.data.result.formatted_phone_number,
+          photo: item.data.result.photos[0].html_attributions[0]
+  
+        }
+        detailsArr.push(onePlace)
+      });
+    }
+    resolve(detailsArr);
+    })
+  }
+  
+    handleFormSubmit = async (event) => {
+      event.preventDefault()
+      let result = await this.formSubmit();
+      console.log("DETAILS API:", result)
+  }
+
+
   updateAddress = (boxNum,address) => {
     let num = "address" + boxNum
     this.setState({[num]: address})
   }
   
+
   render() {
     var LatLng = {
       lat: parseFloat(this.state.chosenLat),
@@ -150,7 +188,7 @@ class MyFancyComponent extends Component {
               selectedMarker={this.state.selectedMarker}
               markers={this.state.places}
               onClick={this.handleClick}
-              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
+              googleMapURL="https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{ height: `400px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
@@ -163,7 +201,11 @@ class MyFancyComponent extends Component {
             <Filters
               type={this.state.type}
               radius={this.state.radius}
+              handleFormSubmit={this.handleFormSubmit}
               />
+            <button type="submit" onClick={this.handleFormSubmit}>Search</button>
+          {/* <DetailCards handleformSubmit={this.handleFormSubmit} /> */}
+          <button type="submit" onClick={this.getPlaces}>Test</button>
               <button onClick={this.getAvgLng && this.getAvgLat}>Average and list</button>
           </Col>
       </>

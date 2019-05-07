@@ -3,20 +3,23 @@ import { compose } from "recompose"
 import {  withScriptjs,  withGoogleMap,  GoogleMap,  Marker,  InfoWindow} from "react-google-maps"
 import "./style.css"
 
+
 const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
-    // console.log(props.markers)
+    console.log("Map with a marker props.markers: ", props.placeID)
     return (
       <GoogleMap defaultZoom={8} defaultCenter={props.currentLocation ? props.currentLocation : { lat: 0, lng: 0 }}>
         {/* {console.log(typeof(props.currentLocation))} */}
         {/* {console.log(`default loc ${defaultCenter}`)} */}
   
         {props.markers.map(marker => {
+          
           const onClick = props.onClick.bind(this, marker)
           return (
             <Marker
-              key={marker.id}
-              onClick={onClick}
-              position={{ lat: marker.lat, lng: marker.lng }}
+              key={marker.place.id}
+              onClick={() => onClick(marker.id)}
+              id={marker.id}
+              position={{ lat: marker.place.lat, lng: marker.place.lng }}
             >
               {props.selectedMarker === marker &&
                 <InfoWindow>

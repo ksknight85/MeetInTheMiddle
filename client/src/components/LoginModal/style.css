@@ -46,8 +46,7 @@ span {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #498fe2;
-	background-color: #498fe2;
+	background-color: #f8bc45;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -67,7 +66,7 @@ button:focus {
 
 button.ghost {
 	background-color: transparent;
-	border-color: #FFFFFF;
+	border-color: #f8bc45
 }
 
 form {
@@ -161,8 +160,8 @@ input {
 
 .overlay {
 	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #498fc2, #499ff2);
-	background: linear-gradient(to right, #498fc2, #499ff2);
+	background: -webkit-linear-gradient(to right, #57aabe, #57aabe);
+	background: linear-gradient(to right, #57aabe, #57aabe);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -251,3 +250,6 @@ footer a {
     text-decoration: none;
 } */
 
+.helloFriend {
+	background: #57aabe
+}

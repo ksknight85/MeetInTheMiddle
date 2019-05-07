@@ -5,7 +5,7 @@ import "./style.css";
 import Header from "../../components/Header";
 import MyMapComponent from '../../components/Map/MyMapComponent';
 import { GoogleMap } from 'react-google-maps';
-
+import ModalExample from "../../components/Modal/Modal.js"
 
 
 class Home extends Component {
@@ -71,6 +71,7 @@ class Home extends Component {
         <span onClick={this.findPlace}>places</span>{"----------------"}
         <span onClick={this.findDetails}>details</span> 
         <div>
+          <ModalExample show={true} closeOnOuterClick={true}/>
           <Row><Header /></Row>
           <Row>
             <MyMapComponent >
