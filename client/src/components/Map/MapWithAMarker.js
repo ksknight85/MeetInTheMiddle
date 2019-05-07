@@ -2,7 +2,7 @@ import React from "react"
 import { compose } from "recompose"
 import {  withScriptjs,  withGoogleMap,  GoogleMap,  Marker,  InfoWindow} from "react-google-maps"
 import "./style.css"
-// import "./SearchForm"
+
 
 const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
     console.log("Map with a marker props.markers: ", props.placeID)

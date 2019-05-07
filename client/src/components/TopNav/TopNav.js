@@ -23,7 +23,7 @@ export default class Navigation extends Component {
                 });
             }
         }).catch(err => {
-            console.log("Not logged in");
+            console.log(err);
         });
     }
 

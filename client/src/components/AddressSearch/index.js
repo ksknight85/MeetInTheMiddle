@@ -9,14 +9,21 @@ export default class GoogleSuggest extends Component {
         search: "",
         value: "",
     }
+    constructor(props) {
+        super(props);
+      }
  
     handleInputChange = e => {
         this.setState({search: e.target.value, value: e.target.value})
+        this.props.update(this.props.num, this.state.value)
     }
  
     handleSelectSuggest = (geocodedPrediction, originalPrediction) => {
         console.log(geocodedPrediction, originalPrediction) // eslint-disable-line
+        this.props.update(this.props.num, geocodedPrediction.formatted_address);
         this.setState({search: "", value: geocodedPrediction.formatted_address})
+        this.props.coords(this.props.num, this.state.value);
+
     }
     
     handleNoResult = () => {
