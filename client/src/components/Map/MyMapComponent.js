@@ -25,8 +25,8 @@ class MyFancyComponent extends Component {
       address3: false,
       address4: false,
       address5: false,
-      chosenLat: "",
-      chosenLng: "",
+      chosenLat: "39.709123",
+      chosenLng: "-104.980573",
       radius: "1600",
       type: "restaurant",
       num: 2,
@@ -97,7 +97,9 @@ class MyFancyComponent extends Component {
 
 
   handleClick = (event, marker) => {
-    // event.preventDefault()
+    if (event && event.preventDefault){
+      event.preventDefault() 
+    } 
     console.log("handle click:", { marker })
     this.setState({ selectedMarker: marker })
     console.log("Selected Marker", this.state.selectedMarker)
@@ -142,11 +144,12 @@ class MyFancyComponent extends Component {
       resolve(detailsArr);
     })
   }
-
-  handleFormSubmit = async (event) => {
-    event.preventDefault()
-    let result = await this.formSubmit();
-    console.log("DETAILS API:", result)
+  
+    handleFormSubmit = async (event) => {
+      event.preventDefault()
+      this.getPlaces()
+      let result = await this.formSubmit();
+      console.log("DETAILS API:", result)
   }
 
 
@@ -189,32 +192,30 @@ class MyFancyComponent extends Component {
             num={"2"}
             update={this.updateAddress}
             coords={this.getCoordinates}
-          />
-          {this.generateMore(parseInt(this.state.num))}
-          <MapWithAMarker
-            selectedMarker={this.state.selectedMarker}
-            markers={this.state.places}
-            onClick={this.handleClick}
-            googleMapURL="https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `400px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-            key={this.state.selectedMarker}
-            currentLocation={LatLng}
-          />
-        </Col>
-        <Col>
-          <p>Filter your results</p>
-          <Filters
-            type={this.state.type}
-            radius={this.state.radius}
-            handleRadiusTypeChange={this.handleRadiusTypeChange}
-          />
-          <button type="submit" onClick={this.handleFormSubmit}>Search</button>
-          {/* <DetailCards handleformSubmit={this.handleFormSubmit} /> */}
-          <button type="submit" onClick={this.getPlaces}>Test</button>
-          <button onClick={this.getAvgLng && this.getAvgLat}>Average and list</button>
-        </Col>
+            />
+            {this.generateMore(parseInt(this.state.num))}
+            <MapWithAMarker
+              selectedMarker={this.state.selectedMarker}
+              markers={this.state.places}
+              onClick={this.handleClick}
+              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE&libraries=geometry,drawing,places"
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `400px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+              key={this.state.selectedMarker}
+              currentLocation={LatLng}
+            />
+          </Col>
+          <Col>
+            <p>Filter your results</p>
+            <Filters
+              type={this.state.type}
+              radius={this.state.radius}
+              handleRadiusTypeChange={this.handleRadiusTypeChange}
+              handleFormSubmit={this.handleFormSubmit}
+              />
+              <button onClick={this.getAvgLng && this.getAvgLat}>Average and list</button>
+          </Col>
       </>
     )
   }

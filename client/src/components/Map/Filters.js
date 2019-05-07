@@ -78,8 +78,7 @@ console.log(`filter props ${props.handleRadiusTypeChange}`)
             <option value={15}>15 mi</option>
             <option value={25}>20 mi</option>
           </select>
-
-          <button type="submit"  className="btn btn-success" onClick={props.handleRadiusTypeChange}>
+          <button type="submit"  className="btn btn-success" onClick={props.handleFormSubmit}>
             Search
           </button>
         </div>
