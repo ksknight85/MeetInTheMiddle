@@ -89,7 +89,7 @@ function Filters(props) {
             <option value={25}>20 mi</option>
           </select>
 
-          <button type="submit"  className="btn btn-success" onClick={props.handleFormSubmit}>
+          <button type="submit"  className="btn btn-success" onClick={props.handleFormSubmit>
             Search
           </button>
         </div>
