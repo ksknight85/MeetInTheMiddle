@@ -39,7 +39,6 @@ export default class GoogleSuggest extends Component {
         this.props.update(this.props.num, geocodedPrediction.formatted_address);
         this.setState({ search: "", value: geocodedPrediction.formatted_address })
         this.props.coords(this.props.num, this.state.value);
-
     }
     postAddress = () => {
 
