@@ -37,7 +37,7 @@ class MyFancyComponent extends Component {
 
   getAvgLat = () => {
     let latAverage;
-    // console.log("hit")
+    console.log("hit")
     if (this.state.address1Coord && this.state.address2Coord && !this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
       latAverage = (this.state.address1Coord.lat + this.state.address2Coord.lat) / 2
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
