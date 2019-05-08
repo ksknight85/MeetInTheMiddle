@@ -1,6 +1,5 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { Col, Row } from "reactstrap";
 import "./Modal.css"
