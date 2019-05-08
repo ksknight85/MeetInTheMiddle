@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./profile.css";
-import { Button } from "reactstrap";
-import { Link } from "react-router-dom"
 import API from "../../utils/API"
 import GoogleSuggest from "../../components/ProfileAddressSearch"
 
@@ -31,8 +29,8 @@ class Profile extends Component {
             }
         })
             .catch(err => {
-            console.log(err);
-        });
+                console.log(err);
+            });
         // console.log(this.props)
 
     }
@@ -65,13 +63,13 @@ class Profile extends Component {
         })
         .catch(err=> console.log(err))
       }
-
-      deleteAddress = (id) => {
+    
+    deleteAddress = (id) => {
         API.deleteAddress(id)
-          .then(res => console.log("delete: please"))
-          .catch(err => console.log("delete: no"))
-            this.findAll()
-      }
+            .then(res => console.log("delete: please"))
+            .catch(err => console.log("delete: no"))
+        this.findAll()
+    }
 
     updateAddress = (address) => {
         this.setState({updater: this.state.updater + 1})
@@ -96,9 +94,9 @@ class Profile extends Component {
                         <h5 id="savedAddresses">Saved Addresses:</h5>
                         {/* <button type="submit" className="btn btn-warning" id="add"
                         // onClick = {() => {
-                            
+
                         //         return (document.getElementById("profileContainier").appendChild(<GoogleSuggest />))
-                            
+
                         // }}
                         >+ Add Another</button> */}
                         <GoogleSuggest new="new" />
