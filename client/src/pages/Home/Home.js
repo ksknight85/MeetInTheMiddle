@@ -19,7 +19,7 @@ class Home extends Component {
 
   // revist this it does not hit either the .then or .catch but it does post the address
   postAddress = () => {
-    API.postAddress("5cd1d3e6916a24284884d8c4", {address: "123456 fake st"})
+    API.postAddress("5cd1d3e6916a24284884d8c4", { address: "123456 fake st" })
       .then(res => console.log("post: please"))
       .catch(err => console.log("post: no"))
   }
@@ -30,12 +30,12 @@ class Home extends Component {
   }
   findAll = () => {
     API.getAll("5ccdf7b418094b379059c35c")
-    .then(res=> console.log(res.data))
-    .catch(err=> console.log(err))
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
   }
   findPlace = () => {
     API.places("cafe", "39.740880", "-104.981930", "5000")
-      .then(res=> console.log(res))
+      .then(res => console.log(res))
       .catch(err => console.log(`error: \n ${err}`))
   }
 
@@ -64,17 +64,10 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="homeBox">
-        {/* <span onClick={this.postAddress}>save</span> {"--------------------"}
-        <span onClick={this.deleteAddress}>delete</span>{"-----------------"}
-        <span onClick={this.findAll}>find places</span>{"------------------"}
-        <span onClick={this.findPlace}>places</span>{"----------------"}
-        <span onClick={this.findDetails}>details</span>  */}
-        <div>
-          <ModalExample show={true} closeOnOuterClick={true}/>
-          <Row><Header /></Row>
-        </div>
-      </div>
+      <>
+        <ModalExample show={true} closeOnOuterClick={true} />
+        <Row><Header /></Row>
+      </>
     );
   }
 }
