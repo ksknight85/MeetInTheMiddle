@@ -3,7 +3,7 @@
     /* background-image: url("http://storage.googleapis.com/zagat-article-ss/mourningdove_atlanta_1_lukebeardd_02022018.jpg?h=646&w=646&auto=format"); */
     background-size: cover;
     display: flex;
-    min-height: 100vh;
+    min-height: 150vh;
     flex-direction: column;
 }
 
@@ -25,6 +25,7 @@ body {
       margin-top: 10%;
       padding: 0;
       width: 60%
+
   }
 
   #welcome {
