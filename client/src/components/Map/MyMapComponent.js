@@ -34,11 +34,11 @@ class MyFancyComponent extends Component {
       details: []
     }
   }
-  
+
   getAvg = () => {
     var latAverage;
     var lngAverage;
-   
+
     if (this.state.address1Coord && this.state.address2Coord && !this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
       latAverage = (this.state.address1Coord.lat + this.state.address2Coord.lat) / 2
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
@@ -48,7 +48,7 @@ class MyFancyComponent extends Component {
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && this.state.address4Coord && this.state.address5Coord) {
       latAverage = ((this.state.address1Coord.lat + this.state.address2Coord.lat + this.state.address3Coord.lat + this.state.address4Coord.lat + this.state.address5Coord.lat) / 5)
     }
-  
+
     if (this.state.address1Coord && this.state.address2Coord && !this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
       lngAverage = (this.state.address1Coord.lng + this.state.address2Coord.lng) / 2
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
@@ -78,29 +78,29 @@ class MyFancyComponent extends Component {
       .then(data => {
         console.log("TEST TEST TEST TEST", data)
         const newArr = []
-        for (let i = 0; i<data.data.results.length && i < 20; i++) {
+        for (let i = 0; i < data.data.results.length && i < 20; i++) {
           newArr.push({ place: data.data.results[i].geometry.location, id: data.data.results[i].place_id })
           placesIDs.push(data.data.results[i].place_id)
         }
         this.setState({ places: newArr })
         this.setState({ placeID: placesIDs })
-        this.setState({details: data.data.results})
+        this.setState({ details: data.data.results })
         console.log("DATA: ", this.state.details)
       })
   }
 
   moveCard = () => {
     let newArr = this.state.details
-      for (var i=0; i < newArr.length; i++) {
-        if (this.state.selectedMarker === newArr[i].reference) {
-            var a = newArr.splice(i,1);   // removes the item
-            newArr.unshift(a[0]);         // adds it back to the beginning
-            break;
-        }
+    for (var i = 0; i < newArr.length; i++) {
+      if (this.state.selectedMarker === newArr[i].reference) {
+        var a = newArr.splice(i, 1);   // removes the item
+        newArr.unshift(a[0]);         // adds it back to the beginning
+        break;
+      }
     }
-    this.setState({details: newArr})
-    }
-  
+    this.setState({ details: newArr })
+  }
+
 
   handleClick = (event, marker) => {
     if (event && event.preventDefault) {
@@ -129,13 +129,13 @@ class MyFancyComponent extends Component {
     }
   }
 
-    handleFormSubmit = async (event) => {
-      event.preventDefault()
-      this.getAvg()
+  handleFormSubmit = async (event) => {
+    event.preventDefault()
+    this.getAvg()
   }
 
 
-  updateAddressInState = (boxNum,address) => {
+  updateAddressInState = (boxNum, address) => {
     let num = "address" + boxNum
     this.setState({ [num]: address })
   }
@@ -188,7 +188,6 @@ class MyFancyComponent extends Component {
             />
           </Col>
         </Row>
-
         <Row>
           <Col id="mapDiv">
             <MapWithAMarker
@@ -201,14 +200,19 @@ class MyFancyComponent extends Component {
               mapElement={<div style={{ height: `100%` }} />}
               key={this.state.selectedMarker}
               currentLocation={LatLng}
+              add1={this.state.address1Coord}
+              add2={this.state.address2Coord}
+              add3={this.state.address3Coord}
+              add4={this.state.address4Coord}
+              add5={this.state.address5Coord}
             />
           </Col>
           <Col id="detailCol">
-         {this.state.details.length ? 
-         this.state.details.map((detail) => (
-          <DetailCards details={detail} selectedThing={this.state.selectedMarker}/> 
-         ))
-         : 'Add 2 or more addresses, select a location type and radius, then click "Search".'}
+            {this.state.details.length ?
+              this.state.details.map((detail) => (
+                <DetailCards details={detail} selectedThing={this.state.selectedMarker} />
+              ))
+              : 'Add 2 or more addresses, select a location type and radius, then click "Search".'}
           </Col>
         </Row>
         {/* <Row>
