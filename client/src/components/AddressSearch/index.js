@@ -139,12 +139,14 @@ export default class GoogleSuggest extends Component {
                         <span className="input-group-btn">
                         <button type="button" className="btn btn-warning" onClick={this.postAddress}>Save</button>
                     {/* <button type="button" className="btn btn-info">Select from Profile</button> */}
+                    {this.state.loggedIn ? (
                     <select onChange={this.selectAddress} name="saved">
                         <option value="Choose from your saved addresses">Choose from your saved addresses</option>
                         {this.state.userAddress.map(address=> {
                             return (<option value={address}>{address}</option>)
                         })}
                     </select>
+                    ) : (<></>)}
                     </span>
                 </div>
                 </div>
