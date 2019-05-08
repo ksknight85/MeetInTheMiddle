@@ -23,4 +23,14 @@ module.exports = {
             .then(user => res.json(user.address))
             
     },
+    update: function (req,res) {
+        console.log(req.body)
+        db.Address
+            .update({"_id": req.params.id}, {$set: {"address": Object.keys(req.body)[0]}})
+            .then(console.log(`id: ${req.params.id} was updated`))
+            .catch(err => console.log(err))
+    }
 }
+
+
+

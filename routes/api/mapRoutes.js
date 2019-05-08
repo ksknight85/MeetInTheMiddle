@@ -7,7 +7,14 @@ const mapController = require("../../controller/mapController");
 router.route("/:type/:lat/:lng/:radius")
     .get(mapController.placesGet)
 
+
+
+router.route("/coords/:place")
+    .get(mapController.coordinatesGet)
+    
 router.route("/:placeId")
     .get(mapController.detailsGet)
+
+
 
 module.exports = router

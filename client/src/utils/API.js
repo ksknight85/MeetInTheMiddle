@@ -1,4 +1,5 @@
 import axios from "axios";
+// import keys from "../../../keys"
 
 export default {
   // logs in user
@@ -34,13 +35,18 @@ export default {
     console.log(id)
     return axios.delete("/api/address/" +id)
   },
+  updateAddress: function(id, address) {
+    console.log(`id: \n\n ${id}`)
+    console.log(`address: \n\n ${address}`)
+    return axios.put("/api/address/" + id, address)
+  },
   getAll: function (id) {
     return axios.get("/api/address/"+ id)
   },
 
   coordinates: function(address) {
      let formatted = address.split(" ").join("+")
-    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${formatted}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
+    return axios.get(`/api/place/coords/${formatted}`)
   }, 
 
   // places: function(lat, lng, radius, type) {

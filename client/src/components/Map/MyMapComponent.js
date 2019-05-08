@@ -74,6 +74,7 @@ class MyFancyComponent extends Component {
     let num = "address" + boxNum + "Coord"
     API.coordinates(address)
       .then(data => {
+        console.log(`coords:  \n\n${data.data.results[0].geometry.location}`)
         this.setState({ [num]: data.data.results[0].geometry.location })
       })
       .catch(err => console.log(err))

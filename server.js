@@ -8,6 +8,7 @@ const session = require("express-session");
 const passport = require("passport");
 const logger = require("morgan");
 const flash = require('connect-flash');
+require("dotenv").config()
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
