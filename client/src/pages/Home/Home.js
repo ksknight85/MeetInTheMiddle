@@ -21,9 +21,7 @@ class Home extends Component {
 
   // revist this it does not hit either the .then or .catch but it does post the address
   postAddress = () => {
-
     API.postAddress("5cd1d3e6916a24284884d8c4", {address: "123456 fake st"})
-
       .then(res => console.log("post: please"))
       .catch(err => console.log("post: no"))
   }

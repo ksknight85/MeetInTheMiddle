@@ -57,6 +57,13 @@ class Profile extends Component {
         .catch(err=> console.log(err))
       }
 
+      deleteAddress = (id) => {
+        API.deleteAddress(id)
+          .then(res => console.log("delete: please"))
+          .catch(err => console.log("delete: no"))
+            this.findAll()
+      }
+
     render() {
         return (
             <div className="profilePage">
@@ -74,14 +81,25 @@ class Profile extends Component {
                         // }}
                         >+ Add Another</button>
                         {this.state.addresses.map(address => {
-                            return (
+                            return ( 
+                            <>
+                            {address.update ? (<GoogleSuggest />) : (
+                                <div key={address.address} className="card">
+                                    <div className="card-body">
+                                        {address.address}
+                                        <button type="submit" id="update" data-addressId={address.id} className="btn btn-warning"><u>Update</u></button>
+                                        <button type="submit" id="delete" data-addressId={address.id} onClick={()=> this.deleteAddress(address.id)} className="btn btn-warning"><u>Delete</u></button>
+                                    </div>
+                                </div>
+                            )}
                                 <div key={address.address} className="card">
                                 <div className="card-body">
                                     {address.address}
                                     <button type="submit" id="update" data-addressId={address.id} className="btn btn-warning"><u>Update</u></button>
-                                    <button type="submit" id="delete" data-addressId={address.id} className="btn btn-warning"><u>Delete</u></button>
+                                    <button type="submit" id="delete" data-addressId={address.id} onClick={()=> this.deleteAddress(address.id)} className="btn btn-warning"><u>Delete</u></button>
                                 </div>
                             </div>
+                            </>
                             )
                         })}
                     </div>
