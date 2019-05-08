@@ -25,8 +25,8 @@ class MyFancyComponent extends Component {
       address3: false,
       address4: false,
       address5: false,
-      chosenLat: "",
-      chosenLng: "",
+      chosenLat: false,
+      chosenLng: false,
       radius: "",
       type: "",
       num: 2,
@@ -34,10 +34,11 @@ class MyFancyComponent extends Component {
       details: []
     }
   }
-
-  getAvgLat = () => {
-    let latAverage;
-    console.log("hit")
+  
+  getAvg = () => {
+    var latAverage;
+    var lngAverage;
+   
     if (this.state.address1Coord && this.state.address2Coord && !this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
       latAverage = (this.state.address1Coord.lat + this.state.address2Coord.lat) / 2
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
@@ -47,14 +48,7 @@ class MyFancyComponent extends Component {
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && this.state.address4Coord && this.state.address5Coord) {
       latAverage = ((this.state.address1Coord.lat + this.state.address2Coord.lat + this.state.address3Coord.lat + this.state.address4Coord.lat + this.state.address5Coord.lat) / 5)
     }
-    console.log(latAverage)
-    this.setState({ chosenLat: latAverage})
-    console.log(this.state.chosenLat)
-  }
-
-  getAvgLng = () => {
-    let lngAverage;
-    console.log("hit")
+  
     if (this.state.address1Coord && this.state.address2Coord && !this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
       lngAverage = (this.state.address1Coord.lng + this.state.address2Coord.lng) / 2
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
@@ -64,13 +58,8 @@ class MyFancyComponent extends Component {
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && this.state.address4Coord && this.state.address5Coord) {
       lngAverage = ((this.state.address1Coord.lng + this.state.address2Coord.lng + this.state.address3Coord.lng + this.state.address4Coord.lng + this.state.address5Coord.lng) / 5)
     }
-    console.log(lngAverage)
-    this.setState({ chosenLng: lngAverage })
-    console.log(this.state.chosenLng)
-  }
-  getAvg = () => {
-    this.getAvgLng();
-    this.getAvgLat();
+
+    this.setState({ chosenLng: lngAverage, chosenLat: latAverage }, () => this.getPlaces())
   }
 
 
@@ -87,9 +76,9 @@ class MyFancyComponent extends Component {
   getPlaces = () => {
     API.places(this.state.type, this.state.chosenLat, this.state.chosenLng, this.state.radius)
       .then(data => {
-        console.log("in places .then: ", data.data.results)
+        console.log("TEST TEST TEST TEST", data)
         const newArr = []
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i<data.data.results.length && i < 20; i++) {
           newArr.push({ place: data.data.results[i].geometry.location, id: data.data.results[i].place_id })
           placesIDs.push(data.data.results[i].place_id)
         }
@@ -142,7 +131,6 @@ class MyFancyComponent extends Component {
 
     handleFormSubmit = async (event) => {
       event.preventDefault()
-      this.getPlaces()
       this.getAvg()
   }
 
