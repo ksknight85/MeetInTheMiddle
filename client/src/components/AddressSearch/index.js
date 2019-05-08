@@ -13,12 +13,6 @@ export default class GoogleSuggest extends Component {
         loggedIn: false,
         userID: ""
     }
-    constructor(props) {
-        super(props);
-    }
-    componentDidMount() {
-        this.loggedIn();
-    }
 
     loggedIn = () => {
         API.isLoggedIn().then(user => {
@@ -79,6 +73,7 @@ export default class GoogleSuggest extends Component {
     }
 
     componentDidMount() {
+        this.loggedIn();
         // console.log("did mount")
         API.isLoggedIn().then(user => {
             console.log(user.data.user)
@@ -108,48 +103,47 @@ export default class GoogleSuggest extends Component {
                 render={googleMaps =>
                     googleMaps && (
                         <div className="input-bar">
-                        <div className="input-bar-item">
-                        <ReactGooglePlacesSuggest
-                            googleMaps={googleMaps}
-                            autocompletionRequest={{
-                                input: search,
-                                // Optional options
-                                // https://developers.google.com/maps/documentation/javascript/reference?hl=fr#AutocompletionRequest
-                            }}
-                            // Optional props
-                            onNoResult={this.handleNoResult}
-                            onSelectSuggest={this.handleSelectSuggest}
-                            textNoResults="My custom no results text" // null or "" if you want to disable the no results item
-                            customRender={prediction => (
-                                <div className="customWrapper input-group">
-                                    {prediction
-                                        ? prediction.description
-                                        : "My custom no results text"}
-                                </div>
-                            )}
-                        >
-                            <input
-                                className= "form-control width100"
-                                type="text"
-                                value={value}
-                                placeholder="Search a location"
-                                onChange={this.handleInputChange}
-                            />
-                        </ReactGooglePlacesSuggest>
-                        <span className="input-group-btn">
-                        <button type="button" className="btn btn-warning" onClick={this.postAddress}>Save</button>
-                    {/* <button type="button" className="btn btn-info">Select from Profile</button> */}
-                    {this.state.loggedIn ? (
-                    <select onChange={this.selectAddress} name="saved">
-                        <option value="Choose from your saved addresses">Choose from your saved addresses</option>
-                        {this.state.userAddress.map(address=> {
-                            return (<option value={address}>{address}</option>)
-                        })}
-                    </select>
-                    ) : (<></>)}
-                    </span>
-                </div>
-                </div>
+                            <div className="input-bar-item">
+                                <ReactGooglePlacesSuggest
+                                    googleMaps={googleMaps}
+                                    autocompletionRequest={{
+                                        input: search,
+                                        // Optional options
+                                        // https://developers.google.com/maps/documentation/javascript/reference?hl=fr#AutocompletionRequest
+                                    }}
+                                    // Optional props
+                                    onNoResult={this.handleNoResult}
+                                    onSelectSuggest={this.handleSelectSuggest}
+                                    textNoResults="My custom no results text" // null or "" if you want to disable the no results item
+                                    customRender={prediction => (
+                                        <div className="customWrapper input-group">
+                                            {prediction
+                                                ? prediction.description
+                                                : "My custom no results text"}
+                                        </div>
+                                    )}
+                                >
+                                    <input
+                                        className="form-control width100"
+                                        type="text"
+                                        value={value}
+                                        placeholder="Search a location"
+                                        onChange={this.handleInputChange}
+                                    />
+                                </ReactGooglePlacesSuggest>
+                                <span className="input-group-btn">
+                                    {this.state.loggedIn ? (<>
+                                        <button type="button" className="btn btn-warning" onClick={this.postAddress}>Save</button>
+                                        <select onChange={this.selectAddress} name="saved">
+                                            <option value="Choose from your saved addresses">Choose from your saved addresses</option>
+                                            {this.state.userAddress.map(address => {
+                                                return (<option value={address}>{address}</option>)
+                                            })}
+                                        </select>
+                                    </>) : (<></>)}
+                                </span>
+                            </div>
+                        </div>
                     )
                 }
             />

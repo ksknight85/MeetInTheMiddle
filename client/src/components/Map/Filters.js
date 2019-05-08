@@ -1,6 +1,5 @@
 import React from "react"
 import "./style.css"
-import DetailCards from "../DetailCards/DetailCards";
 
 
 function Filters(props) {
