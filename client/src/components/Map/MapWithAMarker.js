@@ -7,10 +7,11 @@ import "./style.css"
 const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
     // console.log("Map with a marker props.markers: ", props.placeID)
     return (
-      <GoogleMap defaultZoom={8} defaultCenter={props.currentLocation.length ? props.currentLocation : { lat: 39.7392, lng: -104.9903 }}>
+      <GoogleMap defaultZoom={10} defaultCenter={{ lat: 39.7392, lng: -104.9903 }} center={props.currentLocation}>
         {/* {console.log(typeof(props.currentLocation))} */}
         {/* {console.log(`default loc ${defaultCenter}`)} */}
-  
+        {console.log("CURRENT LOCATION",props.currentLocation)}
+
         {props.markers.map(marker => {
           
           const onClick = props.onClick.bind(this, marker)
