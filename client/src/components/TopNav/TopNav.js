@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./navbar.css";
 import API from "../../utils/API";
 import { Link } from 'react-router-dom'
-import { NavLink } from 'reactstrap';
 
 export default class Navigation extends Component {
 

@@ -25,9 +25,9 @@ class MyFancyComponent extends Component {
       address3: false,
       address4: false,
       address5: false,
-      chosenLat: "39.709123",
-      chosenLng: "-104.980573",
-      radius: "1600",
+      chosenLat: "",
+      chosenLng: "",
+      radius: "",
       type: "",
       num: 2,
       placeID: placesIDs,
@@ -37,7 +37,7 @@ class MyFancyComponent extends Component {
 
   getAvgLat = () => {
     let latAverage;
-    // console.log("hit")
+    console.log("hit")
     if (this.state.address1Coord && this.state.address2Coord && !this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
       latAverage = (this.state.address1Coord.lat + this.state.address2Coord.lat) / 2
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && !this.state.address4Coord && !this.state.address5Coord) {
@@ -47,7 +47,9 @@ class MyFancyComponent extends Component {
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && this.state.address4Coord && this.state.address5Coord) {
       latAverage = ((this.state.address1Coord.lat + this.state.address2Coord.lat + this.state.address3Coord.lat + this.state.address4Coord.lat + this.state.address5Coord.lat) / 5)
     }
-    this.setState({ chosenLat: latAverage.toString() })
+    console.log(latAverage)
+    this.setState({ chosenLat: latAverage})
+    console.log(this.state.chosenLat)
   }
 
   getAvgLng = () => {
@@ -62,7 +64,9 @@ class MyFancyComponent extends Component {
     } else if (this.state.address1Coord && this.state.address2Coord && this.state.address3Coord && this.state.address4Coord && this.state.address5Coord) {
       lngAverage = ((this.state.address1Coord.lng + this.state.address2Coord.lng + this.state.address3Coord.lng + this.state.address4Coord.lng + this.state.address5Coord.lng) / 5)
     }
-    this.setState({ chosenLng: lngAverage.toString() })
+    console.log(lngAverage)
+    this.setState({ chosenLng: lngAverage })
+    console.log(this.state.chosenLng)
   }
   getAvg = () => {
     this.getAvgLng();
@@ -93,8 +97,6 @@ class MyFancyComponent extends Component {
         this.setState({ placeID: placesIDs })
         this.setState({details: data.data.results})
         console.log("DATA: ", this.state.details)
-        var href = this.state.details[0].photos[0].html_attributions
-        console.log("PHOTO: ", href)
       })
   }
 
@@ -141,6 +143,7 @@ class MyFancyComponent extends Component {
     handleFormSubmit = async (event) => {
       event.preventDefault()
       this.getPlaces()
+      this.getAvg()
   }
 
 
