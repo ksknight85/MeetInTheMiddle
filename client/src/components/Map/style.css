@@ -3,13 +3,46 @@
 }
 
 .form-group-type {
-    margin: 5px 0 10px 5px;
+    width: 50%;
+    margin-bottom: 10px;
+    margin-left: 2%
 }
 
 .form-group-radius {
-    display: -webkit-inline-box;
-    margin: 0 0 5px 5px;
+    width: 50%;
+    margin-left: 2%
+}
+
+#submitButton {
+    margin-top: 10px
+}
+
+#subtitle {
+    font-family: 'Sansita', sans-serif;
+    font-size: 1.5em;
+    margin-left: 3.3%;
+    margin-top: 2%
+}
+
+#subtitle2 {
+    font-family: 'Sansita', sans-serif;
+    font-size: 1.5em;
+    margin-top: 2%;
+    margin-left: 2%
+}
+
+#mapDiv {
+    margin-left: 3%;
+    margin-bottom: 2%;
+    padding: 0;
+}
+
+#detailCol {
+    margin-bottom: 2%
 }
 
 
-
+#selectNum {
+    margin-left: 3.3%;
+    margin-bottom: 10px
+}

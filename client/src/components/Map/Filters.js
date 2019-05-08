@@ -15,7 +15,7 @@ function Filters(props) {
               type="text"
               className="form-control"
             >
-              <option>Search a location Type</option>
+              <option>Search a location type</option>
               <option value="airport">Airport</option>
               <option value="amusement_park">Amusement Park</option>
               <option value="aquarium">Aquarium</option>
@@ -33,7 +33,7 @@ function Filters(props) {
               <option value="electronics_store">Electronics Store</option>
               <option value="florist">Florist</option>
               <option value="furniture_store">Furniture Store</option>
-              <option value="gym">gym</option>
+              <option value="gym">Gym</option>
               <option value="hair_care">Hair Care</option>
               <option value="hardware_store">Hardware Store</option>
               <option value="home_goods_store">Home Goods Store</option>
@@ -43,10 +43,9 @@ function Filters(props) {
               <option value="lodging">Lodging</option>
               <option value="mosque">Mosque</option>
               <option value="movie_theater">Movie Theater</option>
-              <option value="Museum">museum</option>
+              <option value="Museum">Museum</option>
               <option value="night_club">Night Club</option>
               <option value="park">Park</option>
-              <option value="Pet Store">pet_store</option>
               <option value="restaurant">Restaurant</option>
               <option value="school">School</option>
               <option value="shoe_store">Shoe Store</option>
@@ -74,7 +73,7 @@ function Filters(props) {
               <option value={40000}>25 mi</option>
             </select>
             <div className="form-group-radius">
-              <button type="submit" className="btn btn-info" onClick={props.handleFormSubmit}>
+              <button type="submit" className="btn btn-info" id="submitButton" onClick={props.handleFormSubmit}>
                 Search
           </button>
             </div>

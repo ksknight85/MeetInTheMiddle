@@ -3,8 +3,6 @@ import { Row } from "reactstrap";
 import API from "../../utils/API";
 import "./style.css";
 import Header from "../../components/Header";
-import MyMapComponent from '../../components/Map/MyMapComponent';
-import { GoogleMap } from 'react-google-maps';
 import ModalExample from "../../components/Modal/Modal.js"
 
 
@@ -67,17 +65,14 @@ class Home extends Component {
   render() {
     return (
       <div className="homeBox">
-        <span onClick={this.postAddress}>save</span> {"--------------------"}
+        {/* <span onClick={this.postAddress}>save</span> {"--------------------"}
         <span onClick={this.deleteAddress}>delete</span>{"-----------------"}
         <span onClick={this.findAll}>find places</span>{"------------------"}
         <span onClick={this.findPlace}>places</span>{"----------------"}
-        <span onClick={this.findDetails}>details</span> 
+        <span onClick={this.findDetails}>details</span>  */}
         <div>
           <ModalExample show={true} closeOnOuterClick={true}/>
           <Row><Header /></Row>
-            <MyMapComponent >
-              <GoogleMap {...MyMapComponent} />
-            </MyMapComponent>
         </div>
       </div>
     );

@@ -8,8 +8,3 @@
     text-align: center
 }
 
-@media only screen and (max-width: 800px) {
-    #column, #mapDiv, #detailCol {
-      flex-basis: 100%
-    }
-  }

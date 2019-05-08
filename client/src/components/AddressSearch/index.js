@@ -4,50 +4,70 @@ import ReactGooglePlacesSuggest from "react-google-places-suggest"
 import API from "../../utils/API"
 import "./style.css"
 const MY_API_KEY = "AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE" // fake
- 
+
 export default class GoogleSuggest extends Component {
     state = {
         search: "",
         value: "",
-        userAddress: []
+        userAddress: [],
+        loggedIn: false,
+        userID: ""
     }
     constructor(props) {
         super(props);
-      }
- 
+    }
+    componentDidMount() {
+        this.loggedIn();
+    }
+
+    loggedIn = () => {
+        API.isLoggedIn().then(user => {
+            console.log(user)
+            if (user.data.loggedIn) {
+                this.setState({
+                    loggedIn: true,
+                    username: user.data.user._id
+                });
+                console.log(`User: data ${user.data}`);
+            }
+        }).catch(err => {
+            console.log("Not logged in");
+        });
+    }
+
     handleInputChange = e => {
-        this.setState({search: e.target.value, value: e.target.value})
+        this.setState({ search: e.target.value, value: e.target.value })
         this.props.update(this.props.num, this.state.value)
     }
- 
+
     handleSelectSuggest = (geocodedPrediction, originalPrediction) => {
         // console.log(`suggested predictions:  \n${geocodedPrediction}\n\n ${originalPrediction}`) // eslint-disable-line
         this.props.update(this.props.num, geocodedPrediction.formatted_address);
-        this.setState({search: "", value: geocodedPrediction.formatted_address})
+        this.setState({ search: "", value: geocodedPrediction.formatted_address })
         this.props.coords(this.props.num, this.state.value);
 
     }
     postAddress = () => {
 
-        API.postAddress(this.state.userId, {address: this.state.value})
-    
-          .then(res => console.log("post: please"))
-          .catch(err => console.log("post: no"))
+        API.postAddress(this.state.userId, { address: this.state.value })
+
+            .then(res => console.log("post: please"))
+            .catch(err => console.log("post: no"))
     }
 
     findAll = () => {
         // console.log(`${this.props.num}'s search bar hit`)
         API.getAll(this.state.userId)
-        .then(res=> {
-            let addressArray = [];
-            for (let i =0; i < res.data.length; i++) {
-                addressArray.push(res.data[i].address)
-            }
-            this.setState({userAddress: addressArray})
-        })
-        .catch(err=> console.log(err))
+            .then(res => {
+                let addressArray = [];
+                for (let i = 0; i < res.data.length; i++) {
+                    addressArray.push(res.data[i].address)
+                }
+                this.setState({ userAddress: addressArray })
+            })
+            .catch(err => console.log(err))
     }
-    
+
     handleNoResult = () => {
         console.log('No results for ', this.state.search)
     }
@@ -55,7 +75,7 @@ export default class GoogleSuggest extends Component {
     selectAddress = (event) => {
         // event.preventDefault();
         const value = event.target.value;
-        this.setState({search: value, value: value})
+        this.setState({ search: value, value: value })
     }
 
     componentDidMount() {
@@ -73,12 +93,12 @@ export default class GoogleSuggest extends Component {
             }
         })
             .catch(err => {
-            console.log(err);
-        });
+                console.log(err);
+            });
     }
- 
+
     render() {
-        const {search, value} = this.state
+        const { search, value } = this.state
         return (
             <ReactGoogleMapLoader
                 params={{
@@ -130,7 +150,6 @@ export default class GoogleSuggest extends Component {
                 </div>
                     )
                 }
-                
             />
         )
     }
