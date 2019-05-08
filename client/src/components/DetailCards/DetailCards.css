@@ -1,0 +1,32 @@
+.cardText {
+    list-style: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#cardTitle {
+font-family: 'Sansita', sans-serif;
+margin-bottom: 0
+}
+
+#cardHeader {
+    background: #f8bf45
+}
+
+#title {
+    font-family: 'Sansita', sans-serif;
+    font-size: larger
+}
+
+#open {
+    font-family: 'Montserrat', sans-serif;
+    font-size: larger;
+    color: #57aabe
+}
+
+.card {
+    margin-bottom: 6px;
+}
+
+#cardBody {
+    padding: 10px;
+}

@@ -93,23 +93,32 @@ class MyFancyComponent extends Component {
         this.setState({ placeID: placesIDs })
         this.setState({details: data.data.results})
         console.log("DATA: ", this.state.details)
+        var href = this.state.details[0].photos[0].html_attributions
+        console.log("PHOTO: ", href)
       })
   }
 
-
-  // componentDidMount() {
-  //   this.getCoordinates()
-  //   this.getPlaces(this.state.chosenLat, this.state.chosenLng, this.state.radius, this.state.type)
-  // }
-
+  moveCard = () => {
+    let newArr = this.state.details
+      for (var i=0; i < newArr.length; i++) {
+        if (this.state.selectedMarker === newArr[i].reference) {
+            var a = newArr.splice(i,1);   // removes the item
+            newArr.unshift(a[0]);         // adds it back to the beginning
+            break;
+        }
+    }
+    this.setState({details: newArr})
+    }
+  
 
   handleClick = (event, marker) => {
     if (event && event.preventDefault) {
       event.preventDefault()
     }
-    console.log("handle click:", { marker })
     this.setState({ selectedMarker: marker })
     console.log("Selected Marker", this.state.selectedMarker)
+    this.moveCard()
+
   }
   numAddresses = (event) => {
     event.preventDefault()
@@ -128,7 +137,6 @@ class MyFancyComponent extends Component {
       return
     }
   }
-
 
     handleFormSubmit = async (event) => {
       event.preventDefault()
@@ -156,11 +164,11 @@ class MyFancyComponent extends Component {
     }
 
     return (
-      <>
+      <div className="main">
         <Row>
-          <Col>
-            <p>Type in 2-5 addresses to find a central meeting point:</p>
-            <select value={this.state.num} onChange={this.numAddresses} name="num">
+          <Col id="column">
+            <p id="subtitle">Type in 2-5 addresses to find a central meeting point:</p>
+            <select value={this.state.num} onChange={this.numAddresses} name="num" id="selectNum">
               <option>Add More?</option>
               <option value={2}>2</option>
               <option value={3}>3</option>
@@ -179,21 +187,19 @@ class MyFancyComponent extends Component {
             />
             {this.generateMore(parseInt(this.state.num))}
           </Col>
-          <Col>
-            <p>Filter your results</p>
+          <Col id="column">
+            <p id="subtitle2">Filter your results:</p>
             <Filters
               type={this.state.type}
               radius={this.state.radius}
               handleRadiusTypeChange={this.handleRadiusTypeChange}
               handleFormSubmit={this.handleFormSubmit}
-                          details={this.state.details}
-
             />
           </Col>
         </Row>
 
         <Row>
-          <Col>
+          <Col id="mapDiv">
             <MapWithAMarker
               selectedMarker={this.state.selectedMarker}
               markers={this.state.places}
@@ -206,11 +212,18 @@ class MyFancyComponent extends Component {
               currentLocation={LatLng}
             />
           </Col>
+          <Col id="detailCol">
+         {this.state.details.length ? 
+         this.state.details.map((detail) => (
+          <DetailCards details={detail} selectedThing={this.state.selectedMarker}/> 
+         ))
+         : 'Add 2 or more addresses, select a location type and radius, then click "Search".'}
+          </Col>
         </Row>
-        <Row>
+        {/* <Row>
         <button onClick={this.getAvgLng && this.getAvgLat}>Average and list</button>
-        </Row>
-      </>
+        </Row> */}
+      </div>
     )
   }
 }

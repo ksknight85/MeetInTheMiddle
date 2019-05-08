@@ -57,9 +57,6 @@ export default {
   
 // MOVE TO THE BACKEND TO GET RID OF CORS WORKAROUND
   details: function(placeId){
-
     return axios.get(`/api/place/${placeId}`)
   }
-
-
 };
