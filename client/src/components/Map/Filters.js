@@ -15,7 +15,7 @@ function Filters(props) {
               type="text"
               className="form-control"
             >
-              <option>Search a location Type</option>
+              <option>Search a location type</option>
               <option value="airport">Airport</option>
               <option value="amusement_park">Amusement Park</option>
               <option value="aquarium">Aquarium</option>
@@ -73,7 +73,7 @@ function Filters(props) {
               <option value={40000}>25 mi</option>
             </select>
             <div className="form-group-radius">
-              <button type="submit" className="btn btn-info" onClick={props.handleFormSubmit}>
+              <button type="submit" className="btn btn-info" id="submitButton" onClick={props.handleFormSubmit}>
                 Search
           </button>
             </div>
