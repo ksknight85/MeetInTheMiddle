@@ -5,12 +5,36 @@ import "./style.css"
 
 
 const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
-  console.log(`Props add1: ${props.add1}`)
-  // console.log("Map with a marker props.markers: ", props.placeID)
-  return (
-    <GoogleMap defaultZoom={8} defaultCenter={props.currentLocation.length ? props.currentLocation : { lat: 39.7392, lng: -104.9903 }}>
-      {/* {console.log(typeof(props.currentLocation))} */}
-      {/* {console.log(`default loc ${defaultCenter}`)} */}
+    // console.log("Map with a marker props.markers: ", props.placeID)
+    return (
+      <GoogleMap defaultZoom={10} defaultCenter={{ lat: 39.7392, lng: -104.9903 }} center={props.currentLocation}>
+        {/* {console.log(typeof(props.currentLocation))} */}
+        {/* {console.log(`default loc ${defaultCenter}`)} */}
+        {console.log("CURRENT LOCATION",props.currentLocation)}
+
+        {props.markers.map(marker => {
+          
+          const onClick = props.onClick.bind(this, marker)
+          return (
+            <Marker
+              key={marker.place.id}
+              onClick={() => onClick(marker.id)}
+              id={marker.id}
+              position={{ lat: marker.place.lat, lng: marker.place.lng }}
+            >
+              {props.selectedMarker === marker &&
+                <InfoWindow>
+                  <div>
+                    {marker}
+                  </div>
+                </InfoWindow>}
+  
+            </Marker>
+          )
+        })}
+      </GoogleMap>
+    )
+  })
 
       {props.markers.map(marker => {
 

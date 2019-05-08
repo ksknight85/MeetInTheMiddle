@@ -9,6 +9,8 @@ import GoogleSuggest from "../../components/AddressSearch"
 import DetailCards from "../../components/DetailCards/DetailCards.js"
 
 let placesIDs = []
+// let LatLng = {lat: 39.7392, lng: -104.9903}
+
 class MyFancyComponent extends Component {
   constructor(props) {
     super(props)
@@ -31,7 +33,8 @@ class MyFancyComponent extends Component {
       type: "",
       num: 2,
       placeID: placesIDs,
-      details: []
+      details: [],
+      LatLng: {lat: 39.7392, lng: -104.9903}
     }
   }
 
@@ -60,8 +63,8 @@ class MyFancyComponent extends Component {
     }
 
     this.setState({ chosenLng: lngAverage, chosenLat: latAverage }, () => this.getPlaces())
-  }
 
+  }
 
   getCoordinates = (boxNum, address) => {
     let num = "address" + boxNum + "Coord"
@@ -86,6 +89,8 @@ class MyFancyComponent extends Component {
         this.setState({ placeID: placesIDs })
         this.setState({ details: data.data.results })
         console.log("DATA: ", this.state.details)
+      }).then(() => {
+        this.setState({LatLng: {lat: this.state.chosenLat, lng: this.state.chosenLng}})
       })
   }
 
@@ -149,10 +154,6 @@ class MyFancyComponent extends Component {
 
 
   render() {
-    var LatLng = {
-      lat: parseFloat(this.state.chosenLat),
-      lng: parseFloat(this.state.chosenLng)
-    }
 
     return (
       <div className="main">
@@ -199,12 +200,12 @@ class MyFancyComponent extends Component {
               containerElement={<div style={{ height: `400px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
               key={this.state.selectedMarker}
-              currentLocation={LatLng}
               add1={this.state.address1Coord}
               add2={this.state.address2Coord}
               add3={this.state.address3Coord}
               add4={this.state.address4Coord}
               add5={this.state.address5Coord}
+              currentLocation={this.state.LatLng}
             />
           </Col>
           <Col id="detailCol">
