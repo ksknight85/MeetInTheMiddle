@@ -37,7 +37,6 @@ class MyFancyComponent extends Component {
       LatLng: {lat: 39.7392, lng: -104.9903}
     }
   }
-
   
   getAvg = () => {
     var latAverage;
