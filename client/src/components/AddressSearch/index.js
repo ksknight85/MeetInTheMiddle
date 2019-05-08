@@ -130,9 +130,11 @@ export default class GoogleSuggest extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </ReactGooglePlacesSuggest>
-                                <span className="input-group-btn">
+                                {this.state.loggedIn ? (
+                                <button type="button" className="btn btn-warning" onClick={this.postAddress}>Save</button>) : (<></>)}
+                            </div>
+                            <div className="input-group-btn">
                                     {this.state.loggedIn ? (<>
-                                        <button type="button" className="btn btn-warning" onClick={this.postAddress}>Save</button>
                                         <select onChange={this.selectAddress} name="saved">
                                             <option value="Choose from your saved addresses">Choose from your saved addresses</option>
                                             {this.state.userAddress.map(address => {
@@ -140,8 +142,7 @@ export default class GoogleSuggest extends Component {
                                             })}
                                         </select>
                                     </>) : (<></>)}
-                                </span>
-                            </div>
+                                </div>
                         </div>
                     )
                 }
