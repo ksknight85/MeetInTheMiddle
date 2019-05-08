@@ -57,7 +57,7 @@ export default class Navigation extends Component {
                 <Link to="/"><li className="nav-item active nav-link">Home<span className="sr-only">(current)</span></li></Link>
                 <Link to="/search"><li className="nav-item nav-link">Search</li></Link>
                 <Link to="/profile"><li className="nav-item nav-link">Profile</li></Link>
-                <Link to="#"><li className="nav-item nav-link">Logout</li></Link>
+                <Link to="#"><li onClick={this.logout}className="nav-item nav-link">Logout</li></Link>
               </ul>
             ) : (
                 <ul className="navbar-nav">
