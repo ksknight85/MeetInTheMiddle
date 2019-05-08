@@ -67,7 +67,7 @@ function Filters(props) {
               className="form-control"
             >
              <option value={1600}>Select a radius</option>
-              <option value={1600}>1 mi</option>
+              <option value={1609}>1 mi</option>
               <option value={8000}>5 mi</option>
               <option value={16000}>10 mi</option>
               <option value={40000}>25 mi</option>
