@@ -1,37 +1,28 @@
-.instructions {
+ #instructions {
   position: absolute;
   top: 1%;
   right: 1%;
   z-index: 500;
   font-family: 'Montserrat', sans-serif;
-
-}
-.ReactModal__Overlay {
-  z-index: 500;
-}
-
-.ReactModal__Content {
-  background-color: transparent;
 }
 
 #how {
   font-family: 'Sansita', sans-serif;
-  background: #57aabe;
   text-align: center;
+  font-size: 55px;
 }
 
 #modalImg { 
-  max-height: 200px; 
-  /* width: 200px; */
-  margin: 10px;
+ padding-top: 20px;
+ padding-bottom: 20px
 }
 
 .description {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px; 
-  background-color: white;
-  padding: 4px;
-  margin: 10px;
+  color: black;
+  line-height: 1.2;
+  margin-top: 10px
 }
 
 .modalExamp {
@@ -39,35 +30,35 @@
   align-content: center;
   text-align: center;
   font-size: 16px;
-  border: 1px solid #57aabe;
+  border: 3px solid #f8bf45;
+  height: 150px;
   width: 150px;
   padding: 5px;
-  background-color: white;
-  margin-top: 15px;
-}
+  background-color: #57aabe;
+  margin-top: 30px;
+  margin-bottom: none;
+  color: white;
+  line-height: 1.2
+} 
 
 .exampRow  {
   align-content: center;
-  margin: 15px;
-}
-.col { 
-  padding: 0 auto;
-  margin: 0 auto;
-  vertical-align: middle;
 }
 
 .row {
   place-content: center;
 }
 
-#closeBtn {
-  float: right;
-  padding: 12px 24px;
+#explanationRow {
+  background-color: #f8bf45
 }
 
+Modal {
+  padding: none
+}
 
 @media only screen and (max-width: 1000px) {
-  .instructions {
+  #instructions {
       position: absolute;
       top: 1%;
       right: 8%;
@@ -79,7 +70,7 @@
 }
 
 @media only screen and (max-width: 850px) {
-  .instructions {
+  #instructions {
       position: absolute;
       top: 1%;
       right: 10%;
@@ -88,7 +79,7 @@
 }
 
 @media only screen and (max-width: 700px) {
-  .instructions {
+  #instructions {
       position: absolute;
       top: 1%;
       right: 12%;
@@ -97,7 +88,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .instructions {
+  #instructions {
       position: absolute;
       top: 1%;
       right: 14%;
@@ -106,7 +97,7 @@
 }
 
 @media only screen and (max-width: 500px) {
-  .instructions {
+  #instructions {
       position: absolute;
       top: 1%;
       right: 16%;
@@ -115,7 +106,7 @@
 }
 
 @media only screen and (max-width: 450px) {
-  .instructions {
+  #instructions {
       position: absolute;
       top: 1%;
       right: 18%;
