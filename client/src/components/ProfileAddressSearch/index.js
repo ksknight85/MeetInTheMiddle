@@ -121,7 +121,7 @@ export default class GoogleSuggest extends Component {
                             />
                         </ReactGooglePlacesSuggest>
                         <span className="input-group-btn">
-                        <button type="button" className="btn btn-warning" onClick={this.props.new === "new" ? this.postAddress : this.updateAddress}>Save</button>
+                        <button type="button" className="btn btn-warning" id="profileButton" onClick={this.props.new === "new" ? this.postAddress : this.updateAddress}>Save</button>
                     </span>
                 </div>
                 </div>
