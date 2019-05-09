@@ -47,6 +47,7 @@ export default class GoogleSuggest extends Component {
 
             .then(res => console.log("post: please"))
             .catch(err => console.log("post: no"))
+        this.props.refresh()
     }
 
     updateAddress = () => {
@@ -55,6 +56,7 @@ export default class GoogleSuggest extends Component {
         // console.log(place)
         API.updateAddress(updateId, place)
             .then(console.log(this))
+        this.props.refresh()
     }
 
 

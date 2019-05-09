@@ -1,6 +1,6 @@
 const axios = require("axios");
 const keys = require("../keys")
-// console.log(keys)
+console.log(keys)
 module.exports = {
     placesGet: function(req,res) {
         const { type, lat, lng, radius } = req.params
@@ -26,10 +26,10 @@ module.exports = {
             })
     },
     coordinatesGet: function(req,res) {
-        // console.log(`cooords!!!!! \n\n\n${req.params.place}`)
+        console.log(`cooords!!!!! \n\n\n${req.params.place}`)
         axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.params.place}&key=${keys.google.apikey}`)
         .then(function(details){
-            console.log(`details: \n\n ${details.data}`);
+            console.log(`details: \n\n ${details.data.results}`);
             res.json(details.data)
 
         })
