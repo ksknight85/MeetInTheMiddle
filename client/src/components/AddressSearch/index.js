@@ -64,9 +64,15 @@ export default class GoogleSuggest extends Component {
     console.log('No results for ', this.state.search)
   }
 
+  saveSelect = (event) => {
+    console.log(event)
+  }
+
   selectAddress = (event) => {
     const value = event.target.value;
     this.setState({ search: value, value: value })
+    this.props.update(this.props.num, value)
+    this.props.coords(this.props.num, value)
   }
 
   componentDidMount() {
