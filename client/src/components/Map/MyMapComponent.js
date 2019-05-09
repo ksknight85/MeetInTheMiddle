@@ -197,11 +197,11 @@ class MyFancyComponent extends Component {
               containerElement={<div style={{ height: `400px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
               key={this.state.selectedMarker}
-              // add1={this.state.address1Coord}
-              // add2={this.state.address2Coord}
-              // add3={this.state.address3Coord}
-              // add4={this.state.address4Coord}
-              // add5={this.state.address5Coord}
+              add1={this.state.address1Coord}
+              add2={this.state.address2Coord}
+              add3={this.state.address3Coord}
+              add4={this.state.address4Coord}
+              add5={this.state.address5Coord}
               currentLocation={this.state.LatLng}
             />
           </Col>
