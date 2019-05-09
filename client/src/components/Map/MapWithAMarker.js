@@ -33,31 +33,42 @@ const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
           </Marker>
         )
       })}
-      <Marker
-        icon={{ url: Mark1 }}
-        key={props.add1.lat}
-        position={{ lat: props.add1.lat, lng: props.add1.lng }}>
-      </Marker>
-      <Marker
-        icon={{ url: Mark2 }}
-        key={props.add2.lat}
-        position={{ lat: props.add2.lat, lng: props.add2.lng }}>
-      </Marker>
-      <Marker
-        icon={{ url: Mark3 }}
-        key={props.add3.lat}
-        position={{ lat: props.add3.lat, lng: props.add3.lng }}>
-      </Marker>
-      <Marker
-        icon={{ url: Mark4 }}
-        key={props.add4.lat}
-        position={{ lat: props.add4.lat, lng: props.add4.lng }}>
-      </Marker>
-      <Marker
-        icon={{ url: Mark5 }}
-        key={props.add5.lat}
-        position={{ lat: props.add5.lat, lng: props.add5.lng }}>
-      </Marker>
+      {(props.add1.lat) ? (<>
+        <Marker
+          icon={{ url: Mark1 }}
+          key={props.add1.lat}
+          position={{ lat: props.add1.lat, lng: props.add1.lng }}>
+        </Marker>
+      </>) : (<></>)}
+      {(props.add2.lat) ? (<>
+        <Marker
+          icon={{ url: Mark2 }}
+          key={props.add2.lat}
+          position={{ lat: props.add2.lat, lng: props.add2.lng }}>
+        </Marker>
+      </>) : (<></>)}
+      {(props.add3.lat) ? (<>
+
+        <Marker
+          icon={{ url: Mark3 }}
+          key={props.add3.lat}
+          position={{ lat: props.add3.lat, lng: props.add3.lng }}>
+        </Marker>
+      </>) : (<></>)}
+      {(props.add4.lat) ? (<>
+        <Marker
+          icon={{ url: Mark4 }}
+          key={props.add4.lat}
+          position={{ lat: props.add4.lat, lng: props.add4.lng }}>
+        </Marker>
+      </>) : (<></>)}
+      {(props.add5.lat) ? (<>
+        <Marker
+          icon={{ url: Mark5 }}
+          key={props.add5.lat}
+          position={{ lat: props.add5.lat, lng: props.add5.lng }}>
+        </Marker>
+      </>) : (<></>)}
     </GoogleMap>
   )
 })
