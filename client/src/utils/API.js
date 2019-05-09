@@ -1,5 +1,4 @@
 import axios from "axios";
-// import keys from "../../../keys"
 
 export default {
   // logs in user
@@ -26,43 +25,32 @@ export default {
   logout: function() {
     return axios.get("/api/users/logout")
   },
-
+  //saves address
   postAddress: function(id, address) {
-    console.log(id);
     return axios.post("/api/address/" +id, address);
   },
+  //deletes address
   deleteAddress: function(id) {
-    console.log(id)
     return axios.delete("/api/address/" +id)
   },
+  //updates address
   updateAddress: function(id, address) {
-    console.log(`id: \n\n ${id}`)
-    console.log(`address: \n\n ${address}`)
     return axios.put("/api/address/" + id, address)
   },
+  // gets all address for a user
   getAll: function (id) {
     return axios.get("/api/address/"+ id)
   },
-
+  //gets coords for current formatted addresses
   coordinates: function(address) {
-    console.log(address)
      let formatted = address.split(" ").join("+")
     return axios.get(`/api/place/coords/${formatted}`)
   }, 
-
-  // places: function(lat, lng, radius, type) {
-  //   return axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${type}&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
-  // }, 
+  // finds relevent places
   places: function(type, lat, lng, radius) {
-    console.log("In places API call: " ,lat, lng, radius, type)
     return axios.get(`/api/place/${type}/${lat}/${lng}/${radius}`)
   }, 
-
-  // details: function(placeID){
-  //   return axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeID}&fields=name,rating,formatted_phone_number&key=AIzaSyCONkF6ans7kgeS5x--mxwLeMmH0aNJ3vE`)
-  // }
-  
-// MOVE TO THE BACKEND TO GET RID OF CORS WORKAROUND
+  //details about each place
   details: function(placeId){
     return axios.get(`/api/place/${placeId}`)
   }

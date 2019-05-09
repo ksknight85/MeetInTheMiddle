@@ -16,20 +16,16 @@ module.exports = {
 
     },
     detailsGet: function(req,res) {
-        // console.log(`details: \n\n\n${req.params.placeId}`)
         const placeId = req.params.placeId
         axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&fields=name,photo,url,type,rating,formatted_phone_number,address_component&key=${keys.google.apikey}`)
             .then(function(details){
-                // console.log(`details: \n\n ${details.data.result.name}`);
                 res.json(details.data.result)
 
             })
     },
     coordinatesGet: function(req,res) {
-        console.log(`cooords!!!!! \n\n\n${req.params.place}`)
         axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${req.params.place}&key=${keys.google.apikey}`)
         .then(function(details){
-            console.log(`details: \n\n ${details.data.results}`);
             res.json(details.data)
 
         })

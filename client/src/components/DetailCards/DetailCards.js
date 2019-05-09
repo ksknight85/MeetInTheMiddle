@@ -36,7 +36,7 @@ function DetailCards(props) {
             <div className="card-body" id="cardBody1">
             <Row>
             <Col md="auto" id="icon">
-            <img src={place.icon} style={{ width: "80px", height: "80px", marginTop: "25px", marginLeft: "25px"}}/>
+            <img src={place.icon} style={{ width: "80px", height: "80px", marginTop: "25px", marginLeft: "25px"}} alt={place.name}/>
             </Col>
             <Col xs lg="10">
             <ul id="list">
