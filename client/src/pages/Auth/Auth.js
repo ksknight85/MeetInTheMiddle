@@ -32,7 +32,6 @@ class Auth extends Component {
         username: this.state.loginUsername,
         password: this.state.loginPassword
       }).then(user => {
-        console.log(user);
         if (user.data.loggedIn) {
           this.setState({
             loggedIn: true,
@@ -52,7 +51,6 @@ class Auth extends Component {
 
   handleSignup = event => {
     event.preventDefault();
-    console.log("hi")
     if (this.state.username && this.state.password) {
       API.signup({
         username: this.state.username,
@@ -123,27 +121,3 @@ class Auth extends Component {
 }
 
 export default Auth;
-
-// {/* <div className="authBox">
-//           {(this.props.action === "login") ? (
-//             <Login
-//               username={this.state.username}
-//               password={this.state.password}
-//               handleLogin={this.handleLogin}
-//               handleInputChange={this.handleInputChange}
-//               message={this.state.message}
-//             />
-//           ) : (
-//               <Signup
-//                 username={this.state.username}
-//                 password={this.state.password}
-//                 confirmPassword={this.state.confirmPassword}
-//                 handleSignup={this.handleSignup}
-//                 handleInputChange={this.handleInputChange}
-//                 message={this.state.message}
-//               />
-//             )}
-//         </div> */}
-
-
-

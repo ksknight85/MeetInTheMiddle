@@ -1,6 +1,5 @@
 .profilePage {
     background-image: url("../../images/coffeeshoppeople.jpg");
-    /* background-image: url("http://storage.googleapis.com/zagat-article-ss/mourningdove_atlanta_1_lukebeardd_02022018.jpg?h=646&w=646&auto=format"); */
     background-size: cover;
     display: flex;
     min-height: 150vh;

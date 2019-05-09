@@ -29,8 +29,6 @@ const usersSchema = new Schema({
       type: Date,
       default: Date.now()
   },
-    // The ref property links the ObjectId to the Note model
-  // This allows us to populate the Article with an associated Note
   address: [
     {
     type: Schema.Types.ObjectId,

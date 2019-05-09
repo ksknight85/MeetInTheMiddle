@@ -70,7 +70,6 @@ class MyFancyComponent extends Component {
     let num = "address" + boxNum + "Coord"
     API.coordinates(address)
       .then(data => {
-        console.log(`coords:  \n\n${data.data.results[0].geometry.location}`)
         this.setState({ [num]: data.data.results[0].geometry.location })
       })
       .catch(err => console.log(err))
@@ -80,7 +79,6 @@ class MyFancyComponent extends Component {
   getPlaces = () => {
     API.places(this.state.type, this.state.chosenLat, this.state.chosenLng, this.state.radius)
       .then(data => {
-        console.log("TEST TEST TEST TEST", data)
         const newArr = []
         for (let i = 0; i < data.data.results.length && i < 20; i++) {
           newArr.push({ place: data.data.results[i].geometry.location, id: data.data.results[i].place_id })
@@ -89,7 +87,6 @@ class MyFancyComponent extends Component {
         this.setState({ places: newArr })
         this.setState({ placeID: placesIDs })
         this.setState({ details: data.data.results })
-        console.log("DATA: ", this.state.details)
       }).then(() => {
         this.setState({LatLng: {lat: this.state.chosenLat, lng: this.state.chosenLng}})
       })
@@ -113,7 +110,6 @@ class MyFancyComponent extends Component {
       event.preventDefault()
     }
     this.setState({ selectedMarker: marker })
-    console.log("Selected Marker", this.state.selectedMarker)
     this.moveCard()
 
   }

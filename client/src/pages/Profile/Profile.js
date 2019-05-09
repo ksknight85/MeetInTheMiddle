@@ -18,7 +18,6 @@ class Profile extends Component {
         this.loading();
 
         API.isLoggedIn().then(user => {
-            console.log(user.data.user)
             if (user.data.loggedIn) {
                 this.setState({
                     loggedIn: true,
@@ -31,8 +30,6 @@ class Profile extends Component {
             .catch(err => {
                 console.log(err);
             });
-        // console.log(this.props)
-
     }
 
     handleInputChange = event => {
@@ -52,7 +49,6 @@ class Profile extends Component {
     }
 
     findAll = () => {
-        // console.log(`find hit`)
         API.getAll(this.state.userId)
         .then(res=> {
             let addressArray=[];
@@ -66,8 +62,8 @@ class Profile extends Component {
     
     deleteAddress = (id) => {
         API.deleteAddress(id)
-            .then(res => console.log("delete: please"))
-            .catch(err => console.log("delete: no"))
+            .then(res => console.log("delete: success"))
+            .catch(err => console.log("delete: fail"))
         this.findAll()
     }
 
@@ -76,29 +72,15 @@ class Profile extends Component {
         address.update = true;
     }
 
-    refresher = (address) => {
-        address.update=false
-        this.setState({updater: this.state.updater + 1})
-        
-    }
 
 
     render() {
         return (
             <div className="profilePage">
-                {/* {this.state.loggedIn ? ( */}
                 <div className="profileBox">
-                    {/* <h1 id="userTitle">Welcome {this.state.user.username}</h1> */}
                     <div className="container" id="profileContainer">
                         <h2 id="welcome">Welcome {this.state.name}</h2>
                         <h5 id="savedAddresses">Saved Addresses:</h5>
-                        {/* <button type="submit" className="btn btn-warning" id="add"
-                        // onClick = {() => {
-
-                        //         return (document.getElementById("profileContainier").appendChild(<GoogleSuggest />))
-
-                        // }}
-                        >+ Add Another</button> */}
                         <GoogleSuggest refresh={this.findAll} new="new" />
                         {this.state.addresses.map(address => {
                             return ( 
@@ -112,30 +94,11 @@ class Profile extends Component {
                                     </div>
                                 </div>
                             )}
-                                {/* <div key={address.address} className="card">
-                                <div className="card-body">
-                                    {address.address}
-                                    <button type="submit" id="update" data-addressId={address.id} className="btn btn-warning"><u>Update</u></button>
-                                    <button type="submit" id="delete" data-addressId={address.id} onClick={()=> this.deleteAddress(address.id)} className="btn btn-warning"><u>Delete</u></button>
-                                </div>
-                            </div> */}
                             </>
                             )
                         })}
                     </div>
                 </div>
-                {/* ) : (
-                    <div className="noUser">
-                        {!this.state.loading ? (
-                            <>
-                                <h1>please log in</h1>
-                                <Link className="loginLink" to="/login"><Button className="loginBtn" color="info" block>Login</Button></Link>
-                            </>
-                        ) : (
-                            <img id="loadingIcon" src="./assets/images/loading.gif" alt="loading"/>
-                        )}
-                    </div> 
-                )} */}
             </div>
         )
     }

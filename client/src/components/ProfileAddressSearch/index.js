@@ -22,7 +22,6 @@ export default class GoogleSuggest extends Component {
                     loggedIn: true,
                     username: user.data.user._id
                 });
-                console.log(`User: data ${user.data}`);
             }
         }).catch(err => {
             console.log("Not logged in");
@@ -42,8 +41,8 @@ export default class GoogleSuggest extends Component {
 
         API.postAddress(this.state.userId, { address: this.state.value })
 
-            .then(res => console.log("post: please"))
-            .catch(err => console.log("post: no"))
+            .then(res => console.log("post: success"))
+            .catch(err => console.log("post: fail"))
         this.props.refresh()
     }
 
@@ -62,15 +61,12 @@ export default class GoogleSuggest extends Component {
     }
 
     selectAddress = (event) => {
-        // event.preventDefault();
         const value = event.target.value;
         this.setState({ search: value, value: value })
     }
 
     componentDidMount() {
-        // console.log("did mount")
         API.isLoggedIn().then(user => {
-            console.log(user.data.user)
             if (user.data.loggedIn) {
                 this.setState({
                     loggedIn: true,
@@ -126,7 +122,6 @@ export default class GoogleSuggest extends Component {
                         </ReactGooglePlacesSuggest>
                         <span className="input-group-btn">
                         <button type="button" className="btn btn-warning" onClick={this.props.new === "new" ? this.postAddress : this.updateAddress}>Save</button>
-                    {/* <button type="button" className="btn btn-info">Select from Profile</button> */}
                     </span>
                 </div>
                 </div>

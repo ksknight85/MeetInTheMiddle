@@ -24,7 +24,6 @@ module.exports = {
             
     },
     update: function (req,res) {
-        console.log(req.body)
         db.Address
             .update({"_id": req.params.id}, {$set: {"address": Object.keys(req.body)[0]}})
             .then(console.log(`id: ${req.params.id} was updated`))

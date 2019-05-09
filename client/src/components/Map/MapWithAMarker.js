@@ -10,12 +10,8 @@ import Mark5 from "../../images/GoogleMarker5.png"
 
 
 const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
-  // console.log("Map with a marker props.markers: ", props.placeID)
   return (
     <GoogleMap defaultZoom={10} defaultCenter={{ lat: 39.7392, lng: -104.9903 }} center={props.currentLocation}>
-      {/* {console.log(typeof(props.currentLocation))} */}
-      {/* {console.log(`default loc ${defaultCenter}`)} */}
-      {console.log("CURRENT LOCATION", props.currentLocation)}
 
       {props.markers.map(marker => {
 
