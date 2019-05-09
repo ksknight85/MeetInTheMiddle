@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css"
 
 
-function LoginModal(props) {
+function Login(props) {
   return (
     <div className="zama-form">
       <div className={`container ${props.action === "signup" ? 'right-panel-active' : ''}`} id="container">
@@ -84,5 +84,5 @@ function LoginModal(props) {
 }
 
 
-export default LoginModal;
+export default Login;
 

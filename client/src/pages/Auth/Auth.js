@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import LoginModal from "../../components/LoginModal/index.js"
+import Login from "../../components/Login/index.js"
 
 class Auth extends Component {
 
@@ -91,7 +91,7 @@ class Auth extends Component {
     return (
       <>
         {(this.state.action === "login") ? (
-          <LoginModal
+          <Login
             action={this.state.action}
             name={this.state.username}
             username={this.state.loginUsername}
@@ -101,9 +101,9 @@ class Auth extends Component {
             handleActionChange={this.handleActionChange}
             message={this.state.message}
             handleSignup={this.handleSignup}
-          ><div id="app" /></LoginModal>
+          ><div id="app" /></Login>
         ) : (
-            <LoginModal
+            <Login
               action={this.state.action}
               name={this.state.username}
               username={this.state.username}
@@ -113,7 +113,7 @@ class Auth extends Component {
               handleActionChange={this.handleActionChange}
               message={this.state.message}
               handleSignup={this.handleSignup}
-            ><div id="app" /></LoginModal>
+            ><div id="app" /></Login>
           )}
       </>
     )

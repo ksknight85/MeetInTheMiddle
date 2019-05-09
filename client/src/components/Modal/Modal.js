@@ -26,7 +26,7 @@ export default class ModalExample extends React.Component {
         <h1 ref={subtitle => this.subtitle = subtitle} id="how" style={{color: "black"}}>How does it work?</h1>
           <Row id="explanationRow">
              <Col md="6">
-               <img id="modalImg" src="../assets/images/screenshot2.png" style={{width: "100%", height: "100%"}}></img>
+               <img id="modalImg" alt="modalImg" src="../assets/images/screenshot2.png" style={{width: "100%", height: "100%"}}></img>
              </Col>
              <Col md="6">
                <div class="description">
@@ -54,3 +54,4 @@ export default class ModalExample extends React.Component {
     );
   }
 }
+export default ModalExample
