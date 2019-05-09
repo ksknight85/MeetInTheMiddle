@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/meetInTheMiddle", { useNewUrlParser: true }, function(err) {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://meetinthemiddle:meetinthemiddle123@ds123603.mlab.com:23603/heroku_9344qp75" , { useNewUrlParser: true }, function(err) {
     if (err) throw err;
     console.log(`mongoose connection successful`.yellow);
     app.listen(PORT, (err)=> {
@@ -40,5 +40,14 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/meetInTheMiddle
     });
 });
 
+
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/meetInTheMiddle" , { useNewUrlParser: true }, function(err) {
+//     if (err) throw err;
+//     console.log(`mongoose connection successful`.yellow);
+//     app.listen(PORT, (err)=> {
+//         if (err) throw err;
+//         console.log(`connected on port ${PORT}`.cyan)
+//     });
+// });
 
 
