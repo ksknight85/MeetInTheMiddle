@@ -13,7 +13,11 @@ yarn-error.log*
 /.changelog
 .npm/
 <<<<<<< HEAD
+<<<<<<< HEAD
 .env
 =======
 .env
 >>>>>>> ab3849a6b1965b0064538319dee003051107c4ef
+=======
+.env
+>>>>>>> 6a0bb8b0db0a1633b5c4f51ef78820ab0240e8fa

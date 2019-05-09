@@ -99,12 +99,12 @@ class Profile extends Component {
 
                         // }}
                         >+ Add Another</button> */}
-                        <GoogleSuggest new="new" />
+                        <GoogleSuggest refresh={this.findAll} new="new" />
                         {this.state.addresses.map(address => {
                             return ( 
                             <>
-                            {address.update ? (<GoogleSuggest address={address.address} refresh={this.refresher} addressId={address.id}/>) : (
-                                <div key={address.address} className="card">
+                            {address.update ? (<GoogleSuggest address={address.address} refresh={this.findAll} addressId={address.id}/>) : (
+                                <div key={address.address} thingy={this.state.updater} className="card">
                                     <div className="card-body">
                                         {address.address}
                                         <button type="submit" id="update" data-addressId={address.id} onClick={()=>this.updateAddress(address)} className="btn btn-warning"><u>Update</u></button>

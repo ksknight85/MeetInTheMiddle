@@ -45,6 +45,7 @@ export default {
   },
 
   coordinates: function(address) {
+    console.log(address)
      let formatted = address.split(" ").join("+")
     return axios.get(`/api/place/coords/${formatted}`)
   }, 
