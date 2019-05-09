@@ -1,6 +1,5 @@
 import React from "react"
 import "./DetailCards.css"
-import { Col, Row } from "reactstrap";
 import styled from "styled-components"
 
 const Styled = styled.div` && {
@@ -36,7 +35,7 @@ function DetailCards(props) {
             <div className="card-body" id="cardBody1">
             <Row>
             <Col md="auto" id="icon">
-            <img src={place.icon} style={{ width: "80px", height: "80px", marginTop: "25px", marginLeft: "25px"}}/>
+            <img alt="cardTitle" src={place.icon} style={{ width: "80px", height: "80px", marginTop: "25px", marginLeft: "25px"}}/>
             </Col>
             <Col xs lg="10">
             <ul id="list">

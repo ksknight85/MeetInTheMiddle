@@ -13,9 +13,6 @@ export default class GoogleSuggest extends Component {
         loggedIn: false,
         userID: ""
     }
-    constructor(props) {
-        super(props);
-    }
 
     loggedIn = () => {
         API.isLoggedIn().then(user => {
