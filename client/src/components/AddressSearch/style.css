@@ -12,9 +12,10 @@
 .addrFromSaved {
     margin-left: 8%;
     margin-top: -5px;
+    margin-bottom: 5px
 }
 
 #addSaveBtn {
     margin-left: 5px;
-    margin-bottom: -5px
+    margin-top: 8.5px
 }

@@ -1,6 +1,6 @@
  #instructions {
   position: absolute;
-  top: 1%;
+  top: 0.5%;
   right: 1%;
   z-index: 500;
   font-family: 'Montserrat', sans-serif;
@@ -15,7 +15,8 @@
 
 #modalImg { 
  padding-top: 20px;
- padding-bottom: 20px
+ padding-bottom: 20px;
+ border: 3px solid #f8bf45;
 }
 
 .description {
@@ -39,20 +40,19 @@
   margin-top: 30px;
   margin-bottom: none;
   color: white;
-  line-height: 1.2
+  line-height: 1.2;
+  display: inline-table
 } 
 
-.exampRow  {
+#exampRow  {
   align-content: center;
+  text-align: center;
 }
 
 .row {
   place-content: center;
 }
 
-#explanationRow {
-  background-color: #f8bf45
-}
 
 Modal {
   padding: none
