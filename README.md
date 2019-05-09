@@ -1,7 +1,13 @@
-# react-auth
+# Meet in the Middle
+Have you ever wanted to go to dinner with a group of friends but have struggled to find a central location? Now you can! Enter up to five addresses and quickly determine the best place to Meet in the Middle. You can filter your search by selecting a specific location type or by adjusting the search radius. The app works for US and international locations!
+
+![Meet in the Middle Screenshot](./client/public/assets/images/screenshotOfApp.png)
+![Meet in the Middle Screenshot](./client/public/assets/images/screenshotMapAndResults.png)
+
+## react-auth
 react app with passport authentication
 
-[Check out the app here](https://react-auth-simple.herokuapp.com/)
+[Check out the app here](https://meet-inthe-middle.herokuapp.com/)
 
 ## Requirements
 * mongoDB
@@ -17,11 +23,11 @@ react app with passport authentication
 * mongoose
 * Node
 * reactstrap
-* animate css
+* animista css
 
 ## Setup Instructions
 1. clone the repo 
-    * `git clone git@github.com:evanejtucker/react-auth.git`
+    * `git clone https://github.com/ksknight85/MeetInTheMiddle`
     * `cd react-auth`
 2. install dependencies
     * `npm run install`
@@ -32,4 +38,7 @@ react app with passport authentication
 5. Happy Hacking!
 
 ## Contributors
-    Evan E J Tucker
+    Jenn Campbell
+    Kevin Knight
+    Dylan Le Clair
+    Haley Brown
