@@ -213,9 +213,7 @@ class MyFancyComponent extends Component {
               : 'Add 2 or more addresses, select a location type and radius, then click "Search".'}
           </Col>
         </Row>
-        {/* <Row>
-        <button onClick={this.getAvgLng && this.getAvgLat}>Average and list</button>
-        </Row> */}
+
       </div>
     )
   }
