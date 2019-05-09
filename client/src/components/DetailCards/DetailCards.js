@@ -39,7 +39,7 @@ function DetailCards(props) {
             <Col md="auto" id="icon">
             <img alt="cardTitle" src={place.icon} style={{ width: "80px", height: "80px", marginTop: "25px", marginLeft: "25px"}}/>
             </Col>
-            <Col xs lg="10">
+            <Col xs lg="8">
             <ul id="list">
                 <li className="card-text cardText"><b id="title">Address:</b> {place.vicinity}</li>
                 <li className="card-text cardText"><b id="title">Rating:</b> {place.rating}</li>

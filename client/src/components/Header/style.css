@@ -4,8 +4,8 @@
 
 #titleDiv {
     position: absolute;
-    right: 10%;
-    margin-top: 10%;
+    right: 4%;
+    margin-top: 4%;
     background: white;
     width: 400px;
     height: 390px;
@@ -16,7 +16,7 @@
     width: 100%;
     height:66%;
     padding-left: 20px;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 
 #byline {
@@ -27,10 +27,12 @@
 }
 
 
-.d-block {
-    max-height: 600px;
-    border-bottom: 2px solid #57aabe;
-    object-fit: cover;
+.carousel-item {
+    max-height: 800px;
+}
+
+#image {
+    width: 100%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -42,13 +44,13 @@
         right: 0;
         left: 15%;
         width: 70%;
-        height: 70%;
+        height: auto;
 
     }
 
     #titleImage {
-        width: 95%;
-        height:100%;
+        width: 100%;
+        height:auto;
         padding-left: 30px;
 
     }
@@ -62,3 +64,4 @@
         display: none
     }
   }
+

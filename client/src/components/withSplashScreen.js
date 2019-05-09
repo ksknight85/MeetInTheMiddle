@@ -28,7 +28,7 @@ function withSplashScreen(WrappedComponent) {
       };
     }
 
-    async componentDidMount() {
+     componentDidMount() {
       try {
         setTimeout(() => {
           this.setState({
