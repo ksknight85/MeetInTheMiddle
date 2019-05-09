@@ -30,15 +30,22 @@ function DetailCards(props) {
     return (
         <Styled key={place.name} className="card" style={{ width: "95%" }} id={place.reference} active={props.selectedThing===place.reference}>
             <div className="card-header" id="cardHeader">
-                <h4 className="card-title" id="cardTitle">{place.name}<img alt="cardTitle" src={place.icon} style={{ width: "30px", height: "30px", padding: "5px" }}/></h4>
+                <h4 className="card-title" id="cardTitle">{place.name}</h4>
             </div>
             <div className="card-body" id="cardBody1">
-            <ul>
+            <Row>
+            <Col md="auto" id="icon">
+            <img alt="cardTitle" src={place.icon} style={{ width: "80px", height: "80px", marginTop: "25px", marginLeft: "25px"}}/>
+            </Col>
+            <Col xs lg="10">
+            <ul id="list">
                 <li className="card-text cardText"><b id="title">Address:</b> {place.vicinity}</li>
                 <li className="card-text cardText"><b id="title">Rating:</b> {place.rating}</li>
                 <li className="card-text cardText"><b id="title">Price Level:</b> {place.price_level}</li>
                 <li className="card-text cardText" id="open">{exists ? (open ? "Currently Open" : "Currently Closed"): null}</li>
             </ul>
+            </Col>
+            </Row>
             </div>
         </Styled>
     )

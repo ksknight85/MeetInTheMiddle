@@ -6,7 +6,8 @@ import Auth from "./pages/Auth";
 import NoMatch from "./pages/NoMatch";
 import TopNav from "./components/TopNav";
 import Footer from "./components/Footer";
-import Search from "./pages/Search"
+import Search from "./pages/Search";
+import withSplashScreen from './components/withSplashScreen';
 
 function App() {
   return (
@@ -30,4 +31,5 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
+export default withSplashScreen(App);
