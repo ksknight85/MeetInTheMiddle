@@ -1,6 +1,5 @@
 import React from "react"
 import "./DetailCards.css"
-import { Col, Row } from "reactstrap";
 import styled from "styled-components"
 
 const Styled = styled.div` && {
@@ -31,7 +30,7 @@ function DetailCards(props) {
     return (
         <Styled key={place.name} className="card" style={{ width: "95%" }} id={place.reference} active={props.selectedThing===place.reference}>
             <div className="card-header" id="cardHeader">
-                <h4 className="card-title" id="cardTitle">{place.name}<img src={place.icon} style={{ width: "30px", height: "30px", padding: "5px" }}/></h4>
+                <h4 className="card-title" id="cardTitle">{place.name}<img alt="cardTitle" src={place.icon} style={{ width: "30px", height: "30px", padding: "5px" }}/></h4>
             </div>
             <div className="card-body" id="cardBody1">
             <ul>

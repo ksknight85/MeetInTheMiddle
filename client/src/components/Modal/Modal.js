@@ -63,7 +63,7 @@ class ModalExample extends React.Component {
 
           <Row>
             <Col md="4">
-              <img id="modalImg" src="http://geniussys.com/img/placeholder/blogposts-300x220.png"></img>
+              <img id="modalImg" alt="modalImg" src="http://geniussys.com/img/placeholder/blogposts-300x220.png"></img>
             </Col>
             <Col md="7">
               <div class="description">
@@ -106,6 +106,6 @@ export default ModalExample
 //   <button>the modal</button>
 // </form> */}
 
-{/* <Col>
-<p class="modalExamp">Locate a park for a playdate or BBQ with family</p>
-</Col> */}
+// {/* <Col>
+// <p class="modalExamp">Locate a park for a playdate or BBQ with family</p>
+// </Col> */}
