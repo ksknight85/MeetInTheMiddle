@@ -1,6 +1,8 @@
 import React from "react"
 import "./DetailCards.css"
 import styled from "styled-components"
+import { Row, Col } from "reactstrap";
+
 
 const Styled = styled.div` && {
     border: ${props => props.active ? "5px solid #57aabe" : null}

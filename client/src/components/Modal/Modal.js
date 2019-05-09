@@ -4,7 +4,7 @@ import { Col, Row } from "reactstrap";
 import "./Modal.css"
 import Modal from 'react-responsive-modal'
 
-export default class ModalExample extends React.Component {
+class ModalExample extends React.Component {
   state = {
     open: false,
   };
