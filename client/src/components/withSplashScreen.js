@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import auth0Client from '../Auth';
 import './splash-screen.css';
 
 function LoadingMessage() {
@@ -29,9 +28,8 @@ function withSplashScreen(WrappedComponent) {
       };
     }
 
-    async componentDidMount() {
+     componentDidMount() {
       try {
-        // await auth0Client.loadSession();
         setTimeout(() => {
           this.setState({
             loading: false,
