@@ -16,3 +16,7 @@
     padding-right: 15px;
     font-family:'Montserrat', sans-serif; 
 }
+
+#topNavbar {
+    z-index: 900
+}
