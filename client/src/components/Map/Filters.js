@@ -13,6 +13,7 @@ function Filters(props) {
               name="type"
               type="text"
               className="form-control"
+              id="typeForm"
             >
               <option>Search a location type</option>
               <option value="airport">Airport</option>
