@@ -28,7 +28,7 @@ react app with passport authentication
 ## Setup Instructions
 1. clone the repo 
     * `git clone https://github.com/ksknight85/MeetInTheMiddle`
-    * `cd react-auth`
+    * `cd MeetInTheMiddle`
 2. install dependencies
     * `npm run install`
 3. Start mongo server by opening a seperate terminal or bash window and run:
