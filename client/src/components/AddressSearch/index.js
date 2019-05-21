@@ -137,7 +137,7 @@ export default class GoogleSuggest extends Component {
               </div>
               <div className="input-group">
                 {this.state.loggedIn ? (<>
-                  <select className=" addrFromSaved form-control" onChange={this.selectAddress} name="saved">
+                  <select className="form-control" id="addrFromSaved " onChange={this.selectAddress} name="saved">
                     <option value="Choose from your saved addresses">Choose from your saved addresses</option>
                     {this.state.userAddress.map(address => {
                       return (<option value={address}>{address}</option>)
